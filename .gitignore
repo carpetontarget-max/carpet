@@ -16,3 +16,6 @@ Thumbs.db
 
 # stray logs (not part of the site)
 logs/
+
+# unrelated file that landed in this folder before the repo was cloned
+github-mcp-server-main.zip
