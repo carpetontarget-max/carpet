@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, links } from '../config';
+---
+<Base title="About Us" description="About On Target Carpet Cleaning — a local, eco-friendly cleaning team in Leicester.">
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      <span class="eyebrow">About us</span>
+      <h1>A local team you can trust</h1>
+      <p>On Target Carpet Cleaning is a Leicester-based cleaning company serving {site.serviceArea}. We help homeowners, tenants and businesses keep their carpets, upholstery and rugs looking their best.</p>
+      <p>We built our reputation on doing the job properly: powerful hot water extraction that lifts dirt and allergens from deep within the fibres, paired with eco-friendly cleaning solutions that are safe around your family and pets.</p>
+      <p>Whether it's a single room, an end-of-tenancy deep clean or an office that needs regular attention, we turn up on time, work hard, and back every job with our satisfaction guarantee.</p>
+      <h2 style="margin-top:1.5em;">Our promise</h2>
+      <div class="grid grid--2">
+        <div class="card"><h3>🌿 Eco-friendly</h3><p>Safe, non-toxic cleaning solutions.</p></div>
+        <div class="card"><h3>✅ Guaranteed</h3><p>Not happy with an area? We'll put it right.</p></div>
+        <div class="card"><h3>📅 Flexible</h3><p>Evening and weekend appointments available.</p></div>
+        <div class="card"><h3>💷 Fair pricing</h3><p>Clear, no-obligation quotes every time.</p></div>
+      </div>
+      <div class="btn-row" style="margin-top:32px;">
+        <a href={links.whatsapp} class="btn btn--wa">💬 WhatsApp us</a>
+        <a href={links.tel} class="btn btn--primary">📞 {site.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+</Base>

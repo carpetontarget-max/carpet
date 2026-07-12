@@ -1,0 +1,35 @@
+---
+import { site, links } from '../config';
+import Logo from './Logo.astro';
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <Logo variant="light" />
+      <p style="margin-top:16px;max-width:340px;">{site.tagline}. Serving {site.serviceArea} with eco-friendly hot water extraction and a satisfaction guarantee.</p>
+      <div class="social-row">
+        <a href={links.whatsapp} target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        <a href={links.messenger} target="_blank" rel="noopener" aria-label="Messenger">📨</a>
+        <a href={links.instagram} target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+        <a href={links.facebook} target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+      </div>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>
+        <a href={links.tel}>{site.phoneDisplay}</a><br />
+        <a href={links.sms}>Text us</a><br />
+        <a href={links.email}>{site.email}</a>
+      </p>
+    </div>
+    <div>
+      <h4>Opening Hours</h4>
+      <p>
+        {site.hours.map((h) => (<span>{h.day}: {h.time}<br /></span>))}
+      </p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    © 2026 {site.businessName}. All rights reserved.
+  </div>
+</footer>

@@ -1,0 +1,107 @@
+---
+import { site, testimonials as fallbackReviews } from '../config';
+
+/**
+ * Fetches REAL Google reviews at build time via the Places API (New).
+ * - Key comes from the GOOGLE_PLACES_API_KEY env var (kept out of the client bundle).
+ * - Place ID comes from site.googlePlaceId in config.ts.
+ * If either is missing, we render the manual testimonials from config instead,
+ * so the site always works. Reviews refresh on every rebuild/deploy.
+ */
+const apiKey = import.meta.env.GOOGLE_PLACES_API_KEY;
+const placeId = site.googlePlaceId;
+const configured =
+  apiKey && placeId && !placeId.startsWith('YOUR_');
+
+let rating = 4.9;
+let total = 0;
+let reviews = [];
+let live = false;
+
+if (configured) {
+  try {
+    const res = await fetch(
+      `https://places.googleapis.com/v1/places/${placeId}`,
+      {
+        headers: {
+          'X-Goog-Api-Key': apiKey,
+          'X-Goog-FieldMask':
+            'rating,userRatingCount,googleMapsUri,reviews',
+        },
+      },
+    );
+    if (res.ok) {
+      const data = await res.json();
+      rating = data.rating ?? rating;
+      total = data.userRatingCount ?? 0;
+      reviews = (data.reviews ?? []).map((r) => ({
+        name: r.authorAttribution?.displayName ?? 'Google user',
+        photo: r.authorAttribution?.photoUri ?? '',
+        rating: r.rating ?? 5,
+        when: r.relativePublishTimeDescription ?? '',
+        text: r.text?.text ?? '',
+      }));
+      live = reviews.length > 0;
+    } else {
+      console.warn('[GoogleReviews] Places API returned', res.status);
+    }
+  } catch (e) {
+    console.warn('[GoogleReviews] fetch failed:', e?.message);
+  }
+}
+
+// Fallback: use manual testimonials shaped like reviews
+if (!live) {
+  reviews = fallbackReviews.map((t) => ({
+    name: t.name,
+    photo: '',
+    rating: 5,
+    when: t.location,
+    text: t.quote,
+  }));
+}
+
+const initials = (n) =>
+  n.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+const stars = (n) => '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+---
+<div class="center reveal">
+  <span class="eyebrow">Reviews</span>
+  <h2>What our customers say</h2>
+  <div class="greviews-head">
+    <span class="greviews-score">{rating.toFixed(1)}</span>
+    <span>
+      <span class="rating-stars">{stars(Math.round(rating))}</span><br />
+      <span class="gbadge"><span class="g"><b1 style="color:#4285F4">G</b1><b1 style="color:#EA4335">o</b1><b1 style="color:#FBBC05">o</b1><b1 style="color:#4285F4">g</b1><b1 style="color:#34A853">l</b1><b1 style="color:#EA4335">e</b1></span>
+        {total > 0 ? `${total} reviews` : 'Reviews'}</span>
+    </span>
+  </div>
+  {!live && (
+    <p style="font-size:.82rem;color:var(--slate);">Showing featured reviews — connect the Google Places API in <code>config.ts</code> to display live Google reviews.</p>
+  )}
+</div>
+
+<div class="grid grid--3">
+  {reviews.slice(0, 6).map((r) => (
+    <div class="card review-card reveal">
+      <div class="review-head">
+        <div class="review-avatar">
+          {r.photo ? <img src={r.photo} alt={r.name} referrerpolicy="no-referrer" /> : initials(r.name)}
+        </div>
+        <div>
+          <div class="review-name">{r.name}</div>
+          <div class="review-meta">{r.when}</div>
+        </div>
+      </div>
+      <div class="rating-stars" style="font-size:.95rem;">{stars(r.rating)}</div>
+      <p class="review-text">{r.text}</p>
+      <div class="review-gmark">
+        <span style="font-weight:800;">G</span> Posted on Google
+      </div>
+    </div>
+  ))}
+</div>
+
+<div class="center" style="margin-top:32px;">
+  <a href={site.googleReviewsUrl} target="_blank" rel="noopener" class="btn btn--ghost">See all reviews on Google →</a>
+</div>

@@ -1,0 +1,214 @@
+/**
+ * ── SITE CONFIG ─────────────────────────────────────────────────────────
+ * Edit everything here in one place. All pages read from this file.
+ *
+ * Phone number formats you need:
+ *   Local (display):     07444 784316
+ *   International (calls): +447444784316   (UK: drop leading 0, add +44)
+ *   WhatsApp (wa.me):     447444784316     (no + , no spaces)
+ * ────────────────────────────────────────────────────────────────────────
+ */
+
+export const site = {
+  businessName: 'On Target Carpet Cleaning',
+  tagline: 'Professional carpet & upholstery cleaning in Leicestershire',
+  serviceArea: 'Leicester & surrounding areas',
+
+  // ── Contact ──
+  phoneDisplay: '07444 784316',
+  phoneIntl: '+447444784316',   // used for tel: and sms:
+  whatsappNumber: '447444784316', // used for wa.me link (no + , no spaces)
+  email: 'carpetontarget@gmail.com',
+
+  // ── Opening hours ──
+  hours: [
+    { day: 'Monday – Friday', time: '8:00am – 10:00pm' },
+    { day: 'Saturday', time: '9:00am – 10:00pm' },
+    { day: 'Sunday', time: '9:00am – 8:00pm' },
+  ],
+
+  // ── Social / messaging links ──
+  // ⚠️ REPLACE the placeholders below with your real usernames/page IDs.
+  social: {
+    // Instagram: put your handle without the @  →  instagram.com/<handle>
+    instagram: 'YOUR_INSTAGRAM_HANDLE',
+    // Facebook page (for the profile link): facebook.com/<page>
+    facebook: 'YOUR_FACEBOOK_PAGE',
+    // Facebook Messenger deep link uses your Page's username: m.me/<page>
+    messenger: 'YOUR_FACEBOOK_PAGE',
+  },
+
+  // ── Contact form ──
+  // Free form-to-email service. Sign up at https://web3forms.com (no backend
+  // needed), paste your access key here. Submissions go to the email above.
+  web3formsAccessKey: 'YOUR_WEB3FORMS_ACCESS_KEY',
+
+  // ── Google reviews (real, live) ──
+  // The site fetches your real Google rating + latest reviews AT BUILD TIME.
+  // 1. Find your Place ID: https://developers.google.com/maps/documentation/places/web-service/place-id
+  // 2. Put the API key in a .env file as GOOGLE_PLACES_API_KEY (never commit it).
+  // Until both are set, the site falls back to the manual testimonials below.
+  googlePlaceId: 'YOUR_GOOGLE_PLACE_ID',
+  // Public link so visitors can read/leave reviews on Google:
+  googleReviewsUrl: 'https://www.google.com/search?q=On+Target+Carpet+%26+Upholstery+Cleaning+Reviews',
+};
+
+// ── Pre-built link helpers (used by buttons across the site) ──
+const waMessage = encodeURIComponent(
+  "Hi On Target, I'd like a quote for carpet cleaning.",
+);
+
+// While a handle is still a placeholder (starts with "YOUR_"), the button acts
+// as a "dummy" and opens the platform homepage instead of a broken profile URL.
+// As soon as you set the real handle in `site.social`, it links to your account.
+const isPlaceholder = (v: string) => !v || v.startsWith('YOUR_');
+const link = (handle: string, profileBase: string, homepage: string) =>
+  isPlaceholder(handle) ? homepage : `${profileBase}${handle}`;
+
+export const links = {
+  tel: `tel:${site.phoneIntl}`,
+  sms: `sms:${site.phoneIntl}`,
+  email: `mailto:${site.email}`,
+  whatsapp: `https://wa.me/${site.whatsappNumber}?text=${waMessage}`,
+  instagram: link(site.social.instagram, 'https://instagram.com/', 'https://instagram.com'),
+  facebook: link(site.social.facebook, 'https://facebook.com/', 'https://facebook.com'),
+  messenger: link(site.social.messenger, 'https://m.me/', 'https://m.me'),
+};
+
+// ── Services (edit / add / remove freely) ──
+export const services = [
+  {
+    icon: '🧼',
+    title: 'Carpet Deep Cleaning',
+    desc: 'Hot water extraction that lifts dirt, allergens and grime deep from the fibres — leaving carpets fresh and restored.',
+    img: '/images/service-carpet.png',
+  },
+  {
+    icon: '✨',
+    title: 'Stain & Spot Removal',
+    desc: 'Advanced treatment for tough stains, spills and high-traffic marks that everyday cleaning leaves behind.',
+    img: '/images/service-stain.png',
+  },
+  {
+    icon: '🐾',
+    title: 'Pet Stain & Odour Removal',
+    desc: 'Specialist eco-friendly treatment that eliminates pet stains and neutralises odours at the source.',
+    img: '/images/service-pet.png',
+  },
+  {
+    icon: '🔑',
+    title: 'End of Tenancy Cleaning',
+    desc: 'Deposit-saving deep cleans that meet landlord and letting-agent standards.',
+    img: '/images/service-tenancy.png',
+  },
+  {
+    icon: '🏢',
+    title: 'Commercial Carpet Cleaning',
+    desc: 'Flexible, out-of-hours cleaning for offices, shops and business premises.',
+    img: '/images/service-commercial.png',
+  },
+  {
+    icon: '🛋️',
+    title: 'Upholstery & Rug Cleaning',
+    desc: 'Gentle, thorough cleaning for sofas, chairs and rugs of all fabrics.',
+    img: '/images/service-upholstery.jpg',
+  },
+];
+
+// ── Testimonials (edit freely) ──
+export const testimonials = [
+  {
+    quote:
+      'My carpets looked brand new, and the fact they use eco-friendly solutions is a huge bonus. Highly recommend!',
+    name: 'Happy Customer',
+    location: 'Leicester',
+  },
+  {
+    quote:
+      'Fast, professional and friendly. Booked an end-of-tenancy clean and got my full deposit back.',
+    name: 'Verified Client',
+    location: 'Leicestershire',
+  },
+  {
+    quote:
+      'Removed pet stains I thought were permanent. Fantastic result and great value.',
+    name: 'Local Resident',
+    location: 'Leicester',
+  },
+];
+
+// ── "How it works" steps ──
+export const steps = [
+  { title: 'Get in touch', desc: 'Call, text or WhatsApp us with your rooms and postcode for a fast, free quote.' },
+  { title: 'Book a slot', desc: 'Pick a time that suits you — evenings and weekends available.' },
+  { title: 'We deep clean', desc: 'Our hot water extraction lifts dirt, stains and allergens from deep in the fibres.' },
+  { title: 'Enjoy the result', desc: 'Fresh, restored carpets — backed by our satisfaction guarantee.' },
+];
+
+// ── Stat counters ──
+export const stats = [
+  { big: '4.9★', label: 'Average rating' },
+  { big: '1,200+', label: 'Cleans completed' },
+  { big: '100%', label: 'Satisfaction guarantee' },
+  { big: '4–6h', label: 'Typical dry time' },
+];
+
+// ── Trust / certification badges (edit to match what you actually hold) ──
+export const certifications = [
+  'Fully insured',
+  'Eco-friendly solutions',
+  'Satisfaction guaranteed',
+  'DBS-checked technicians',
+];
+
+// ── Pricing tiers (indicative — adjust to your real prices) ──
+export const pricing = [
+  {
+    name: 'Single Room',
+    price: '30', unit: 'from / room',
+    features: ['Deep hot water extraction', 'Pre-treatment of stains', 'Deodorising finish'],
+    featured: false,
+  },
+  {
+    name: 'Whole Home',
+    price: '99', unit: 'from / 3 rooms',
+    features: ['Everything in Single Room', 'Hallway & stairs option', 'Best value bundle', 'Priority booking'],
+    featured: true,
+  },
+  {
+    name: 'Upholstery',
+    price: '45', unit: 'from / sofa',
+    features: ['Sofas, chairs & rugs', 'Fabric-safe treatment', 'Pet stain & odour removal'],
+    featured: false,
+  },
+];
+
+// ── Service areas ──
+export const areas = [
+  'Leicester', 'Oadby', 'Wigston', 'Glenfield', 'Braunstone', 'Syston',
+  'Birstall', 'Thurmaston', 'Enderby', 'Blaby', 'Leicester Forest East', 'Loughborough',
+];
+
+// ── FAQ (edit freely) ──
+export const faqs = [
+  {
+    q: 'What cleaning method do you use?',
+    a: 'We use professional hot water extraction, which deep-cleans carpets and upholstery while using eco-friendly cleaning solutions.',
+  },
+  {
+    q: 'How long does a carpet take to dry?',
+    a: 'Most carpets are dry within 4–6 hours, depending on fabric, airflow and room temperature.',
+  },
+  {
+    q: 'Do you offer a satisfaction guarantee?',
+    a: 'Yes. If you are not happy with any area, let us know and we will put it right.',
+  },
+  {
+    q: 'Which areas do you cover?',
+    a: 'We cover Leicester and the surrounding areas across Leicestershire. Get in touch to confirm your postcode.',
+  },
+  {
+    q: 'How do I get a quote?',
+    a: 'Call or message us on WhatsApp for a fast, no-obligation quote, or use the contact form and we will get back to you.',
+  },
+];

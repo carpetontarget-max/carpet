@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import { links, services } from '../config';
+---
+<Base title="Services" description="Carpet, upholstery and rug cleaning services in Leicester.">
+  <section class="section">
+    <div class="container center">
+      <span class="eyebrow">Our services</span>
+      <h1>Cleaning services we offer</h1>
+      <p class="lead">Every service uses eco-friendly hot water extraction and comes with our satisfaction guarantee.</p>
+    </div>
+    <div class="container">
+      <div class="grid grid--3">
+        {services.map((s) => (
+          <div class="svc-card">
+            <img src={s.img} alt={s.title} loading="lazy" width="490" height="300" />
+            <div class="overlay"></div>
+            <div class="body">
+              <span class="chip">{s.icon} Service</span>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="center" style="margin-top:40px;">
+        <div class="btn-row" style="justify-content:center;">
+          <a href={links.whatsapp} class="btn btn--wa">💬 Get a quote on WhatsApp</a>
+          <a href="/contact" class="btn btn--primary">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

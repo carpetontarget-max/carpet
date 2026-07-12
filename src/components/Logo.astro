@@ -1,0 +1,25 @@
+---
+// Reusable brand lockup: crosshair target mark + wordmark.
+// variant: "dark" (ink text, for light backgrounds) | "light" (white text, for dark backgrounds)
+const { variant = 'dark', subtitle = true } = Astro.props;
+const textColor = variant === 'light' ? '#ffffff' : '#0c2a30';
+const subColor = variant === 'light' ? 'rgba(255,255,255,.75)' : '#5a6b6e';
+---
+<span class="logo" style={`--logo-text:${textColor};--logo-sub:${subColor};`}>
+  <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <!-- ticks -->
+    <g stroke="var(--brand)" stroke-width="7" stroke-linecap="round">
+      <line x1="50" y1="4"  x2="50" y2="20" />
+      <line x1="50" y1="80" x2="50" y2="96" />
+      <line x1="4"  y1="50" x2="20" y2="50" />
+      <line x1="80" y1="50" x2="96" y2="50" />
+    </g>
+    <circle cx="50" cy="50" r="30" fill="none" stroke="var(--brand)" stroke-width="7" />
+    <circle cx="50" cy="50" r="13" fill="none" stroke="var(--brand)" stroke-width="7" />
+    <circle cx="50" cy="50" r="4.5" fill="var(--brand)" />
+  </svg>
+  <span class="logo-words">
+    <span class="logo-name">ontarget</span>
+    {subtitle && <span class="logo-sub">Carpet &amp; Upholstery Cleaning</span>}
+  </span>
+</span>

@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, links } from '../config';
+---
+<Base title="Contact" description="Contact On Target Carpet Cleaning for a free quote.">
+  <section class="section">
+    <div class="container grid grid--2" style="align-items:start;gap:48px;">
+      <!-- Direct contact options -->
+      <div>
+        <span class="eyebrow">Get in touch</span>
+        <h1>Contact us for a free quote</h1>
+        <p>Message us however suits you best — most enquiries get a same-day reply.</p>
+        <div class="grid" style="gap:12px;margin-top:8px;">
+          <a href={links.whatsapp} class="btn btn--wa">💬 WhatsApp — {site.phoneDisplay}</a>
+          <a href={links.messenger} class="btn btn--primary">📨 Facebook Messenger</a>
+          <a href={links.sms} class="btn btn--ghost">✉️ Text (SMS) us</a>
+          <a href={links.tel} class="btn btn--ghost">📞 Call {site.phoneDisplay}</a>
+          <a href={links.email} class="btn btn--ghost">✉️ {site.email}</a>
+          <a href={links.instagram} class="btn btn--ghost">📷 Instagram</a>
+        </div>
+        <h3 style="margin-top:1.6em;">Opening hours</h3>
+        <p>
+          {site.hours.map((h) => (<span><strong>{h.day}:</strong> {h.time}<br /></span>))}
+        </p>
+      </div>
+
+      <!-- Contact form (Web3Forms) -->
+      <div>
+        <h2>Send a message</h2>
+        <form class="form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+          <input type="hidden" name="subject" value="New enquiry from On Target website" />
+          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+          <div class="row">
+            <div>
+              <label for="first">First name</label>
+              <input id="first" name="first_name" required />
+            </div>
+            <div>
+              <label for="last">Last name</label>
+              <input id="last" name="last_name" />
+            </div>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required />
+          </div>
+          <div>
+            <label for="phone">Phone (optional)</label>
+            <input id="phone" name="phone" />
+          </div>
+          <div>
+            <label for="message">How can we help?</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary">Send message</button>
+          <p style="font-size:0.85rem;">Prefer instant replies? <a href={links.whatsapp}>Message us on WhatsApp</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,42 @@
+---
+import { site, links } from '../config';
+import Logo from './Logo.astro';
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+<!-- Top trust strip -->
+<div class="trust-strip">
+  <div class="container">
+    <span><span class="stars">★★★★★</span> <b>4.9/5</b> rated by local customers</span>
+    <span class="hide-sm">🌿 Eco-friendly hot water extraction</span>
+    <span class="hide-sm">✅ Satisfaction guarantee</span>
+    <span>📞 <a href={links.tel} style="color:#fff;font-weight:700;">{site.phoneDisplay}</a></span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="/" aria-label="On Target Carpet Cleaning home"><Logo /></a>
+    <nav class="nav-links" id="navLinks">
+      {nav.map((n) => <a class="navlink" href={n.href}>{n.label}</a>)}
+    </nav>
+    <div class="nav-cta">
+      <a href={links.tel} class="nav-phone desktop"><span>Call us</span>{site.phoneDisplay}</a>
+      <a href="/contact" class="btn btn--gold" style="padding:.6em 1.2em;">Get a Quote</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<script>
+  const t = document.getElementById('navToggle');
+  const l = document.getElementById('navLinks');
+  t?.addEventListener('click', () => l?.classList.toggle('open'));
+  // Reveal-on-scroll
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('in')), { threshold: 0.12 });
+  window.addEventListener('DOMContentLoaded', () => document.querySelectorAll('.reveal').forEach((el) => io.observe(el)));
+</script>

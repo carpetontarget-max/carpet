@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { links, faqs } from '../config';
+---
+<Base title="FAQ" description="Frequently asked questions about our carpet cleaning services.">
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      <div class="center">
+        <span class="eyebrow">FAQ</span>
+        <h1>Frequently asked questions</h1>
+      </div>
+      {faqs.map((f) => (
+        <details class="faq">
+          <summary>{f.q}<span>＋</span></summary>
+          <p style="margin-top:0.8em;">{f.a}</p>
+        </details>
+      ))}
+      <div class="center" style="margin-top:32px;">
+        <p>Still have a question?</p>
+        <div class="btn-row" style="justify-content:center;">
+          <a href={links.whatsapp} class="btn btn--wa">💬 Ask on WhatsApp</a>
+          <a href="/contact" class="btn btn--primary">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
