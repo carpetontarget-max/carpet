@@ -45,12 +45,15 @@ export const site = {
 
   // ── Google reviews (real, live) ──
   // The site fetches your real Google rating + latest reviews AT BUILD TIME.
-  // 1. Find your Place ID: https://developers.google.com/maps/documentation/places/web-service/place-id
-  // 2. Put the API key in a .env file as GOOGLE_PLACES_API_KEY (never commit it).
-  // Until both are set, the site falls back to the manual testimonials below.
-  googlePlaceId: 'YOUR_GOOGLE_PLACE_ID',
-  // Public link so visitors can read/leave reviews on Google:
-  googleReviewsUrl: 'https://www.google.com/search?q=On+Target+Carpet+%26+Upholstery+Cleaning+Reviews',
+  // YOU ONLY NEED ONE THING: a Google Places API key in a .env file as
+  // GOOGLE_PLACES_API_KEY. The listing is found automatically by the name below.
+  googlePlaceQuery: 'On Target Carpet & Upholstery Cleaning, Leicester',
+  // Optional: if the name search ever picks the wrong listing, paste your exact
+  // Place ID here (format ChIJ...) and it takes priority. Leave as-is otherwise.
+  googlePlaceId: '',
+  // Your Google listing (built from your Maps CID) — read & write reviews:
+  googleReviewsUrl: 'https://www.google.com/maps?cid=2693741505926420310',
+  googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=cid:2693741505926420310',
 };
 
 // ── Pre-built link helpers (used by buttons across the site) ──
