@@ -153,7 +153,7 @@ export const services = [
     icon: '🪜',
     title: 'Stairs & Landing Cleaning',
     desc: 'Deep cleaning for high-traffic stairs and landings — lifting ground-in dirt and restoring worn, flattened carpet on every step.',
-    img: '/images/service-stairs.jpg',
+    img: '/images/stairs-after.jpg',
   },
 ];
 
