@@ -1,5 +1,5 @@
 ---
-import { site, testimonials as fallbackReviews } from '../config';
+import { site, googleReviews, testimonials as fallbackReviews } from '../config';
 
 /**
  * Fetches REAL Google reviews at build time via the Places API (New).
@@ -12,8 +12,8 @@ const apiKey = import.meta.env.GOOGLE_PLACES_API_KEY;
 const placeId = (site.googlePlaceId || '').trim();
 const query = site.googlePlaceQuery;
 
-let rating = 5.0;
-let total = 0;
+let rating = site.googleRating ?? 5.0;
+let total = site.googleReviewCount ?? 0;
 let reviews = [];
 let live = false;
 
@@ -70,15 +70,22 @@ if (apiKey) {
   }
 }
 
-// Fallback: use manual testimonials shaped like reviews
+// Fallback when the API isn't set: use your pasted-in Google reviews.
+// (Filters out any blank template rows.) Falls back to manual testimonials
+// only if no Google reviews have been filled in yet.
+let usingStatic = false;
 if (!live) {
-  reviews = fallbackReviews.map((t) => ({
-    name: t.name,
-    photo: '',
-    rating: 5,
-    when: t.location,
-    text: t.quote,
-  }));
+  const staticReviews = (googleReviews ?? []).filter((r) => r.name && r.text);
+  if (staticReviews.length) {
+    usingStatic = true;
+    reviews = staticReviews.map((r) => ({
+      name: r.name, photo: '', rating: r.rating ?? 5, when: r.when ?? '', text: r.text,
+    }));
+  } else {
+    reviews = fallbackReviews.map((t) => ({
+      name: t.name, photo: '', rating: 5, when: t.location, text: t.quote,
+    }));
+  }
 }
 
 const initials = (n) =>
@@ -96,13 +103,13 @@ const stars = (n) => '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 
         {total > 0 ? `${total} reviews` : 'Reviews'}</span>
     </span>
   </div>
-  {!live && (
-    <p style="font-size:.82rem;color:var(--slate);">Showing featured reviews — connect the Google Places API in <code>config.ts</code> to display live Google reviews.</p>
+  {!live && !usingStatic && (
+    <p style="font-size:.82rem;color:var(--slate);">Showing featured reviews — add your reviews in <code>config.ts</code> or connect the Google Places API for live reviews.</p>
   )}
 </div>
 
 <div class="grid grid--3">
-  {reviews.slice(0, 6).map((r) => (
+  {reviews.slice(0, 3).map((r) => (
     <div class="card review-card reveal">
       <div class="review-head">
         <div class="review-avatar">
@@ -122,7 +129,6 @@ const stars = (n) => '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 
   ))}
 </div>
 
-<div class="center btn-row" style="margin-top:32px;justify-content:center;">
+<div class="center" style="margin-top:32px;">
   <a href={site.googleReviewsUrl} target="_blank" rel="noopener" class="btn btn--ghost">See all {total > 0 ? total : ''} reviews on Google →</a>
-  <a href={site.googleWriteReviewUrl} target="_blank" rel="noopener" class="btn btn--primary">★ Write a review</a>
 </div>

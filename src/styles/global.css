@@ -243,9 +243,11 @@ img { max-width: 100%; display: block; }
   position: relative; max-width: 780px; margin: 0 auto; aspect-ratio: 16/9;
   border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); user-select: none;
 }
-.ba .layer { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 800; font-size: 1.2rem; color: #fff; }
-.ba .before { background: linear-gradient(135deg, #6b7b73, #40514c); }
-.ba .after { background: linear-gradient(135deg, var(--brand), var(--brand-2)); clip-path: inset(0 50% 0 0); }
+.ba .layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ba img.after { clip-path: inset(0 50% 0 0); }
+/* fallback gradients if images are not present yet */
+.ba .ph-before { background: linear-gradient(135deg, #6b7b73, #40514c); }
+.ba .ph-after { background: linear-gradient(135deg, var(--brand), var(--brand-2)); clip-path: inset(0 50% 0 0); }
 .ba .tag { position: absolute; top: 14px; padding: .3em .9em; border-radius: 999px; background: rgba(0,0,0,.35); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
 .ba .tag.l { left: 14px; } .ba .tag.r { right: 14px; }
 .ba input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }

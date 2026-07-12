@@ -54,7 +54,40 @@ export const site = {
   // Your Google listing (built from your Maps CID) — read & write reviews:
   googleReviewsUrl: 'https://www.google.com/maps?cid=2693741505926420310',
   googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=cid:2693741505926420310',
+
+  // Your real headline numbers (shown above the review cards):
+  googleRating: 5.0,
+  googleReviewCount: 78,
 };
+
+/**
+ * ── YOUR LAST 3 GOOGLE REVIEWS ──────────────────────────────────────
+ * Paste your three most-recent Google reviews here (these display directly,
+ * no API key needed). For each: reviewer name, star rating, when, and the text.
+ * Copy them from: https://www.google.com/maps?cid=2693741505926420310 (sort: Newest)
+ * ⚠️ Only #1 is filled in (from your screenshot). Fill in #2–#3 with the
+ *    real review text — please don't make them up.
+ */
+export const googleReviews = [
+  {
+    name: 'Rush Usman',
+    rating: 5,
+    when: '3 months ago',
+    text: 'I recently used this sofa and carpet cleaning service and was very pleased with the results. They were easy to book. The cleaning quality was excellent, Martin explained what products he used.',
+  },
+  {
+    name: 'tina Craig',
+    rating: 5,
+    when: 'a month ago',
+    text: 'Excellent service. Martin was very professional explaining the different stages of cleaning our suite and carpets. We were very impressed with the result and would have no hesitation in recommending him.',
+  },
+  {
+    name: 'M M',
+    rating: 5,
+    when: 'a month ago',
+    text: "Martin is professional and very polite. He clearly knows what he's doing and we were very pleased with his work. Will definitely use him again and highly recommend him.",
+  },
+];
 
 // ── Pre-built link helpers (used by buttons across the site) ──
 const waMessage = encodeURIComponent(
@@ -150,7 +183,7 @@ export const steps = [
 
 // ── Stat counters ──
 export const stats = [
-  { big: '4.9★', label: 'Average rating' },
+  { big: '5.0★', label: 'Average rating' },
   { big: '1,200+', label: 'Cleans completed' },
   { big: '100%', label: 'Satisfaction guarantee' },
   { big: '4–6h', label: 'Typical dry time' },
