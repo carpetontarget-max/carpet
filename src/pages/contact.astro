@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site, links } from '../config';
+import Icon from '../components/Icon.astro';
 ---
 <Base title="Contact" description="Contact On Target Carpet Cleaning for a free quote.">
   <section class="section">
@@ -11,12 +12,12 @@ import { site, links } from '../config';
         <h1>Contact us for a free quote</h1>
         <p>Message us however suits you best — most enquiries get a same-day reply.</p>
         <div class="grid" style="gap:12px;margin-top:8px;">
-          <a href={links.whatsapp} class="btn btn--wa">💬 WhatsApp — {site.phoneDisplay}</a>
-          <a href={links.messenger} class="btn btn--primary">📨 Facebook Messenger</a>
-          <a href={links.sms} class="btn btn--ghost">✉️ Text (SMS) us</a>
-          <a href={links.tel} class="btn btn--ghost">📞 Call {site.phoneDisplay}</a>
-          <a href={links.email} class="btn btn--ghost">✉️ {site.email}</a>
-          <a href={links.instagram} class="btn btn--ghost">📷 Instagram</a>
+          <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp — {site.phoneDisplay}</a>
+          <a href={links.messenger} class="btn btn--primary"><Icon name="messenger" size={17} /> Facebook Messenger</a>
+          <a href={links.sms} class="btn btn--ghost"><Icon name="sms" size={17} /> Text (SMS) us</a>
+          <a href={links.tel} class="btn btn--ghost"><Icon name="phone" size={16} /> Call {site.phoneDisplay}</a>
+          <a href={links.email} class="btn btn--ghost"><Icon name="email" size={17} /> {site.email}</a>
+          <a href={links.instagram} class="btn btn--ghost"><Icon name="instagram" size={16} /> Instagram</a>
         </div>
         <h3 style="margin-top:1.6em;">Opening hours</h3>
         <p>

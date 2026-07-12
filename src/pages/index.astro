@@ -2,13 +2,19 @@
 import Base from '../layouts/Base.astro';
 import { site, links, services, steps, stats, certifications, pricing, areas } from '../config';
 import GoogleReviews from '../components/GoogleReviews.astro';
+import Icon from '../components/Icon.astro';
 ---
 <Base>
   <!-- HERO -->
   <section class="hero">
     <img src="/images/hero-equipment.png" alt="" aria-hidden="true" class="hero-bg" />
+    <div class="hero-blobs" id="heroBlobs">
+      <span class="hero-blob hero-blob--1"></span>
+      <span class="hero-blob hero-blob--2"></span>
+      <span class="hero-blob hero-blob--3"></span>
+    </div>
     <div class="container hero-grid">
-      <div>
+      <div class="reveal reveal--left">
         <span class="pill"><span class="stars">★★★★★</span> Trusted by homeowners across {site.serviceArea}</span>
         <h1>Carpets & upholstery that look&nbsp;<span style="color:var(--brand-light)">brand new</span></h1>
         <p class="lead" style="margin-left:0;">
@@ -16,8 +22,8 @@ import GoogleReviews from '../components/GoogleReviews.astro';
           flexible scheduling and a satisfaction guarantee — {site.serviceArea}.
         </p>
         <div class="btn-row">
-          <a href={links.whatsapp} class="btn btn--wa">💬 WhatsApp a quote</a>
-          <a href={links.tel} class="btn btn--onDark">📞 {site.phoneDisplay}</a>
+          <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp a quote</a>
+          <a href={links.tel} class="btn btn--onDark"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
         </div>
         <div class="hero-badges">
           {certifications.map((c) => <span class="badge">✓ {c}</span>)}
@@ -25,7 +31,7 @@ import GoogleReviews from '../components/GoogleReviews.astro';
       </div>
 
       <!-- Quote card -->
-      <div class="quote-card">
+      <div class="quote-card reveal reveal--right" style="transition-delay:.12s">
         <h3>Get your free quote</h3>
         <p class="muted">Enter your postcode and we'll get straight back to you.</p>
         <form action="/contact" method="get">
@@ -35,8 +41,8 @@ import GoogleReviews from '../components/GoogleReviews.astro';
           </div>
         </form>
         <div class="btn-row" style="margin-top:6px;">
-          <a href={links.whatsapp} class="btn btn--wa" style="flex:1;justify-content:center;">💬 WhatsApp</a>
-          <a href={links.messenger} class="btn btn--primary" style="flex:1;justify-content:center;">📨 Messenger</a>
+          <a href={links.whatsapp} class="btn btn--wa" style="flex:1;justify-content:center;"><Icon name="whatsapp" size={17} /> WhatsApp</a>
+          <a href={links.messenger} class="btn btn--primary" style="flex:1;justify-content:center;"><Icon name="messenger" size={17} /> Messenger</a>
         </div>
         <p class="muted" style="margin:12px 0 0;text-align:center;">Same-day replies · No obligation</p>
       </div>
@@ -196,9 +202,9 @@ import GoogleReviews from '../components/GoogleReviews.astro';
       <h2>Ready for fresher, cleaner carpets?</h2>
       <p class="lead">Get a fast, free quote today — call, text or message us however suits you.</p>
       <div class="btn-row" style="justify-content:center;">
-        <a href={links.whatsapp} class="btn btn--wa">💬 WhatsApp</a>
-        <a href={links.sms} class="btn btn--gold">✉️ Text us</a>
-        <a href={links.tel} class="btn btn--onDark">📞 {site.phoneDisplay}</a>
+        <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp</a>
+        <a href={links.sms} class="btn btn--gold"><Icon name="sms" size={17} /> Text us</a>
+        <a href={links.tel} class="btn btn--onDark"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
       </div>
     </div>
   </section>
@@ -218,5 +224,44 @@ import GoogleReviews from '../components/GoogleReviews.astro';
       range.addEventListener('input', update);
       update();
     });
+
+    // Animated count-up for the stats band
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    function animateStat(el) {
+      const text = el.textContent.trim();
+      const m = text.match(/^([\d,.]+)(.*)$/);
+      if (!m) return;
+      const target = parseFloat(m[1].replace(/,/g, ''));
+      const decimals = m[1].includes('.') ? m[1].split('.')[1].length : 0;
+      const suffix = m[2];
+      const duration = 1100;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const val = target * easeOutCubic(p);
+        el.textContent = val.toLocaleString('en-GB', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    const statIo = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { animateStat(e.target); statIo.unobserve(e.target); }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.stat .big').forEach((el) => statIo.observe(el));
+
+    // Subtle mouse-parallax on the hero's floating decorative shapes
+    const heroSection = document.querySelector('.hero');
+    const heroBlobs = document.getElementById('heroBlobs');
+    if (heroSection && heroBlobs && matchMedia('(hover: hover)').matches) {
+      heroSection.addEventListener('mousemove', (e) => {
+        const r = heroSection.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        heroBlobs.style.transform = `translate(${x * 24}px, ${y * 24}px)`;
+      });
+      heroSection.addEventListener('mouseleave', () => { heroBlobs.style.transform = ''; });
+    }
   </script>
 </Base>

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { links, faqs } from '../config';
+import Icon from '../components/Icon.astro';
 ---
 <Base title="FAQ" description="Frequently asked questions about our carpet cleaning services.">
   <section class="section">
@@ -9,19 +10,34 @@ import { links, faqs } from '../config';
         <span class="eyebrow">FAQ</span>
         <h1>Frequently asked questions</h1>
       </div>
-      {faqs.map((f) => (
-        <details class="faq">
-          <summary>{f.q}<span>＋</span></summary>
-          <p style="margin-top:0.8em;">{f.a}</p>
-        </details>
+      {faqs.map((f, i) => (
+        <div class="faq reveal" style={`transition-delay:${Math.min(i, 6) * 0.06}s`}>
+          <button class="faq-q" aria-expanded="false">
+            <span>{f.q}</span>
+            <span class="faq-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner"><p>{f.a}</p></div>
+          </div>
+        </div>
       ))}
       <div class="center" style="margin-top:32px;">
         <p>Still have a question?</p>
         <div class="btn-row" style="justify-content:center;">
-          <a href={links.whatsapp} class="btn btn--wa">💬 Ask on WhatsApp</a>
+          <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> Ask on WhatsApp</a>
           <a href="/contact" class="btn btn--primary">Contact us</a>
         </div>
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    document.querySelectorAll('.faq-q').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        btn.parentElement.classList.toggle('open', !open);
+      });
+    });
+  </script>
 </Base>

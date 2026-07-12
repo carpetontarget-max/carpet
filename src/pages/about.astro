@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site, links } from '../config';
+import Icon from '../components/Icon.astro';
 ---
 <Base title="About Us" description="About On Target Carpet Cleaning — a local, eco-friendly cleaning team in Leicester.">
   <section class="section">
@@ -18,8 +19,8 @@ import { site, links } from '../config';
         <div class="card"><h3>💷 Fair pricing</h3><p>Clear, no-obligation quotes every time.</p></div>
       </div>
       <div class="btn-row" style="margin-top:32px;">
-        <a href={links.whatsapp} class="btn btn--wa">💬 WhatsApp us</a>
-        <a href={links.tel} class="btn btn--primary">📞 {site.phoneDisplay}</a>
+        <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp us</a>
+        <a href={links.tel} class="btn btn--primary"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
       </div>
     </div>
   </section>

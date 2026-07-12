@@ -1,9 +1,23 @@
 ---
 import { links } from '../config';
+import Icon from './Icon.astro';
 ---
 <div class="floating">
-  <a class="f-wa"  href={links.whatsapp} target="_blank" rel="noopener" aria-label="WhatsApp us" title="WhatsApp">💬</a>
-  <a class="f-sms" href={links.sms} aria-label="Text us" title="SMS">✉️</a>
-  <a class="f-msg" href={links.messenger} target="_blank" rel="noopener" aria-label="Message us on Facebook" title="Messenger">💬</a>
-  <a class="f-ig"  href={links.instagram} target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">📷</a>
+  <a class="f-btn f-wa" href={links.whatsapp} target="_blank" rel="noopener" aria-label="WhatsApp us">
+    <span class="f-ring"></span>
+    <Icon name="whatsapp" size={23} />
+    <span class="f-label">WhatsApp</span>
+  </a>
+  <a class="f-btn f-msg" href={links.messenger} target="_blank" rel="noopener" aria-label="Message us on Facebook">
+    <Icon name="messenger" size={23} />
+    <span class="f-label">Messenger</span>
+  </a>
+  <a class="f-btn f-sms" href={links.sms} aria-label="Text us">
+    <Icon name="sms" size={28} />
+    <span class="f-label">Text us</span>
+  </a>
+  <a class="f-btn f-ig" href={links.instagram} target="_blank" rel="noopener" aria-label="Instagram">
+    <Icon name="instagram" size={23} />
+    <span class="f-label">Instagram</span>
+  </a>
 </div>

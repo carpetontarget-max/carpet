@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { links, services } from '../config';
+import Icon from '../components/Icon.astro';
 ---
 <Base title="Services" description="Carpet, upholstery and rug cleaning services in Leicester.">
   <section class="section">
@@ -25,7 +26,7 @@ import { links, services } from '../config';
       </div>
       <div class="center" style="margin-top:40px;">
         <div class="btn-row" style="justify-content:center;">
-          <a href={links.whatsapp} class="btn btn--wa">💬 Get a quote on WhatsApp</a>
+          <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> Get a quote on WhatsApp</a>
           <a href="/contact" class="btn btn--primary">Contact us</a>
         </div>
       </div>
