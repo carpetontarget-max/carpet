@@ -65,7 +65,7 @@ import GoogleReviews from '../components/GoogleReviews.astro';
       <div class="grid grid--3">
         {services.map((s) => (
           <a href="/services" class="svc-card reveal">
-            <img src={s.img} alt={s.title} loading="lazy" width="490" height="300" />
+            <img src={s.img} alt={s.title} loading="lazy" width="490" height="300" onerror="this.remove()" />
             <div class="overlay"></div>
             <div class="body">
               <span class="chip">{s.icon} Service</span>

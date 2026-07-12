@@ -104,6 +104,8 @@ img { max-width: 100%; display: block; }
   min-height: 300px; display: flex; align-items: flex-end;
   box-shadow: var(--shadow); text-decoration: none; color: #fff;
   transition: transform .25s ease, box-shadow .25s ease;
+  /* fallback shown if the photo is missing (e.g. before a stairs photo is added) */
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
 }
 .svc-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 .svc-card img {

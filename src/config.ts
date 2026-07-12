@@ -149,6 +149,12 @@ export const services = [
     desc: 'Gentle, thorough cleaning for sofas, chairs and rugs of all fabrics.',
     img: '/images/service-upholstery.jpg',
   },
+  {
+    icon: '🪜',
+    title: 'Stairs & Landing Cleaning',
+    desc: 'Deep cleaning for high-traffic stairs and landings — lifting ground-in dirt and restoring worn, flattened carpet on every step.',
+    img: '/images/service-stairs.jpg',
+  },
 ];
 
 // ── Testimonials (edit freely) ──
