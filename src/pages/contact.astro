@@ -1,62 +1,79 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, links } from '../config';
+import { site, links, hasMessenger } from '../config';
 import Icon from '../components/Icon.astro';
+
+const photoMessage = encodeURIComponent(
+  "Hi On Target, here are photos of the job I'd like quoted.",
+);
+const whatsappPhotos = `https://wa.me/${site.whatsappNumber}?text=${photoMessage}`;
 ---
-<Base title="Contact" description="Contact On Target Carpet Cleaning for a free quote.">
+<Base title="Contact" description="Talk to On Target Carpet Cleaning on WhatsApp, phone, text or email — same-day replies, seven days a week.">
   <section class="section">
-    <div class="container grid grid--2" style="align-items:start;gap:48px;">
-      <!-- Direct contact options -->
-      <div>
+    <div class="container" style="max-width:820px;">
+      <div class="center reveal">
         <span class="eyebrow">Get in touch</span>
-        <h1>Contact us for a free quote</h1>
-        <p>Message us however suits you best — most enquiries get a same-day reply.</p>
-        <div class="grid" style="gap:12px;margin-top:8px;">
-          <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp — {site.phoneDisplay}</a>
-          <a href={links.messenger} class="btn btn--primary"><Icon name="messenger" size={17} /> Facebook Messenger</a>
-          <a href={links.sms} class="btn btn--ghost"><Icon name="sms" size={17} /> Text (SMS) us</a>
-          <a href={links.tel} class="btn btn--ghost"><Icon name="phone" size={16} /> Call {site.phoneDisplay}</a>
-          <a href={links.email} class="btn btn--ghost"><Icon name="email" size={17} /> {site.email}</a>
-          <a href={links.instagram} class="btn btn--ghost"><Icon name="instagram" size={16} /> Instagram</a>
-        </div>
-        <h3 style="margin-top:1.6em;">Opening hours</h3>
-        <p>
-          {site.hours.map((h) => (<span><strong>{h.day}:</strong> {h.time}<br /></span>))}
-        </p>
+        <h1>Talk to us.</h1>
+        <p class="lead">Same-day replies, seven days a week.</p>
       </div>
 
-      <!-- Contact form (Web3Forms) -->
-      <div>
-        <h2>Send a message</h2>
-        <form class="form" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
-          <input type="hidden" name="subject" value="New enquiry from On Target website" />
-          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
-          <div class="row">
-            <div>
-              <label for="first">First name</label>
-              <input id="first" name="first_name" required />
-            </div>
-            <div>
-              <label for="last">Last name</label>
-              <input id="last" name="last_name" />
-            </div>
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" required />
-          </div>
-          <div>
-            <label for="phone">Phone (optional)</label>
-            <input id="phone" name="phone" />
-          </div>
-          <div>
-            <label for="message">How can we help?</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary">Send message</button>
-          <p style="font-size:0.85rem;">Prefer instant replies? <a href={links.whatsapp}>Message us on WhatsApp</a>.</p>
-        </form>
+      <!-- WhatsApp: the one primary action -->
+      <a href={links.whatsapp} class="channel-card channel-card--primary reveal">
+        <span class="channel-card__icon"><Icon name="whatsapp" size={26} /></span>
+        <span class="channel-card__body">
+          <span class="channel-card__label">WhatsApp</span>
+          <span class="channel-card__note">Fastest. Usually replied within the hour.</span>
+        </span>
+        <span class="channel-card__cta">Chat now →</span>
+      </a>
+
+      <!-- Everything else: outline cards -->
+      <div class="grid grid--3" style="margin-top:16px;">
+        <a href={links.tel} class="channel-card reveal">
+          <span class="channel-card__icon"><Icon name="phone" size={22} /></span>
+          <span class="channel-card__body">
+            <span class="channel-card__label">Call</span>
+            <span class="channel-card__phone">{site.phoneDisplay}</span>
+            <span class="channel-card__note">Every day, 5am–1am.</span>
+          </span>
+        </a>
+        <a href={links.sms} class="channel-card reveal">
+          <span class="channel-card__icon"><Icon name="sms" size={22} /></span>
+          <span class="channel-card__body">
+            <span class="channel-card__label">Text</span>
+            <span class="channel-card__note">Send your postcode and rooms.</span>
+          </span>
+        </a>
+        <a href={links.email} class="channel-card reveal">
+          <span class="channel-card__icon"><Icon name="email" size={22} /></span>
+          <span class="channel-card__body">
+            <span class="channel-card__label">Email</span>
+            <span class="channel-card__note">Best for landlords and letting agents.</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Secondary channels -->
+      <div class={`grid ${hasMessenger ? 'grid--2' : ''} reveal`} style="margin-top:16px;">
+        {hasMessenger && (
+          <a href={links.messenger} target="_blank" rel="noopener" class="channel-card channel-card--small">
+            <span class="channel-card__icon"><Icon name="messenger" size={18} /></span>
+            <span class="channel-card__label">Messenger</span>
+          </a>
+        )}
+        <a href={links.instagram} target="_blank" rel="noopener" class="channel-card channel-card--small">
+          <span class="channel-card__icon"><Icon name="instagram" size={18} /></span>
+          <span class="channel-card__label">Instagram</span>
+        </a>
+      </div>
+
+      <!-- The one input worth asking for -->
+      <div class="photo-quote reveal">
+        <h2>Not sure what it'll cost? Send us a photo.</h2>
+        <p>Snap the carpet, the stain or the sofa and we'll come back with a proper price. No visit needed, no obligation.</p>
+        <a href={whatsappPhotos} class="btn btn--wa" target="_blank" rel="noopener">
+          <Icon name="whatsapp" size={17} /> Send photos on WhatsApp
+        </a>
       </div>
     </div>
   </section>

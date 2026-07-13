@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { site, links, services } from '../../config';
+import Icon from '../../components/Icon.astro';
+
+export function getStaticPaths() {
+  return services.map((s) => ({
+    params: { slug: s.slug },
+    props: { service: s },
+  }));
+}
+
+const { service } = Astro.props;
+const related = service.related
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter(Boolean);
+const paragraphs = service.intro.split('\n\n');
+---
+<Base
+  title={`${service.title} in Leicester`}
+  description={service.metaDescription}
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2" style="align-items:center;gap:48px;">
+        <div class="reveal reveal--left">
+          <span class="eyebrow">{service.icon} Our services</span>
+          <h1>{service.title} in Leicester</h1>
+          <p class="lead" style="margin-left:0;">{service.desc}</p>
+          {paragraphs.map((p) => <p>{p}</p>)}
+          <div class="btn-row" style="margin-top:24px;">
+            <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp for a quote</a>
+            <a href="/#pricing" class="btn btn--ghost">See pricing</a>
+          </div>
+        </div>
+        <Image
+          src={service.img}
+          alt={service.alt}
+          loading="eager"
+          fetchpriority="high"
+          width={800}
+          format="webp"
+          style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--mist">
+    <div class="container center">
+      <span class="eyebrow">Why On Target</span>
+      <h2>Every job comes with the same standard</h2>
+      <div class="grid grid--2" style="text-align:left;max-width:820px;margin:0 auto;">
+        <div class="card"><h3>🌿 Eco-friendly</h3><p>Safe, non-toxic cleaning solutions.</p></div>
+        <div class="card"><h3>✅ Guaranteed</h3><p>Not happy with an area? We'll put it right.</p></div>
+      </div>
+      <p style="margin-top:28px;">Read more about how we work on the <a href="/about">About page</a>, or head to <a href="/contact">Contact</a> to book directly.</p>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="center reveal">
+          <span class="eyebrow">Related services</span>
+          <h2>You might also need</h2>
+        </div>
+        <div class="grid grid--3">
+          {related.map((r) => (
+            <a href={`/services/${r.slug}`} class="card reveal" style="display:block;">
+              <h3>{r.icon} {r.title}</h3>
+              <p>{r.desc}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--deep center">
+    <div class="container">
+      <h2>Ready to book {service.title.toLowerCase()}?</h2>
+      <p class="lead">Get a fast, free quote today — call, text or message us however suits you.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp us</a>
+        <a href={links.tel} class="btn btn--onDark"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+</Base>

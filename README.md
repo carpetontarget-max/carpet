@@ -19,11 +19,10 @@ services, testimonials and FAQ. Change it there and it updates across every page
 
 ### 🔗 Things you MUST fill in before going live
 In `src/config.ts`:
-1. **`social.instagram`** — your Instagram handle (without the @).
+1. **`social.instagram`** — your Instagram handle (without the @). Already set.
 2. **`social.facebook` / `social.messenger`** — your Facebook Page username
-   (Messenger uses `m.me/<page>`).
-3. **`web3formsAccessKey`** — sign up free at https://web3forms.com, paste your
-   access key so the contact form emails you at `carpetontarget@gmail.com`.
+   (Messenger uses `m.me/<page>`). Until this is a real handle, the Messenger
+   button is hidden site-wide rather than pointing at a dead link.
 
 Phone number is already set (`07444 784316`) — WhatsApp/SMS/call links work now.
 

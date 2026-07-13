@@ -2,8 +2,19 @@
 import Base from '../layouts/Base.astro';
 import { links, faqs } from '../config';
 import Icon from '../components/Icon.astro';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
-<Base title="FAQ" description="Frequently asked questions about our carpet cleaning services.">
+<Base title="FAQ" description="Answers to common questions about our carpet and upholstery cleaning service in Leicester — methods, drying time, guarantee and coverage area.">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <section class="section">
     <div class="container" style="max-width:760px;">
       <div class="center">

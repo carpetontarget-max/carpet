@@ -1,5 +1,5 @@
 ---
-import { links } from '../config';
+import { links, hasMessenger } from '../config';
 import Icon from './Icon.astro';
 ---
 <div class="floating">
@@ -8,10 +8,12 @@ import Icon from './Icon.astro';
     <Icon name="whatsapp" size={23} />
     <span class="f-label">WhatsApp</span>
   </a>
-  <a class="f-btn f-msg" href={links.messenger} target="_blank" rel="noopener" aria-label="Message us on Facebook">
-    <Icon name="messenger" size={23} />
-    <span class="f-label">Messenger</span>
-  </a>
+  {hasMessenger && (
+    <a class="f-btn f-msg" href={links.messenger} target="_blank" rel="noopener" aria-label="Message us on Facebook">
+      <Icon name="messenger" size={23} />
+      <span class="f-label">Messenger</span>
+    </a>
+  )}
   <a class="f-btn f-sms" href={links.sms} aria-label="Text us">
     <Icon name="sms" size={28} />
     <span class="f-label">Text us</span>

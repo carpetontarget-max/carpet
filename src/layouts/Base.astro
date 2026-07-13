@@ -1,12 +1,55 @@
 ---
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FloatingContact from '../components/FloatingContact.astro';
-import { site } from '../config';
+import { site, links, areas } from '../config';
+import heroImg from '../images/hero-equipment.png';
 
-const { title, description } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  image?: ImageMetadata;
+}
+const { title, description, image } = Astro.props as Props;
 const pageTitle = title ? `${title} | ${site.businessName}` : `${site.businessName} | ${site.tagline}`;
+const pageDescription = description ?? `${site.tagline}. Serving ${site.serviceArea} with eco-friendly hot water extraction and a satisfaction guarantee.`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const optimizedOgImage = await getImage({ src: image ?? heroImg, width: 1200, format: 'jpg' });
+const ogImage = new URL(optimizedOgImage.src, Astro.site);
+
+// ── LocalBusiness structured data (JSON-LD) ──
+const sameAs = [links.instagram, site.googleReviewsUrl].filter((u) => u && !u.includes('YOUR_'));
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: site.businessName,
+  image: String(ogImage),
+  url: String(Astro.site),
+  telephone: site.phoneIntl,
+  email: site.email,
+  priceRange: '££',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Leicester',
+    addressRegion: 'Leicestershire',
+    addressCountry: 'GB',
+  },
+  areaServed: areas.map((a) => ({ '@type': 'City', name: a })),
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: site.hoursSchema.opens,
+    closes: site.hoursSchema.closes,
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: site.googleRating,
+    reviewCount: site.googleReviewCount,
+  },
+  sameAs,
+};
 ---
 <!doctype html>
 <html lang="en-GB">
@@ -14,8 +57,23 @@ const pageTitle = title ? `${title} | ${site.businessName}` : `${site.businessNa
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
-    <meta name="description" content={description ?? site.tagline} />
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.businessName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
   </head>
   <body>
     <Header />

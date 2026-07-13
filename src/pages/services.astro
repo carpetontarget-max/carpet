@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { links, services } from '../config';
 import Icon from '../components/Icon.astro';
@@ -11,17 +12,18 @@ import Icon from '../components/Icon.astro';
       <p class="lead">Every service uses eco-friendly hot water extraction and comes with our satisfaction guarantee.</p>
     </div>
     <div class="container">
+      <h2 class="sr-only">Our cleaning services</h2>
       <div class="grid grid--3">
         {services.map((s) => (
-          <div class="svc-card">
-            <img src={s.img} alt={s.title} loading="lazy" width="490" height="300" onerror="this.remove()" />
+          <a href={`/services/${s.slug}`} class="svc-card">
+            <Image src={s.img} alt={s.alt} loading="lazy" width={700} format="webp" />
             <div class="overlay"></div>
             <div class="body">
               <span class="chip">{s.icon} Service</span>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       <div class="center" style="margin-top:40px;">

@@ -8,6 +8,13 @@
  *   WhatsApp (wa.me):     447444784316     (no + , no spaces)
  * ────────────────────────────────────────────────────────────────────────
  */
+import imgCarpet from './images/service-carpet.png';
+import imgStain from './images/service-stain.png';
+import imgPet from './images/service-pet.png';
+import imgTenancy from './images/service-tenancy.png';
+import imgCommercial from './images/service-commercial.png';
+import imgUpholstery from './images/service-upholstery.jpg';
+import imgStairsAfter from './images/stairs-after.jpg';
 
 export const site = {
   businessName: 'On Target Carpet Cleaning',
@@ -20,28 +27,23 @@ export const site = {
   whatsappNumber: '447444784316', // used for wa.me link (no + , no spaces)
   email: 'carpetontarget@gmail.com',
 
-  // ── Opening hours ──
+  // ── Opening hours (matches Google Business Profile) ──
   hours: [
-    { day: 'Monday – Friday', time: '8:00am – 10:00pm' },
-    { day: 'Saturday', time: '9:00am – 10:00pm' },
-    { day: 'Sunday', time: '9:00am – 8:00pm' },
+    { day: 'Monday – Sunday', time: '5:00am – 1:00am' },
   ],
+  // Machine-readable version for structured data (24h clock).
+  hoursSchema: { opens: '05:00', closes: '01:00' },
 
   // ── Social / messaging links ──
   // ⚠️ REPLACE the placeholders below with your real usernames/page IDs.
   social: {
     // Instagram: put your handle without the @  →  instagram.com/<handle>
-    instagram: 'YOUR_INSTAGRAM_HANDLE',
+    instagram: 'on_target_carpet_cleaning',
     // Facebook page (for the profile link): facebook.com/<page>
     facebook: 'YOUR_FACEBOOK_PAGE',
     // Facebook Messenger deep link uses your Page's username: m.me/<page>
-    messenger: 'YOUR_FACEBOOK_PAGE',
+    messenger: '104518522484326',
   },
-
-  // ── Contact form ──
-  // Free form-to-email service. Sign up at https://web3forms.com (no backend
-  // needed), paste your access key here. Submissions go to the email above.
-  web3formsAccessKey: 'YOUR_WEB3FORMS_ACCESS_KEY',
 
   // ── Google reviews (real, live) ──
   // The site fetches your real Google rating + latest reviews AT BUILD TIME.
@@ -111,49 +113,93 @@ export const links = {
   messenger: link(site.social.messenger, 'https://m.me/', 'https://m.me'),
 };
 
+// Whether a real Messenger handle has been set — until then, the link is dead
+// (m.me with no page), so callers should hide the Messenger button rather than
+// show a link that goes nowhere useful.
+export const hasMessenger = !isPlaceholder(site.social.messenger);
+
 // ── Services (edit / add / remove freely) ──
+// Each service gets its own page at /services/<slug>. `intro` is the longer,
+// unique copy used on that page (kept distinct per service for SEO — avoid
+// making these near-duplicates of each other). `related` lists 2–3 other
+// slugs to cross-link from that page.
 export const services = [
   {
+    slug: 'carpet-deep-cleaning',
     icon: '🧼',
     title: 'Carpet Deep Cleaning',
     desc: 'Hot water extraction that lifts dirt, allergens and grime deep from the fibres — leaving carpets fresh and restored.',
-    img: '/images/service-carpet.png',
+    img: imgCarpet,
+    alt: 'Technician using hot water extraction equipment to deep clean a carpet in a Leicester home',
+    metaDescription: 'Professional carpet deep cleaning in Leicester using hot water extraction. Lifts dirt and allergens from deep in the fibres. Free quotes, satisfaction guaranteed.',
+    intro: "Our core service: a full hot water extraction clean that goes far deeper than a hoover or a rented machine ever will. We pre-treat traffic lanes and stains, then extract the dirty water straight back out — along with the dust, allergens and grime that build up in the fibres over months of everyday use.\n\nMost carpets are dry within 4–6 hours, and every clean uses eco-friendly solutions that are safe around kids and pets. Whether it's one room or the whole house, you get the same thorough process and the same satisfaction guarantee.",
+    related: ['stain-spot-removal', 'stairs-landing-cleaning', 'end-of-tenancy-cleaning'],
   },
   {
+    slug: 'stain-spot-removal',
     icon: '✨',
     title: 'Stain & Spot Removal',
     desc: 'Advanced treatment for tough stains, spills and high-traffic marks that everyday cleaning leaves behind.',
-    img: '/images/service-stain.png',
+    img: imgStain,
+    alt: 'Close-up of a stubborn carpet stain being treated before deep cleaning',
+    metaDescription: 'Stubborn stain and spot removal for carpets in Leicester — wine, coffee, ink and traffic marks. Targeted treatment, honest advice on what will and won\'t lift.',
+    intro: "Wine, coffee, ink, makeup, traffic lanes worn dark by daily footsteps — some marks need more than a standard clean to shift. We identify what the stain actually is before treating it, because the wrong product on the wrong stain can set it permanently.\n\nWe'll always tell you honestly if a mark is likely to lift fully, partially, or not at all before we start — no guessing games, no charging you for a result we can't deliver. Stain treatment is usually paired with a full room clean so the rest of the carpet matches.",
+    related: ['pet-stain-odour-removal', 'carpet-deep-cleaning', 'upholstery-rug-cleaning'],
   },
   {
+    slug: 'pet-stain-odour-removal',
     icon: '🐾',
     title: 'Pet Stain & Odour Removal',
     desc: 'Specialist eco-friendly treatment that eliminates pet stains and neutralises odours at the source.',
-    img: '/images/service-pet.png',
+    img: imgPet,
+    alt: 'Carpet being treated for pet stains and odours with eco-friendly solution',
+    metaDescription: 'Pet stain and odour removal for carpets and upholstery in Leicester. Eco-friendly treatment that neutralises odours at the source, not just masks them.',
+    intro: "Air fresheners mask pet odour for an afternoon. We treat the actual cause — urine, dander and bacteria trapped in the carpet backing and underlay, not just the visible surface. Our eco-friendly solutions break down odour at a molecular level rather than covering it up.\n\nSafe for households with pets and children once dry, and effective on both fresh accidents and stains that have been there for years. If odour is coming from underlay rather than carpet, we'll tell you that too, rather than cleaning the same spot twice and hoping.",
+    related: ['stain-spot-removal', 'carpet-deep-cleaning', 'upholstery-rug-cleaning'],
   },
   {
+    slug: 'end-of-tenancy-cleaning',
     icon: '🔑',
     title: 'End of Tenancy Cleaning',
     desc: 'Deposit-saving deep cleans that meet landlord and letting-agent standards.',
-    img: '/images/service-tenancy.png',
+    img: imgTenancy,
+    alt: 'Freshly deep-cleaned carpet in an empty rental property ready for handover',
+    metaDescription: 'End of tenancy carpet cleaning in Leicester to the standard landlords and letting agents expect. Help protect your deposit with a documented, professional clean.',
+    intro: "Letting agents and landlords check carpets closely at check-out, and a carpet that merely looks clean isn't always enough — it needs to meet the standard set at check-in. We clean to that standard, and can work directly with tenants, landlords or agents to book around a moving day.\n\nWe're often booked for this alongside a full property clean, and can usually fit same-week appointments around tight moving deadlines. Ask about combining rooms into one whole-house visit — it's more efficient than booking room by room.",
+    related: ['carpet-deep-cleaning', 'stairs-landing-cleaning', 'stain-spot-removal'],
   },
   {
+    slug: 'commercial-carpet-cleaning',
     icon: '🏢',
     title: 'Commercial Carpet Cleaning',
     desc: 'Flexible, out-of-hours cleaning for offices, shops and business premises.',
-    img: '/images/service-commercial.png',
+    img: imgCommercial,
+    alt: 'Commercial office carpet being professionally cleaned outside business hours',
+    metaDescription: 'Commercial carpet cleaning for offices, shops and business premises in Leicester. Flexible out-of-hours scheduling so cleaning never disrupts your working day.',
+    intro: "Business carpets take a different kind of punishment — constant foot traffic, wheeled chairs, spilled coffee — and can't be closed off for a day to deal with it. We work evenings and weekends so cleaning happens around your business, not in the middle of it.\n\nWe cover offices, shops, salons, waiting rooms and other business premises, and can set up a regular schedule (monthly, quarterly) rather than a one-off if that suits your footfall better. Get in touch with your square footage and current condition for an accurate quote.",
+    related: ['carpet-deep-cleaning', 'stairs-landing-cleaning', 'stain-spot-removal'],
   },
   {
+    slug: 'upholstery-rug-cleaning',
     icon: '🛋️',
     title: 'Upholstery & Rug Cleaning',
     desc: 'Gentle, thorough cleaning for sofas, chairs and rugs of all fabrics.',
-    img: '/images/service-upholstery.jpg',
+    img: imgUpholstery,
+    alt: 'Sofa upholstery being deep cleaned with fabric-safe solution',
+    metaDescription: 'Upholstery and rug cleaning in Leicester — sofas, armchairs and rugs of all fabrics, priced per seat. Fabric-safe treatment with pet stain and odour removal available.',
+    intro: "Not every fabric can be cleaned the same way — velvet, wool and delicate weaves need a different approach to a standard cotton-blend sofa, and getting it wrong can shrink, discolour or stiffen the material. We check the fabric first and treat it accordingly.\n\nPriced per seat rather than per item, so a single armchair costs less than a 3-seater sofa. Covers sofas, chairs and rugs, and pairs well with our pet stain and odour removal if that's the issue you're dealing with.",
+    related: ['stain-spot-removal', 'pet-stain-odour-removal', 'carpet-deep-cleaning'],
   },
   {
+    slug: 'stairs-landing-cleaning',
     icon: '🪜',
     title: 'Stairs & Landing Cleaning',
     desc: 'Deep cleaning for high-traffic stairs and landings — lifting ground-in dirt and restoring worn, flattened carpet on every step.',
-    img: '/images/stairs-after.jpg',
+    img: imgStairsAfter,
+    alt: 'Stair carpet before and after professional deep cleaning, showing restored pile and colour',
+    metaDescription: 'Stairs and landing carpet cleaning in Leicester. Restores worn, flattened pile on high-traffic steps that everyday vacuuming can\'t lift.',
+    intro: "Stairs take more wear per square foot than almost any other carpet in the house — every step is a footfall, and the pile flattens and greys long before the carpet either side of it. Standard vacuuming can't reach the ground-in dirt sitting at the base of the fibres.\n\nWe clean every step and the landing in one pass, lifting flattened pile back up and restoring colour that everyday cleaning leaves behind. Often booked alongside a whole-house clean since stairs connect every other room.",
+    related: ['carpet-deep-cleaning', 'end-of-tenancy-cleaning', 'commercial-carpet-cleaning'],
   },
 ];
 
@@ -203,24 +249,24 @@ export const certifications = [
   'DBS-checked technicians',
 ];
 
-// ── Pricing tiers (indicative — adjust to your real prices) ──
+// ── Pricing tiers (real starting prices — exact figure confirmed before work begins) ──
 export const pricing = [
   {
     name: 'Single Room',
-    price: '30', unit: 'from / room',
-    features: ['Deep hot water extraction', 'Pre-treatment of stains', 'Deodorising finish'],
+    price: '70', unit: 'from / room',
+    features: ['Full hot-water extraction clean', 'Pre-treatment for stains & traffic lanes', 'Deodorising finish'],
     featured: false,
   },
   {
     name: 'Whole Home',
-    price: '99', unit: 'from / 3 rooms',
-    features: ['Everything in Single Room', 'Hallway & stairs option', 'Best value bundle', 'Priority booking'],
+    price: '120', unit: 'from / 3 rooms+',
+    features: ['Everything in Single Room, at the whole-house rate', 'Hallway & stairs included', 'One visit, one technician — no repeat call-outs', 'Priority booking slots'],
     featured: true,
   },
   {
     name: 'Upholstery',
-    price: '45', unit: 'from / sofa',
-    features: ['Sofas, chairs & rugs', 'Fabric-safe treatment', 'Pet stain & odour removal'],
+    price: '30', unit: 'from / seat',
+    features: ['Sofas, chairs & rugs', 'Fabric-safe deep clean', 'Pet stain & odour removal'],
     featured: false,
   },
 ];
