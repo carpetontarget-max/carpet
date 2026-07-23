@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, links, homeServices, withBase } from '../config';
+import Icon from '../components/Icon.astro';
+
+// Residential services, in display order, each linking to its own full page.
+const resServices = homeServices;
+
+const reasons = [
+  { icon: '🌿', title: 'Safe for kids & pets', text: 'Eco-friendly, non-toxic solutions that are safe around your family once dry.' },
+  { icon: '💧', title: 'Dry in 4–6 hours', text: 'Powerful extraction removes most of the moisture — no soggy, days-long dry.' },
+  { icon: '✅', title: 'Satisfaction guarantee', text: 'Not happy with an area? Tell us and we’ll come back and put it right.' },
+  { icon: '💷', title: 'Fixed price, no surprises', text: 'A clear price agreed before we start — never a lowball number on the phone.' },
+];
+---
+<Base
+  title="Residential Carpet Cleaning in Leicester"
+  description="Home carpet, rug, upholstery, mattress and curtain cleaning across Leicester and Leicestershire. Eco-friendly hot water extraction that's safe for kids and pets, dry in hours, satisfaction guaranteed."
+>
+  <!-- SUB-HERO -->
+  <section class="subhero">
+    <div class="container subhero-grid">
+      <div class="reveal reveal--left">
+        <span class="eyebrow">Residential cleaning</span>
+        <h1>Carpet cleaning for your home in Leicester</h1>
+        <p class="lead" style="margin-left:0;">
+          Deep, eco-friendly cleaning for carpets, rugs, upholstery, mattresses and more across {site.serviceArea} —
+          safe around kids and pets, dry in hours, and backed by our satisfaction guarantee.
+        </p>
+        <div class="btn-row">
+          <a href={links.whatsapp} class="btn btn--wa btn--lg"><Icon name="whatsapp" size={18} /> WhatsApp a quote</a>
+          <a href={links.tel} class="btn btn--onDark btn--lg"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
+        </div>
+      </div>
+      <!-- PHOTO: replace this placeholder with a real home job photo later -->
+      <div class="ph-photo reveal reveal--right">
+        <span class="ph-cap">📷 Freshly cleaned living room — photo to follow</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESIDENTIAL SERVICES (expandable list) -->
+  <section class="section">
+    <div class="container" style="max-width:860px;">
+      <div class="center reveal">
+        <span class="eyebrow">Our residential services</span>
+        <h2>Everything we clean in your home</h2>
+        <p class="lead">Tap any service to see what’s involved — each has its own page with the full details.</p>
+      </div>
+
+      {resServices.map((s) => (
+        <div class="faq svc-row reveal">
+          <button class="faq-q" aria-expanded="false">
+            <span class="svc-row__title"><span class="svc-row__ico">{s.icon}</span>{s.title}</span>
+            <span class="faq-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <p>{s.desc}</p>
+              <a class="svc-row__link" href={withBase(`/services/${s.slug}`)}>Read the full {s.title.toLowerCase()} guide →</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- WHY HOMEOWNERS CHOOSE US -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="center reveal">
+        <span class="eyebrow">Why homeowners choose us</span>
+        <h2>A local, family-run team you can trust</h2>
+      </div>
+      <div class="grid grid--4">
+        {reasons.map((r) => (
+          <div class="card reveal">
+            <span class="icon">{r.icon}</span>
+            <h3>{r.title}</h3>
+            <p>{r.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="center" style="margin-top:36px;">
+        <a href={withBase('/#pricing')} class="btn btn--ghost">See home pricing →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--deep center">
+    <div class="container">
+      <h2>Ready for fresher, cleaner carpets at home?</h2>
+      <p class="lead">Get a fast, free quote today — send a photo on WhatsApp for the quickest price.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp us</a>
+        <a href={links.tel} class="btn btn--onDark"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.querySelectorAll('.svc-row .faq-q').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        btn.parentElement.classList.toggle('open', !open);
+      });
+    });
+  </script>
+</Base>

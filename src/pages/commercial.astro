@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, links, commercialPremises, withBase } from '../config';
+import Icon from '../components/Icon.astro';
+
+const benefits = [
+  { icon: '🕒', title: 'Out-of-hours cleaning', text: 'Evening, weekend and early-morning slots so we work around your business — not through it.' },
+  { icon: '🛡️', title: 'Fully insured & DBS-checked', text: 'Public liability cover and vetted technicians — safe and compliant to have on your premises.' },
+  { icon: '🔁', title: 'Regular or one-off', text: 'Set up a monthly or quarterly schedule, or book a single deep clean whenever you need it.' },
+  { icon: '💬', title: 'Free, accurate quotes', text: 'Send your square footage and current condition and we’ll come back with a clear price.' },
+];
+---
+<Base
+  title="Commercial Carpet Cleaning in Leicester"
+  description="Commercial carpet and upholstery cleaning for offices, shops, salons, restaurants and business premises across Leicester and Leicestershire. Flexible out-of-hours scheduling, fully insured, free quotes."
+>
+  <!-- SUB-HERO -->
+  <section class="subhero">
+    <div class="container subhero-grid">
+      <div class="reveal reveal--left">
+        <span class="eyebrow">Commercial cleaning</span>
+        <h1>Commercial carpet cleaning in Leicester</h1>
+        <p class="lead" style="margin-left:0;">
+          Professional, out-of-hours carpet and upholstery cleaning for offices, shops, salons and
+          business premises across {site.serviceArea} — so cleaning never disrupts your working day.
+        </p>
+        <div class="btn-row">
+          <a href={links.whatsapp} class="btn btn--wa btn--lg"><Icon name="whatsapp" size={18} /> Get a site quote</a>
+          <a href={links.tel} class="btn btn--onDark btn--lg"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
+        </div>
+      </div>
+      <!-- PHOTO: replace this placeholder with a real commercial job photo later -->
+      <div class="ph-photo reveal reveal--right">
+        <span class="ph-cap">📷 Commercial clean — photo to follow</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section">
+    <div class="container">
+      <div class="center reveal">
+        <span class="eyebrow">Why businesses choose us</span>
+        <h2>Cleaning that fits around your business</h2>
+      </div>
+      <div class="grid grid--4">
+        {benefits.map((b) => (
+          <div class="card reveal">
+            <span class="icon">{b.icon}</span>
+            <h3>{b.title}</h3>
+            <p>{b.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMISES WE CLEAN -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="center reveal">
+        <span class="eyebrow">Premises we clean</span>
+        <h2>From offices to restaurants</h2>
+        <p class="lead">Whatever your premises, we tailor the clean and the schedule to suit it.</p>
+      </div>
+      <div class="grid grid--3">
+        {commercialPremises.map((p) => {
+          const Tag = p.link ? 'a' : 'div';
+          return (
+            <Tag href={p.link ? withBase(p.link) : undefined} class="feature-card reveal">
+              {/* PHOTO: swap this coloured panel for a real <Image> later */}
+              <div class="feature-card__media" style={`background:${p.tint};`}>
+                <span class="fc-emoji">{p.emoji}</span>
+              </div>
+              <div class="feature-card__body">
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+                {p.link && <span class="feature-card__more">Learn more →</span>}
+              </div>
+            </Tag>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- MINIMAL DISRUPTION -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2" style="align-items:center;gap:48px;">
+        <div class="reveal reveal--left">
+          <span class="eyebrow">Minimal disruption</span>
+          <h2>We clean around your opening hours</h2>
+          <p>Carpets take a battering in a busy workplace — foot traffic, wheeled chairs, spilled coffee — but you can’t close for a day to deal with it. We work evenings, weekends and early mornings so the job happens when your premises are quiet.</p>
+          <p>Our fast-drying hot water extraction pulls out the vast majority of moisture on the spot, so floors are ready well before you open. For larger sites we can plan the clean zone by zone to keep everything running.</p>
+          <div class="btn-row" style="margin-top:24px;">
+            <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> Arrange a clean</a>
+            <a href={withBase('/contact')} class="btn btn--ghost">Contact us</a>
+          </div>
+        </div>
+        <!-- PHOTO: replace with a real out-of-hours / office photo later -->
+        <div class="ph-photo reveal reveal--right" style="min-height:300px;background:linear-gradient(135deg,#0a4a63,#04263a);">
+          <span class="ph-cap">📷 Out-of-hours clean — photo to follow</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--deep center">
+    <div class="container">
+      <h2>Get a commercial cleaning quote</h2>
+      <p class="lead">Tell us your premises, square footage and current condition — we’ll come back with a clear, no-obligation price.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp us</a>
+        <a href={links.tel} class="btn btn--onDark"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+</Base>

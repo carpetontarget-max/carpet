@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { links, faqs } from '../config';
+import { links, faqs, faqCategories, withBase } from '../config';
 import Icon from '../components/Icon.astro';
 
 const faqSchema = {
@@ -13,30 +13,45 @@ const faqSchema = {
   })),
 };
 ---
-<Base title="FAQ" description="Answers to common questions about our carpet and upholstery cleaning service in Leicester — methods, drying time, guarantee and coverage area.">
+<Base title="FAQ" description="Answers to common questions about our carpet and upholstery cleaning service in Leicester — pricing, booking, drying time, stains, odours, guarantee and coverage area.">
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <section class="section">
-    <div class="container" style="max-width:760px;">
-      <div class="center">
+    <div class="container" style="max-width:820px;">
+      <div class="center reveal">
         <span class="eyebrow">FAQ</span>
         <h1>Frequently asked questions</h1>
+        <p class="lead">Everything you might want to know before booking — from pricing and drying times to stains, odours and the areas we cover. Can’t find your answer? Just message us.</p>
       </div>
-      {faqs.map((f, i) => (
-        <div class="faq reveal" style={`transition-delay:${Math.min(i, 6) * 0.06}s`}>
-          <button class="faq-q" aria-expanded="false">
-            <span>{f.q}</span>
-            <span class="faq-plus" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a">
-            <div class="faq-a-inner"><p>{f.a}</p></div>
-          </div>
+
+      <nav class="faq-jump reveal" aria-label="FAQ categories">
+        {faqCategories.map((c) => (
+          <a href={`#${c.title.toLowerCase().replace(/[^a-z]+/g, '-')}`}>{c.icon} {c.title}</a>
+        ))}
+      </nav>
+
+      {faqCategories.map((c) => (
+        <div class="faq-group" id={c.title.toLowerCase().replace(/[^a-z]+/g, '-')}>
+          <h2 class="faq-cat reveal"><span class="faq-cat__ico">{c.icon}</span>{c.title}</h2>
+          {c.items.map((f) => (
+            <div class="faq reveal">
+              <button class="faq-q" aria-expanded="false">
+                <span>{f.q}</span>
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+              <div class="faq-a">
+                <div class="faq-a-inner"><p>{f.a}</p></div>
+              </div>
+            </div>
+          ))}
         </div>
       ))}
-      <div class="center" style="margin-top:32px;">
-        <p>Still have a question?</p>
+
+      <div class="faq-cta reveal">
+        <h2>Still have a question?</h2>
+        <p>We reply fast — usually within the hour, seven days a week.</p>
         <div class="btn-row" style="justify-content:center;">
           <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> Ask on WhatsApp</a>
-          <a href="/contact" class="btn btn--primary">Contact us</a>
+          <a href={withBase('/contact')} class="btn btn--ghost">Contact us</a>
         </div>
       </div>
     </div>

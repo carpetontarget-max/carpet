@@ -1,5 +1,5 @@
 ---
-import { site, links, hasMessenger } from '../config';
+import { site, links, hasMessenger, withBase } from '../config';
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 ---
@@ -14,6 +14,16 @@ import Icon from './Icon.astro';
         <a href={links.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" size={18} /></a>
         <a href={links.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon name="facebook" size={18} /></a>
       </div>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <p>
+        <a href={withBase('/residential')}>Residential</a><br />
+        <a href={withBase('/commercial')}>Commercial</a><br />
+        <a href={withBase('/services')}>Services</a><br />
+        <a href={withBase('/about')}>About</a><br />
+        <a href={withBase('/faq')}>FAQ</a>
+      </p>
     </div>
     <div>
       <h4>Contact</h4>

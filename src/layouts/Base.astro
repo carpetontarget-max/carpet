@@ -1,19 +1,21 @@
 ---
 import { getImage } from 'astro:assets';
+import '@fontsource-variable/plus-jakarta-sans';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FloatingContact from '../components/FloatingContact.astro';
-import { site, links, areas } from '../config';
+import { site, links, areas, withBase } from '../config';
 import heroImg from '../images/hero-equipment.png';
 
 interface Props {
   title?: string;
+  titleFull?: string;
   description?: string;
   image?: ImageMetadata;
 }
-const { title, description, image } = Astro.props as Props;
-const pageTitle = title ? `${title} | ${site.businessName}` : `${site.businessName} | ${site.tagline}`;
+const { title, titleFull, description, image } = Astro.props as Props;
+const pageTitle = titleFull ?? (title ? `${title} | ${site.businessName}` : `${site.businessName} | ${site.tagline}`);
 const pageDescription = description ?? `${site.tagline}. Serving ${site.serviceArea} with eco-friendly hot water extraction and a satisfaction guarantee.`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const optimizedOgImage = await getImage({ src: image ?? heroImg, width: 1200, format: 'jpg' });
@@ -59,7 +61,7 @@ const localBusiness = {
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
 
     <!-- Open Graph / social sharing -->
     <meta property="og:type" content="website" />

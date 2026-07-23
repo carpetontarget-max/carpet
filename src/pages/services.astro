@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { links, services } from '../config';
+import { links, services, withBase } from '../config';
 import Icon from '../components/Icon.astro';
 ---
 <Base title="Services" description="Carpet, upholstery and rug cleaning services in Leicester.">
@@ -15,8 +15,8 @@ import Icon from '../components/Icon.astro';
       <h2 class="sr-only">Our cleaning services</h2>
       <div class="grid grid--3">
         {services.map((s) => (
-          <a href={`/services/${s.slug}`} class="svc-card">
-            <Image src={s.img} alt={s.alt} loading="lazy" width={700} format="webp" />
+          <a href={withBase(`/services/${s.slug}`)} class="svc-card" style={s.img ? undefined : `background:${s.tint};`}>
+            {s.img && <Image src={s.img} alt={s.alt} loading="lazy" width={700} format="webp" />}
             <div class="overlay"></div>
             <div class="body">
               <span class="chip">{s.icon} Service</span>
@@ -29,7 +29,7 @@ import Icon from '../components/Icon.astro';
       <div class="center" style="margin-top:40px;">
         <div class="btn-row" style="justify-content:center;">
           <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> Get a quote on WhatsApp</a>
-          <a href="/contact" class="btn btn--primary">Contact us</a>
+          <a href={withBase('/contact')} class="btn btn--primary">Contact us</a>
         </div>
       </div>
     </div>

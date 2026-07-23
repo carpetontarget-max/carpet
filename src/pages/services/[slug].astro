@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
-import { site, links, services } from '../../config';
+import { site, links, services, withBase } from '../../config';
+import { servicePages } from '../../servicePages';
 import Icon from '../../components/Icon.astro';
 
 export function getStaticPaths() {
@@ -12,55 +13,121 @@ export function getStaticPaths() {
 }
 
 const { service } = Astro.props;
+const page = servicePages[service.slug]; // long-form content, if written for this slug
 const related = service.related
   .map((slug) => services.find((s) => s.slug === slug))
   .filter(Boolean);
 const paragraphs = service.intro.split('\n\n');
+
+const h1 = page?.h1 ?? `${service.title} in Leicester`;
+const heroLead = page?.lead ?? service.desc;
+
+const faqSchema = page?.faqs && {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: page.faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 <Base
-  title={`${service.title} in Leicester`}
-  description={service.metaDescription}
+  title={page ? undefined : `${service.title} in Leicester`}
+  titleFull={page?.metaTitle}
+  description={page?.metaDescription ?? service.metaDescription}
 >
+  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+
+  <!-- HERO -->
   <section class="section">
     <div class="container">
       <div class="grid grid--2" style="align-items:center;gap:48px;">
         <div class="reveal reveal--left">
           <span class="eyebrow">{service.icon} Our services</span>
-          <h1>{service.title} in Leicester</h1>
-          <p class="lead" style="margin-left:0;">{service.desc}</p>
-          {paragraphs.map((p) => <p>{p}</p>)}
+          <h1>{h1}</h1>
+          <p class="lead" style="margin-left:0;">{heroLead}</p>
+          {!page && paragraphs.map((p) => <p>{p}</p>)}
           <div class="btn-row" style="margin-top:24px;">
             <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp for a quote</a>
-            <a href="/#pricing" class="btn btn--ghost">See pricing</a>
+            <a href={withBase('/#pricing')} class="btn btn--ghost">See pricing</a>
           </div>
         </div>
-        <Image
-          src={service.img}
-          alt={service.alt}
-          loading="eager"
-          fetchpriority="high"
-          width={800}
-          format="webp"
-          style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"
-        />
+        {service.img ? (
+          <Image
+            src={service.img}
+            alt={service.alt}
+            loading="eager"
+            fetchpriority="high"
+            width={800}
+            format="webp"
+            style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"
+          />
+        ) : (
+          /* PHOTO: swap this coloured panel for a real <Image> once you have one */
+          <div class="ph-photo reveal reveal--right" style={`aspect-ratio:4/3;min-height:0;background:${service.tint};`}>
+            <span class="ph-cap">{service.icon} {service.title} — photo to follow</span>
+          </div>
+        )}
       </div>
     </div>
   </section>
 
-  <section class="section section--mist">
-    <div class="container center">
-      <span class="eyebrow">Why On Target</span>
-      <h2>Every job comes with the same standard</h2>
-      <div class="grid grid--2" style="text-align:left;max-width:820px;margin:0 auto;">
-        <div class="card"><h3>🌿 Eco-friendly</h3><p>Safe, non-toxic cleaning solutions.</p></div>
-        <div class="card"><h3>✅ Guaranteed</h3><p>Not happy with an area? We'll put it right.</p></div>
+  <!-- LONG-FORM ARTICLE (only for slugs with servicePages content) -->
+  {page && (
+    <section class="section" style="padding-top:0;">
+      <div class="container article">
+        {page.sections.map((sec) => (
+          <div class="reveal">
+            <h2>{sec.h2}</h2>
+            {sec.body.map((p) => <p>{p}</p>)}
+            {sec.list && <ul class="ticklist">{sec.list.map((li) => <li>{li}</li>)}</ul>}
+          </div>
+        ))}
       </div>
-      <p style="margin-top:28px;">Read more about how we work on the <a href="/about">About page</a>, or head to <a href="/contact">Contact</a> to book directly.</p>
+    </section>
+  )}
+
+  <!-- WHY ON TARGET -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="center reveal">
+        <span class="eyebrow">Why On Target</span>
+        <h2>Every job comes with the same standard</h2>
+      </div>
+      <div class="grid grid--4" style="text-align:left;">
+        <div class="card reveal"><span class="icon">🌿</span><h3>Eco-friendly</h3><p>Safe, non-toxic solutions for kids and pets.</p></div>
+        <div class="card reveal"><span class="icon">✅</span><h3>Guaranteed</h3><p>Not happy with an area? We'll put it right.</p></div>
+        <div class="card reveal"><span class="icon">💧</span><h3>Fast drying</h3><p>Most carpets touch-dry within 4–6 hours.</p></div>
+        <div class="card reveal"><span class="icon">💷</span><h3>Fixed price</h3><p>Agreed before we start — no surprises.</p></div>
+      </div>
+      <p class="center" style="margin-top:32px;">Read more about how we work on the <a href={withBase('/about')}>About page</a>, or head to <a href={withBase('/contact')}>Contact</a> to book directly.</p>
     </div>
   </section>
+
+  <!-- FAQs (only for slugs with servicePages content) -->
+  {page?.faqs && (
+    <section class="section">
+      <div class="container" style="max-width:820px;">
+        <div class="center reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>{service.title} — your questions answered</h2>
+        </div>
+        {page.faqs.map((f) => (
+          <div class="faq reveal">
+            <button class="faq-q" aria-expanded="false">
+              <span>{f.q}</span>
+              <span class="faq-plus" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>{f.a}</p></div></div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
 
   {related.length > 0 && (
-    <section class="section">
+    <section class="section section--mist">
       <div class="container">
         <div class="center reveal">
           <span class="eyebrow">Related services</span>
@@ -68,7 +135,7 @@ const paragraphs = service.intro.split('\n\n');
         </div>
         <div class="grid grid--3">
           {related.map((r) => (
-            <a href={`/services/${r.slug}`} class="card reveal" style="display:block;">
+            <a href={withBase(`/services/${r.slug}`)} class="card reveal" style="display:block;">
               <h3>{r.icon} {r.title}</h3>
               <p>{r.desc}</p>
             </a>
@@ -88,4 +155,16 @@ const paragraphs = service.intro.split('\n\n');
       </div>
     </div>
   </section>
+
+  {page?.faqs && (
+    <script is:inline>
+      document.querySelectorAll('.faq-q').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const open = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!open));
+          btn.parentElement.classList.toggle('open', !open);
+        });
+      });
+    </script>
+  )}
 </Base>

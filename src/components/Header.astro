@@ -1,10 +1,9 @@
 ---
-import { site, links } from '../config';
+import { site, links, homeServices, businessServices, withBase } from '../config';
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
+const navBefore = [{ href: '/', label: 'Home' }];
+const navAfter = [
   { href: '/about', label: 'About' },
   { href: '/faq', label: 'FAQ' },
   { href: '/contact', label: 'Contact' },
@@ -22,12 +21,37 @@ const nav = [
 
 <header class="site-header" id="siteHeader">
   <div class="container nav">
-    <a href="/" aria-label="On Target Carpet Cleaning home"><Logo /></a>
+    <a href={withBase('/')} aria-label="On Target Carpet Cleaning home"><Logo /></a>
     <nav class="nav-links" id="navLinks">
-      {nav.map((n) => <a class="navlink" href={n.href}>{n.label}</a>)}
+      {navBefore.map((n) => <a class="navlink" href={withBase(n.href)}>{n.label}</a>)}
+
+      <div class="nav-dd" id="navDd">
+        <button class="navlink navlink--dd" id="ddBtn" aria-haspopup="true" aria-expanded="false">
+          Services
+          <svg class="dd-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-menu" id="ddMenu">
+          <div class="dropdown-cols">
+            <div class="dd-group">
+              <a class="dropdown-h dropdown-h--link" href={withBase('/residential')}>For your home <span class="dd-arrow">→</span></a>
+              <div class="dd-links dd-links--2col">
+                {homeServices.map((s) => <a href={withBase(`/services/${s.slug}`)}><span class="dd-ico">{s.icon}</span>{s.title}</a>)}
+              </div>
+            </div>
+            <div class="dd-group dd-group--business">
+              <a class="dropdown-h dropdown-h--link" href={withBase('/commercial')}>For business <span class="dd-arrow">→</span></a>
+              <div class="dd-links">
+                {businessServices.map((s) => <a href={withBase(`/services/${s.slug}`)}><span class="dd-ico">{s.icon}</span>{s.title}</a>)}
+              </div>
+            </div>
+          </div>
+          <a class="dropdown-foot" href={withBase('/services')}>View all services <span class="dd-arrow">→</span></a>
+        </div>
+      </div>
+
+      {navAfter.map((n) => <a class="navlink" href={withBase(n.href)}>{n.label}</a>)}
     </nav>
     <div class="nav-cta">
-      <a href={links.tel} class="nav-phone desktop"><span>Call us</span>{site.phoneDisplay}</a>
       <a href={links.whatsapp} class="btn btn--wa nav-wa"><Icon name="whatsapp" size={15} /> WhatsApp</a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
     </div>
@@ -37,6 +61,25 @@ const nav = [
   const t = document.getElementById('navToggle');
   const l = document.getElementById('navLinks');
   t?.addEventListener('click', () => l?.classList.toggle('open'));
+
+  // Services dropdown (click toggles; desktop also opens on hover via CSS)
+  const dd = document.getElementById('navDd');
+  const ddBtn = document.getElementById('ddBtn');
+  ddBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const open = dd?.classList.toggle('open');
+    ddBtn.setAttribute('aria-expanded', String(!!open));
+  });
+  document.addEventListener('click', (e) => {
+    if (dd && !dd.contains(e.target as Node)) {
+      dd.classList.remove('open');
+      ddBtn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { dd?.classList.remove('open'); ddBtn?.setAttribute('aria-expanded', 'false'); }
+  });
+
   // Reveal-on-scroll
   const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('in')), { threshold: 0.12 });
   window.addEventListener('DOMContentLoaded', () => document.querySelectorAll('.reveal').forEach((el) => io.observe(el)));

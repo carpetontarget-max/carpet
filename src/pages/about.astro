@@ -1,26 +1,59 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, links } from '../config';
+import { site, links, stats } from '../config';
 import Icon from '../components/Icon.astro';
+
+const promise = [
+  { icon: '🌿', title: 'Eco-friendly', text: 'Safe, non-toxic solutions that are kind to your family, pets and the planet.' },
+  { icon: '✅', title: 'Guaranteed', text: "Not happy with an area? Tell us and we'll come back and put it right." },
+  { icon: '📅', title: 'Flexible', text: 'Evening and weekend appointments to fit around your schedule.' },
+  { icon: '💷', title: 'Fair pricing', text: 'Clear, no-obligation quotes with the price agreed before we start.' },
+];
 ---
 <Base title="About Us" description="About On Target Carpet Cleaning — a local, eco-friendly cleaning team in Leicester.">
   <section class="section">
-    <div class="container" style="max-width:760px;">
-      <span class="eyebrow">About us</span>
-      <h1>A local team you can trust</h1>
-      <p>On Target Carpet Cleaning is a Leicester-based cleaning company serving {site.serviceArea}. We help homeowners, tenants and businesses keep their carpets, upholstery and rugs looking their best.</p>
-      <p>We built our reputation on doing the job properly: powerful hot water extraction that lifts dirt and allergens from deep within the fibres, paired with eco-friendly cleaning solutions that are safe around your family and pets.</p>
-      <p>Whether it's a single room, an end-of-tenancy deep clean or an office that needs regular attention, we turn up on time, work hard, and back every job with our satisfaction guarantee.</p>
-      <h2 style="margin-top:1.5em;">Our promise</h2>
-      <div class="grid grid--2">
-        <div class="card"><h3>🌿 Eco-friendly</h3><p>Safe, non-toxic cleaning solutions.</p></div>
-        <div class="card"><h3>✅ Guaranteed</h3><p>Not happy with an area? We'll put it right.</p></div>
-        <div class="card"><h3>📅 Flexible</h3><p>Evening and weekend appointments available.</p></div>
-        <div class="card"><h3>💷 Fair pricing</h3><p>Clear, no-obligation quotes every time.</p></div>
+    <div class="container" style="max-width:820px;">
+      <div class="reveal">
+        <span class="eyebrow">About us</span>
+        <h1>A local team you can trust</h1>
+        <p class="lead" style="margin-left:0;text-align:left;">On Target Carpet Cleaning is a family-run, Leicester-based business serving {site.serviceArea} — helping homeowners, tenants and businesses keep their carpets, upholstery and rugs looking their best.</p>
+        <p>We built our reputation on doing the job properly: powerful hot water extraction that lifts dirt and allergens from deep within the fibres, paired with eco-friendly cleaning solutions that are safe around your family and pets.</p>
+        <p>Whether it's a single room, an end-of-tenancy deep clean or an office that needs regular attention, we turn up on time, work hard, and back every job with our satisfaction guarantee.</p>
       </div>
-      <div class="btn-row" style="margin-top:32px;">
-        <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp us</a>
-        <a href={links.tel} class="btn btn--ghost"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
+    </div>
+
+    <div class="container" style="max-width:960px;margin-top:20px;">
+      <div class="grid grid--4" style="text-align:center;">
+        {stats.map((s) => (
+          <div class="reveal">
+            <div style="font-size:2.1rem;font-weight:800;color:var(--brand-2);letter-spacing:-.03em;line-height:1;">{s.big}</div>
+            <div style="color:var(--slate);font-weight:600;font-size:.92rem;margin-top:6px;">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="center reveal">
+        <span class="eyebrow">Our promise</span>
+        <h2>What every job comes with</h2>
+      </div>
+      <div class="grid grid--4">
+        {promise.map((p) => (
+          <div class="card reveal">
+            <span class="icon">{p.icon}</span>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="center" style="margin-top:36px;">
+        <div class="btn-row" style="justify-content:center;">
+          <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp us</a>
+          <a href={links.tel} class="btn btn--ghost"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
+        </div>
       </div>
     </div>
   </section>
