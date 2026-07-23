@@ -9,7 +9,9 @@ cleaning business serving **Leicester and surrounding areas** (Leicestershire, U
 It replaces an older Wix build with a fast, self-hosted static site.
 
 - **Live domain (target):** https://www.ontargetcarpetcleaning.co.uk
-- **GitHub repo:** https://github.com/vivian4fb/marcin-carpetcleaning
+- **GitHub repo:** https://github.com/carpetontarget-max/carpet
+- **GitHub Pages preview:** https://carpetontarget-max.github.io/carpet/ (built by
+  `.github/workflows/deploy.yml`; needs Settings → Pages → Source: "GitHub Actions")
 - **Primary goal:** generate enquiries. Every page funnels toward one primary
   action — **contact via WhatsApp** — with call/text/email as secondary options.
 

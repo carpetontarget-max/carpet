@@ -1,5 +1,5 @@
 # Builds the Astro site and deploys it to GitHub Pages on every push to main.
-# The site is served at https://vivian4fb.github.io/marcin-carpetcleaning/
+# The site is served at https://carpetontarget-max.github.io/carpet/
 # (GITHUB_PAGES=true switches astro.config.mjs to the project sub-path).
 #
 # One-time setup in the repo: Settings → Pages → Build and deployment →

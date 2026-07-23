@@ -19,9 +19,9 @@ import imgStairsAfter from './images/stairs-after.jpg';
 /**
  * Prefix an internal link with the site's base path so links work whether the
  * site is served from the domain root (production) or a sub-path (e.g. the
- * GitHub Pages preview at /marcin-carpetcleaning/). Use for internal page links
- * ONLY — never for tel:/wa.me/mailto or external URLs.
- *   withBase('/services')  →  '/services'  (prod)  |  '/marcin-carpetcleaning/services'  (Pages)
+ * GitHub Pages preview at /carpet/). Use for internal page links ONLY —
+ * never for tel:/wa.me/mailto or external URLs.
+ *   withBase('/services')  →  '/services'  (prod)  |  '/carpet/services'  (Pages)
  */
 export const withBase = (path = '/') => {
   const base = import.meta.env.BASE_URL.replace(/\/$/, ''); // '' or '/marcin-carpetcleaning'
