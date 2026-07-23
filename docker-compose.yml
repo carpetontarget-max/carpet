@@ -1,0 +1,20 @@
+# Convenience wrapper around the Dockerfile.
+#   docker compose up --build      → build + serve on http://localhost:8080
+#   docker compose down            → stop and remove
+#
+# Set build-time values in a local .env (see .env.example). They are OPTIONAL —
+# omit them and the site still builds. Only PUBLIC_GA_ID and the Places key are
+# read at build time; nothing here is a runtime secret.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PUBLIC_GA_ID: ${PUBLIC_GA_ID:-}
+        GOOGLE_PLACES_API_KEY: ${GOOGLE_PLACES_API_KEY:-}
+        GITHUB_PAGES: ${GITHUB_PAGES:-}
+    image: ontarget-website:latest
+    ports:
+      - "8080:80"
+    restart: unless-stopped

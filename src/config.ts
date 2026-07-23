@@ -40,6 +40,13 @@ export const site = {
   whatsappNumber: '447444784316', // used for wa.me link (no + , no spaces)
   email: 'carpetontarget@gmail.com',
 
+  // ── Google Analytics (GA4) ──
+  // Paste your Measurement ID here (looks like "G-XXXXXXXXXX") to switch
+  // analytics on, OR set PUBLIC_GA_ID in a .env file (the env var wins).
+  // Leave it blank to keep analytics off. Find your ID in GA4 →
+  // Admin → Data Streams → your web stream → "Measurement ID".
+  googleAnalyticsId: '',
+
   // ── Opening hours (matches Google Business Profile) ──
   hours: [
     { day: 'Monday – Sunday', time: '5:00am – 1:00am' },

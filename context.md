@@ -8,10 +8,14 @@ Marketing website for **On Target Carpet Cleaning**, a carpet & upholstery
 cleaning business serving **Leicester and surrounding areas** (Leicestershire, UK).
 It replaces an older Wix build with a fast, self-hosted static site.
 
-- **Live domain (target):** https://www.ontargetcarpetcleaning.co.uk
+- **Live domain (target):** https://www.ontargetcarpetcleaning.co.uk — deployed via
+  **GitHub Pages** (`.github/workflows/deploy.yml` builds + deploys on every push
+  to `main`; needs Settings → Pages → Source: "GitHub Actions", and Settings →
+  Pages → Custom domain: `www.ontargetcarpetcleaning.co.uk`, plus DNS at the
+  registrar pointed at GitHub Pages — see README's Deploy section). `public/CNAME`
+  and `astro.config.mjs` are pinned to the real domain at the root; the site no
+  longer builds a separate `/carpet` sub-path preview.
 - **GitHub repo:** https://github.com/carpetontarget-max/carpet
-- **GitHub Pages preview:** https://carpetontarget-max.github.io/carpet/ (built by
-  `.github/workflows/deploy.yml`; needs Settings → Pages → Source: "GitHub Actions")
 - **Primary goal:** generate enquiries. Every page funnels toward one primary
   action — **contact via WhatsApp** — with call/text/email as secondary options.
 
@@ -120,10 +124,16 @@ npm run preview    # preview the production build
 
 ## Deployment
 
-Static `dist/` output — deploy to Netlify or Cloudflare Pages (free, auto-SSL).
-Build command `npm run build`, publish directory `dist`. Domain
-`ontargetcarpetcleaning.co.uk` is (per the README) still to be pointed from the
-old Wix host — cancel Wix only after the new site is confirmed live on the domain.
+Static `dist/` output, deployed to **GitHub Pages** via
+`.github/workflows/deploy.yml` on every push to `main`, served at the real
+domain (`public/CNAME` + GitHub's Custom domain setting — see README's Deploy
+section for the one-time setup and required Namecheap DNS records). Domain
+`ontargetcarpetcleaning.co.uk` is still pointed at the old Wix host until DNS is
+switched — cancel Wix only after the new site is confirmed live on the domain.
+Netlify/Cloudflare Pages also work as alternatives (same build command
+`npm run build`, publish directory `dist`) but shouldn't run alongside the
+GitHub Pages workflow pointed at the same domain. A Dockerfile + nginx.conf are
+also available for self-hosting the same build on a VPS.
 
 ## SEO features already in place
 

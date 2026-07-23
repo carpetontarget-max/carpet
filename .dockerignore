@@ -1,0 +1,32 @@
+# Keep the build context small and never bake local artifacts/secrets in.
+node_modules
+dist
+.astro
+
+# VCS / CI
+.git
+.github
+.gitignore
+
+# Local env & secrets (the example is fine, the real .env is not)
+.env
+.env.*
+!.env.example
+
+# OS / editor cruft
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Docs, logs and stray files not needed to build the site
+README.md
+context.md
+logs
+*.log
+npm-debug.log*
+*.zip
+
+# Docker files themselves (not needed inside the image build context copy)
+Dockerfile
+docker-compose.yml
+.dockerignore

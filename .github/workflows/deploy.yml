@@ -1,9 +1,13 @@
 # Builds the Astro site and deploys it to GitHub Pages on every push to main.
-# The site is served at https://carpetontarget-max.github.io/carpet/
-# (GITHUB_PAGES=true switches astro.config.mjs to the project sub-path).
+# Served at the custom domain in public/CNAME (www.ontargetcarpetcleaning.co.uk).
 #
-# One-time setup in the repo: Settings → Pages → Build and deployment →
-# Source: "GitHub Actions".
+# One-time setup in the repo:
+#   1. Settings → Pages → Build and deployment → Source: "GitHub Actions".
+#   2. Settings → Pages → Custom domain: www.ontargetcarpetcleaning.co.uk
+#      (only works once the DNS records below are in place — see README).
+#   3. Optional — Settings → Secrets and variables → Actions, add:
+#      PUBLIC_GA_ID (GA4 measurement ID) and/or GOOGLE_PLACES_API_KEY
+#      (live Google reviews). Both are optional; the site builds without them.
 name: Deploy to GitHub Pages
 
 on:
@@ -37,7 +41,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          GITHUB_PAGES: 'true'
+          PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
