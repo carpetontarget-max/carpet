@@ -18,11 +18,13 @@
 export const servicePages = {
   'carpet-deep-cleaning': {
     // The homepage owns "carpet cleaning leicester" — this page targets the
-    // method (deep / steam cleaning) so the two don't compete. See context.md.
-    h1: 'Deep Carpet & Steam Cleaning in Leicester',
-    metaTitle: 'Carpet Steam Cleaning Leicester | Deep Hot Water Extraction',
+    // method (hot water extraction / deep clean) so the two don't compete.
+    // Never call it "steam" cleaning: no steam is visible, and the owner
+    // doesn't want customers questioning it. See context.md.
+    h1: 'Hot Water Extraction Carpet Cleaning in Leicester',
+    metaTitle: 'Hot Water Extraction Carpet Cleaning | Deep Clean in Leicester',
     metaDescription:
-      'Deep carpet steam cleaning in Leicester using professional hot water extraction — lifts dirt, allergens and stains from deep in the pile. Dry in hours, fixed prices, free WhatsApp quotes.',
+      'Deep carpet cleaning in Leicester by professional hot water extraction — lifts dirt, allergens and stains from deep in the pile. Dry in hours, fixed prices, free WhatsApp quotes.',
     lead:
       'Looking for professional carpet cleaning in Leicester? On Target Carpet Cleaning is a local, family-run team that brings tired, dull and stained carpets back to life using powerful hot water extraction. We clean homes and businesses across Leicester and the surrounding Leicestershire towns, and every job is backed by honest, fixed pricing and a satisfaction guarantee.',
     sections: [
@@ -59,7 +61,7 @@ export const servicePages = {
       {
         h2: 'Hot water extraction: the method manufacturers recommend',
         body: [
-          'Hot water extraction — often called “steam cleaning” — is the method most carpet manufacturers specify to keep a warranty valid, and it’s the core of what we do. Heated water and cleaning solution are forced into the carpet under pressure to loosen embedded dirt, dust, allergens and bacteria, then a powerful vacuum pulls the dirty water back out.',
+          'Hot water extraction is the method most carpet manufacturers specify to keep a warranty valid, and it’s the core of what we do. Heated water and cleaning solution are forced into the carpet under pressure to loosen embedded dirt, dust, allergens and bacteria, then a powerful vacuum pulls the dirty water back out.',
           'Because the dirt is physically removed rather than just moved around, the finish is deeper and longer-lasting than bonnet-mopping or a rented upright can achieve. We use eco-friendly, non-toxic solutions throughout, so the clean is safe around children and pets once dry — no harsh chemical smell left hanging in the room.',
         ],
       },

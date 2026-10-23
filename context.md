@@ -195,7 +195,12 @@ Desktop never finished onboarding in the session that added it).
     `areaPages.ts`) to target Leicester's neighbourhoods instead. `/leicester`
     and the two Leicester-themed Wix posts redirect to `/`, and every town
     page links to `/` ("carpet cleaning company based in Leicester"). Don't
-    give another page a "Carpet Cleaning Leicester" title.
+    give another page a "Carpet Cleaning Leicester" title. The carpet service
+    page targets the method instead: "Hot Water Extraction Carpet Cleaning".
+  - **Never say "steam cleaning" anywhere on the site** (owner's decision,
+    2026-10-23): no steam is visible during a clean, so the word makes
+    customers question it. Always say "hot water extraction", even though
+    "carpet steam cleaning" is a searched term.
   - Area pages are linked sitewide (footer "Carpet cleaning near you" row +
     Explore link) and from every service page ("Where we offer this" chips).
   - `withBase()` now adds the trailing slash, so internal links no longer go

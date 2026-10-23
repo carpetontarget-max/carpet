@@ -379,7 +379,7 @@ export const educate = [
   {
     icon: '🔥',
     title: 'Hot water extraction, the method manufacturers recommend',
-    text: 'Most carpet makers specify hot water extraction (often called "steam cleaning") to keep a warranty valid. It injects heated solution deep into the pile, then extracts it — lifting dirt a surface clean never reaches.',
+    text: 'Most carpet makers specify hot water extraction to keep a warranty valid. It injects heated solution deep into the pile, then extracts it — lifting dirt a surface clean never reaches.',
   },
   {
     icon: '🧽',
