@@ -67,7 +67,7 @@ export const site = {
     // Instagram: put your handle without the @  →  instagram.com/<handle>
     instagram: 'on_target_carpet_cleaning',
     // Facebook page (for the profile link): facebook.com/<page>
-    facebook: 'YOUR_FACEBOOK_PAGE',
+    facebook: '104518522484326',
     // Facebook Messenger deep link uses your Page's username: m.me/<page>
     messenger: '104518522484326',
   },
@@ -82,11 +82,11 @@ export const site = {
   googlePlaceId: 'ChIJ5QDUP5yQ5gIRVld4qaAXYiU',
   // Your Google listing (built from your Maps CID) — read & write reviews:
   googleReviewsUrl: 'https://www.google.com/maps?cid=2693741505926420310',
-  googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=cid:2693741505926420310',
+  googleWriteReviewUrl: 'https://g.page/r/CVZXeKmgF2IlEBM/review',
 
   // Your real headline numbers (shown above the review cards):
   googleRating: 5.0,
-  googleReviewCount: 78,
+  googleReviewCount: 86,
 };
 
 /**
@@ -348,7 +348,7 @@ export const certifications = [
 // ── Premium trust badges (icon cards shown under the hero) ──
 export const trustBadges = [
   { icon: '🛡️', label: 'Fully Insured', note: 'Public liability cover' },
-  { icon: '⭐', label: '5★ Rated', note: '78 Google reviews' },
+  { icon: '⭐', label: '5★ Rated', note: '86 Google reviews' },
   { icon: '🌿', label: 'Eco-Friendly', note: 'Safe for kids & pets' },
   { icon: '🏠', label: 'Local & Family Run', note: 'Based in Leicester' },
   { icon: '💧', label: 'Fast Drying', note: 'Dry in 4–6 hours' },
@@ -357,7 +357,7 @@ export const trustBadges = [
 // ── Why choose us (reasons / trust signals) ──
 export const whyChooseUs = [
   { icon: '🏠', title: 'Local & family-run', text: 'A Leicester family business — you deal directly with the person doing the work, not a call centre.' },
-  { icon: '⭐', title: '5.0★ from 78 reviews', text: 'Rated 5.0 on Google by local customers across Leicester and Leicestershire.' },
+  { icon: '⭐', title: '5.0★ from 86 reviews', text: 'Rated 5.0 on Google by local customers across Leicester and Leicestershire.' },
   { icon: '🛡️', title: 'Fully insured & DBS-checked', text: 'Public liability cover and vetted technicians — complete peace of mind in your home or business.' },
   { icon: '🌿', title: 'Eco-friendly & safe', text: 'Non-toxic solutions that are safe around children and pets once dry.' },
   { icon: '💷', title: 'Fixed prices, no surprises', text: 'A clear price agreed before we start — never a lowball number to get us on the phone.' },
