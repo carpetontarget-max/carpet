@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site, links, withBase } from '../../config';
+import { areaPages } from '../../areaPages';
+import Icon from '../../components/Icon.astro';
+---
+<Base
+  title="Areas We Cover"
+  description="Carpet and upholstery cleaning across Leicester and Leicestershire, including Oadby, Wigston, Glenfield, Syston, Birstall, Loughborough and more. Find your area."
+  breadcrumbs={[
+    { name: 'Home', path: '/' },
+    { name: 'Areas We Cover', path: '/areas/' },
+  ]}
+>
+  <section class="section">
+    <div class="container center reveal">
+      <span class="eyebrow">Coverage</span>
+      <h1>Areas we cover across Leicestershire</h1>
+      <p class="lead">Proudly serving {site.serviceArea}. Pick your area below for local details, or just get in touch — we very likely cover you.</p>
+    </div>
+    <div class="container">
+      <div class="grid grid--3" style="margin-top:40px;">
+        {areaPages.map((a) => (
+          <a href={withBase(`/areas/${a.slug}`)} class="card reveal" style="display:block;">
+            <h3>{a.name}</h3>
+            <p>{a.postcode}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--deep center">
+    <div class="container">
+      <h2>Not sure if we cover your street?</h2>
+      <p class="lead">Just ask — we very likely do. Get a fast, free quote today.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a href={links.whatsapp} class="btn btn--wa"><Icon name="whatsapp" size={17} /> WhatsApp us</a>
+        <a href={links.tel} class="btn btn--onDark"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+</Base>

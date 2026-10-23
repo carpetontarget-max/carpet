@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { site, links, services, steps, stats, trustBadges, educate, whyChooseUs, pricing, areas, withBase } from '../config';
+import { areaPages } from '../areaPages';
 import GoogleReviews from '../components/GoogleReviews.astro';
 import Icon from '../components/Icon.astro';
 import heroImg from '../images/hero-equipment.png';
@@ -271,7 +272,10 @@ const homeServices = homeFeatured.map((slug) => services.find((s) => s.slug === 
       <h2>Areas we cover</h2>
       <p class="lead">Proudly serving {site.serviceArea}. Not listed? Ask — we likely cover you.</p>
       <div class="areas" style="justify-content:center;max-width:820px;margin:0 auto;">
-        {areas.map((a) => <a href={withBase('/services/carpet-deep-cleaning')}>{a}</a>)}
+        {areas.map((a) => {
+          const ap = areaPages.find((x) => x.name === a);
+          return <a href={withBase(ap ? `/areas/${ap.slug}` : '/areas')}>{a}</a>;
+        })}
       </div>
     </div>
   </section>

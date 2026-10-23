@@ -127,26 +127,80 @@ npm run preview    # preview the production build
 Static `dist/` output, deployed to **GitHub Pages** via
 `.github/workflows/deploy.yml` on every push to `main`, served at the real
 domain (`public/CNAME` + GitHub's Custom domain setting — see README's Deploy
-section for the one-time setup and required Namecheap DNS records). Domain
-`ontargetcarpetcleaning.co.uk` is still pointed at the old Wix host until DNS is
-switched — cancel Wix only after the new site is confirmed live on the domain.
+section for the one-time setup and required Namecheap DNS records).
+
+**Status (confirmed 2026-09-07): LIVE.** `https://www.ontargetcarpetcleaning.co.uk`
+resolves correctly (apex 301s to `www`), serves the real site over valid HTTPS via
+GitHub Pages, and Google Analytics (`PUBLIC_GA_ID` repo secret, `G-CBJMMXPV2S`) is
+active and firing. Wix hosting has not yet been confirmed cancelled — do that once
+the domain switch has been live and stable for a bit.
+
 Netlify/Cloudflare Pages also work as alternatives (same build command
 `npm run build`, publish directory `dist`) but shouldn't run alongside the
 GitHub Pages workflow pointed at the same domain. A Dockerfile + nginx.conf are
-also available for self-hosting the same build on a VPS.
+also available for self-hosting the same build on a VPS (untested — Docker
+Desktop never finished onboarding in the session that added it).
 
 ## SEO features already in place
 
 - LocalBusiness JSON-LD (hours, service area, rating) sitewide; FAQPage JSON-LD
-  on `/faq` and on every long-form service page that has FAQs.
+  on `/faq` and on every long-form service page that has FAQs; **BreadcrumbList**
+  JSON-LD sitewide (added 2026-09-07, in `Base.astro` — auto Home > Title by
+  default, or an explicit `breadcrumbs` prop for deeper trails like
+  Home > Services > [Service]).
 - Unique `<title>` + meta description, canonical URL, and Open Graph/Twitter tags
   per page (via `Base.astro`). Long-form pages set a keyword-forward `<title>`
   (e.g. "Carpet Cleaning Leicester | …") via the `titleFull` override.
 - **12** individual service landing pages at `/services/<slug>`, retargeted to
   "[Service] … Leicester" keywords, with unique copy, cross-links and long-form
   articles (see servicePages.ts). Two audience landing pages (`/residential`,
-  `/commercial`) plus clickable "Areas we cover" links — all aimed at local search.
-- `robots.txt` + auto-generated `sitemap-index.xml`.
+  `/commercial`).
+- **12 local-area landing pages** at `/areas/<slug>` (added 2026-09-07, content in
+  `src/areaPages.ts`, template in `src/pages/areas/[slug].astro`), one per town in
+  `config.ts`'s `areas` list — each with a unique local intro, the home services
+  grid, `whyChooseUs`, live `<GoogleReviews />`, and cross-links to 2–3 nearby
+  areas. Hub page at `/areas`. The homepage's "Areas we cover" chips link here
+  (previously all pointed at one generic service page — fixed same day).
+- Google Analytics 4 (`src/components/GoogleAnalytics.astro`) — off until
+  `PUBLIC_GA_ID` is set; currently **active** in production (see Deployment above).
+- `robots.txt` + auto-generated `sitemap-index.xml` (33 pages as of 2026-09-07).
+
+## Local SEO — Google Business Profile (off-site, do in business.google.com)
+
+Code-side SEO is in good shape; GBP is usually the single biggest lever left for
+local map-pack rankings, and none of it can be done from this repo. Existing
+listing: Place ID `ChIJ5QDUP5yQ5gIRVld4qaAXYiU` (see `config.ts`), 5.0★ / 78 reviews.
+
+1. **NAP consistency** — Name/Address/Phone on the GBP listing must exactly match
+   the website: "On Target Carpet Cleaning", `07444 784316`. Mismatches (different
+   phone formatting, abbreviated name, etc.) weaken local ranking signals.
+2. **Categories** — primary: "Carpet cleaning service". Add secondary categories
+   that apply: "Upholstery cleaning service", "Rug cleaner", "House cleaning service".
+3. **Service areas in GBP** — list the same 12 towns as `config.ts`'s `areas` /
+   the new `/areas` pages (Leicester, Oadby, Wigston, Glenfield, Braunstone,
+   Syston, Birstall, Thurmaston, Enderby, Blaby, Leicester Forest East,
+   Loughborough). Matching areas between GBP and the website reinforces relevance.
+4. **Services tab** — add all 12 services with short descriptions mirroring the
+   site's service names (`config.ts` → `services`).
+5. **Photos** — upload real job photos (before/after, van, team at work) regularly;
+   listings with more photos get meaningfully more clicks and direction requests.
+   Add a logo photo and a cover photo.
+6. **Google Posts** — short updates every 1–2 weeks (offers, before/after,
+   seasonal reminders). Keeps the profile "active" (a ranking signal) and shows
+   fresh content directly in the knowledge panel.
+7. **Q&A section** — seed 3–5 common questions/answers (pricing, drying time,
+   areas covered) mirroring the site's `/faq` — stops randoms posting wrong answers.
+8. **Website link** — must point to `https://www.ontargetcarpetcleaning.co.uk`
+   (not the old Wix domain). Enable the message/booking button if available.
+9. **Respond to every review** going forward — visible active management is a
+   trust signal to both Google and prospective customers.
+10. **Keep review velocity up** — use `site.googleWriteReviewUrl` (already in
+    `config.ts`) as the follow-up link after each job; steady recent reviews
+    matter more than total count alone.
+11. **NAP citations elsewhere** — get/keep consistent listings on Yell,
+    Checkatrade, Bark, Thomson Local, and the Facebook Page (once the real handle
+    replaces the `YOUR_FACEBOOK_PAGE` placeholder in `config.ts`) — Google
+    cross-references these as a trust signal.
 
 ## Business facts (as currently configured)
 
@@ -244,4 +298,17 @@ relative) and sizes to its content so it always stays contained. Also added a
 a taller invisible hover-bridge, so the menu no longer vanishes while the cursor
 crosses the gap from the "Services" button down into the panel.
 
-All of the above is uncommitted on `main` — commit/push from your own machine.
+**GA4, Docker, real deploy, and local SEO (2026-09-07).** Commit `d430ff1`
+(pushed) added Google Analytics provisions (off until configured — see
+`GoogleAnalytics.astro`), an optional Docker self-host path (untested), and
+switched GitHub Pages from the interim `/carpet` preview to serving the real
+domain at the root — **confirmed live** the same day, GA active. Same session,
+uncommitted follow-up: SEO audit against the live site (meta descriptions,
+`BreadcrumbList` schema — see "SEO features already in place" above) and 12 new
+local-area landing pages under `/areas/<slug>` (`src/areaPages.ts` +
+`src/pages/areas/[slug].astro` + `/areas` hub) — see the Local SEO section above
+for the GBP work that still needs doing manually, off-site.
+
+The SEO/area-pages work above (about.astro, services.astro, Base.astro,
+services/[slug].astro, index.astro, src/areaPages.ts, src/pages/areas/**) is
+**uncommitted on `main`** as of this entry — commit/push from your own machine.
