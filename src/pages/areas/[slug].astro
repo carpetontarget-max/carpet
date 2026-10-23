@@ -22,8 +22,9 @@ const popular = area.popular
   .filter((p) => p.service);
 
 // Real job photo for the hero: rotate through the home-service photos so
-// neighbouring area pages don't all open with the same image.
-const heroPool = homeServices.filter((s) => s.img);
+// neighbouring area pages don't all open with the same image. Skip small
+// photos — they'd be upscaled to hero size and look soft.
+const heroPool = homeServices.filter((s) => s.img && s.img.width >= 800);
 const heroService = heroPool[areaPages.findIndex((a) => a.slug === area.slug) % heroPool.length];
 
 const fromPrice = pricing[0].price; // "Single Room" tier

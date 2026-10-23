@@ -229,6 +229,40 @@ export const areaPages: AreaPage[] = [
       { slug: 'mattress-cleaning', why: 'Fresh mattresses for the next tenants, dry the same day.' },
       { slug: 'stain-spot-removal', why: 'Communal-lounge spills treated before deposit deductions.' },
     ],
-    nearby: ['syston', 'birstall', 'leicester'],
+    nearby: ['coalville', 'syston', 'leicester'],
+  },
+  {
+    slug: 'coalville',
+    name: 'Coalville',
+    postcode: 'LE67',
+    blurb:
+      "Coalville, the former mining town about twelve miles north-west of Leicester on the edge of Charnwood Forest, is well within our coverage — from the older streets of Whitwick and Thringstone to the new estates around Hugglescote and Bardon, on evening and weekend slots that suit you.",
+    localNotes: [
+      "Coalville has grown fast in recent years, with large new estates around Hugglescote and Bardon alongside the older terraced streets of the town centre, Whitwick and Thringstone. Moving into a new build usually means pale, builder-grade carpet that trades have already walked over — plaster dust and boot marks work into the pile before you've even unpacked, and a proper hot water extraction clean lifts them back out.",
+      "If you let a property in the area, our end of tenancy carpet clean is done to the standard agents check at check-out, and we can usually fit it around a tight changeover. Send a few photos on WhatsApp with the postcode and number of rooms, and we'll come back with a fixed price before we travel out.",
+    ],
+    popular: [
+      { slug: 'carpet-deep-cleaning', why: 'A moving-in deep clean for new-build carpet on the newer estates.' },
+      { slug: 'end-of-tenancy-cleaning', why: 'Check-out standard cleans for landlords and tenants across LE67.' },
+      { slug: 'stairs-landing-cleaning', why: 'Stairs and landings — the first carpet in a busy family home to show wear.' },
+    ],
+    nearby: ['ashby-de-la-zouch', 'loughborough', 'glenfield'],
+  },
+  {
+    slug: 'ashby-de-la-zouch',
+    name: 'Ashby-de-la-Zouch',
+    postcode: 'LE65',
+    blurb:
+      "Ashby-de-la-Zouch, the historic market town in the National Forest best known for its castle and its part in Ivanhoe, sits at the north-western edge of our coverage — and we clean homes and businesses right across the town, from the centre to the newer estates.",
+    localNotes: [
+      "Ashby is full of history — the ruins of Ashby Castle, Georgian and Victorian buildings along Market Street, and period homes close to the centre, with newer housing on the edges of town. Older homes may have wool carpet, traditional upholstery or an heirloom rug, and each needs a gentler, fibre-checked approach rather than one method for everything. We check every fibre and fabric before we start and adjust the clean to suit.",
+      "The town centre is busy with independent shops, cafés, pubs and offices too. For business premises we clean out of hours — early mornings, evenings or weekends — so carpets and seating are done while you're closed and dry well before you reopen.",
+    ],
+    popular: [
+      { slug: 'carpet-deep-cleaning', why: 'Wool and synthetic carpets alike, with the method matched to the fibre.' },
+      { slug: 'upholstery-cleaning', why: 'Period sofas and armchairs, fabric-checked before we start.' },
+      { slug: 'commercial-carpet-cleaning', why: "Shops, cafés and offices on Market Street, cleaned while you're closed." },
+    ],
+    nearby: ['coalville', 'loughborough', 'leicester'],
   },
 ];

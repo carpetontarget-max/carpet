@@ -155,7 +155,10 @@ Desktop never finished onboarding in the session that added it).
   "[Service] … Leicester" keywords, with unique copy, cross-links and long-form
   articles (see servicePages.ts). Two audience landing pages (`/residential`,
   `/commercial`).
-- **12 local-area landing pages** at `/areas/<slug>` (added 2026-09-07, content in
+- **14 local-area landing pages** at `/areas/<slug>` (12 added 2026-09-07;
+  Coalville and Ashby-de-la-Zouch added 2026-10-23 after Search Console showed
+  ~1,400 impressions there with no page to rank — owner confirmed they work
+  there), content in
   `src/areaPages.ts`, template in `src/pages/areas/[slug].astro`), one per town in
   `config.ts`'s `areas` list — each with a unique local intro, the home services
   grid, `whyChooseUs`, live `<GoogleReviews />`, and cross-links to 2–3 nearby
@@ -172,8 +175,8 @@ Desktop never finished onboarding in the session that added it).
   global because the component sets `window.gtag = gtag` — keep that line.
   In GA4: mark `generate_lead` as a key event and add an event-scoped custom
   dimension for `method`.
-- `robots.txt` + auto-generated `sitemap-index.xml` (33 pages as of 2026-09-07;
-  `/review` is filtered out in `astro.config.mjs`).
+- `robots.txt` + auto-generated `sitemap-index.xml` (34 URLs as of 2026-10-23;
+  `/review` and the old-URL redirects are left out).
 - **Local SEO pass (2026-10-23):**
   - LocalBusiness JSON-LD now has a stable `@id` (`/#business`, via
     `businessSchemaId()` in config), `hasMap` → the Google Maps listing, and a
@@ -207,10 +210,11 @@ listing: Place ID `ChIJ5QDUP5yQ5gIRVld4qaAXYiU` (see `config.ts`), 5.0★ / 78 r
    phone formatting, abbreviated name, etc.) weaken local ranking signals.
 2. **Categories** — primary: "Carpet cleaning service". Add secondary categories
    that apply: "Upholstery cleaning service", "Rug cleaner", "House cleaning service".
-3. **Service areas in GBP** — list the same 12 towns as `config.ts`'s `areas` /
-   the new `/areas` pages (Leicester, Oadby, Wigston, Glenfield, Braunstone,
+3. **Service areas in GBP** — list the same 14 towns as `config.ts`'s `areas` /
+   the `/areas` pages (Leicester, Oadby, Wigston, Glenfield, Braunstone,
    Syston, Birstall, Thurmaston, Enderby, Blaby, Leicester Forest East,
-   Loughborough). Matching areas between GBP and the website reinforces relevance.
+   Loughborough, Coalville, Ashby-de-la-Zouch). Matching areas between GBP and
+   the website reinforces relevance.
 4. **Services tab** — add all 12 services with short descriptions mirroring the
    site's service names (`config.ts` → `services`).
 5. **Photos** — upload real job photos (before/after, van, team at work) regularly;

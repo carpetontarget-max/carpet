@@ -436,6 +436,7 @@ export const businessServices = services.filter((s) => s.group === 'business');
 export const areas = [
   'Leicester', 'Oadby', 'Wigston', 'Glenfield', 'Braunstone', 'Syston',
   'Birstall', 'Thurmaston', 'Enderby', 'Blaby', 'Leicester Forest East', 'Loughborough',
+  'Coalville', 'Ashby-de-la-Zouch',
 ];
 
 // ── FAQ ──
@@ -503,7 +504,7 @@ export const faqCategories = [
     items: [
       {
         q: 'Which areas do you cover?',
-        a: 'We cover Leicester and the surrounding areas across Leicestershire, including Oadby, Wigston, Glenfield, Syston, Birstall and more. Not sure if we reach you? Just ask — we very likely do.',
+        a: 'We cover Leicester and the surrounding areas across Leicestershire, including Oadby, Wigston, Glenfield, Syston, Birstall, Loughborough, Coalville and Ashby-de-la-Zouch. Not sure if we reach you? Just ask — we very likely do.',
       },
       {
         q: 'Are you insured?',
