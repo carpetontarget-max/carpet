@@ -15,5 +15,25 @@ export default defineConfig({
   // old URL working for anyone who has it bookmarked or linked.
   redirects: {
     '/services/upholstery-rug-cleaning': '/services/upholstery-cleaning/',
+    // Old Wix URLs that still get Google impressions or visits.
+    '/leicester': '/areas/leicester/',
+    '/carpetcleaning': '/services/carpet-deep-cleaning/',
+    '/blog': '/faq/',
+    '/service-page/one-bedroom': '/services/carpet-deep-cleaning/',
+    '/service-page/three-rooms': '/services/carpet-deep-cleaning/',
+    '/service-page/full-three-bed-house': '/services/carpet-deep-cleaning/',
+    '/service-page/full-four-bed-house': '/services/carpet-deep-cleaning/',
+    '/booking-calendar/full-four-bed-house': '/services/carpet-deep-cleaning/',
+    '/service-page/two-seater-sofa': '/services/sofa-cleaning/',
+    '/service-page/three-seater-sofa': '/services/sofa-cleaning/',
+    '/service-page/corner-sofa': '/services/sofa-cleaning/',
+    '/service-page/pet-stain-removal': '/services/pet-stain-odour-removal/',
+    '/service-page/stairs-hall-landing': '/services/stairs-landing-cleaning/',
+    '/post/affordable-leicester-carpet-cleaners-keeping-your-carpets-spotless-without-breaking-the-bank': '/areas/leicester/',
+    '/post/professional-carpet-cleaning-services-in-leicester-keeping-your-floors-spotless-and-fresh': '/areas/leicester/',
+    '/post/benefits-of-professional-carpet-cleaning': '/services/carpet-deep-cleaning/',
+    '/post/top-tips-for-removing-stubborn-carpet-stains-efficiently': '/services/stain-spot-removal/',
+    '/post/expert-carpet-cleaning-advice-tips-to-keep-your-carpets-spotless': '/faq/',
+    '/post/eco-friendly-carpet-cleaning-solutions-you-can-trust': '/about/',
   },
 });
