@@ -36,6 +36,8 @@ export const withBase = (path = '/') => {
 
 export const site = {
   businessName: 'On Target Carpet Cleaning',
+  // Exact name on the Google Business Profile. Used in structured data and the footer so Google can match the site to the listing.
+  googleBusinessName: 'On Target Carpet & Upholstery Cleaning',
   tagline: 'Professional carpet & upholstery cleaning in Leicestershire',
   serviceArea: 'Leicester & surrounding areas',
 
