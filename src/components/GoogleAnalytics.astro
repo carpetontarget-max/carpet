@@ -29,6 +29,29 @@ const enabled = gaId.startsWith('G-') && gaId !== 'G-XXXXXXXXXX';
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
       gtag('config', gaId);
+
+      // Enquiry tracking: every tap on WhatsApp, Messenger, call, text or email
+      // is sent to Analytics as a 'generate_lead' event with the method used and
+      // the page it happened on. Mark generate_lead as a key event in GA4
+      // (Admin > Events) to see enquiries per page, town and traffic source.
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        var method = '';
+        if (href.indexOf('tel:') === 0) method = 'call';
+        else if (href.indexOf('sms:') === 0) method = 'text';
+        else if (href.indexOf('mailto:') === 0) method = 'email';
+        else if (/wa\.me|whatsapp\.com/.test(href)) method = 'whatsapp';
+        else if (/m\.me\//.test(href)) method = 'messenger';
+        if (!method) return;
+        gtag('event', 'generate_lead', {
+          method: method,
+          link_text: (a.getAttribute('aria-label') || a.textContent || '').trim().slice(0, 100),
+          page_path: location.pathname,
+          transport_type: 'beacon'
+        });
+      }, true);
     </script>
   </>
 )}
