@@ -26,13 +26,23 @@ import imgStairsAfter from './images/stairs-after.jpg';
  * site is served from the domain root (production) or a sub-path (e.g. the
  * GitHub Pages preview at /carpet/). Use for internal page links ONLY —
  * never for tel:/wa.me/mailto or external URLs.
- *   withBase('/services')  →  '/services'  (prod)  |  '/carpet/services'  (Pages)
+ *   withBase('/services')  →  '/services/'  (prod)  |  '/carpet/services/'  (Pages)
+ *
+ * Page paths get a trailing slash: pages build to /page/index.html, so the host
+ * 301-redirects /page → /page/. Linking to the slash form skips that hop for
+ * visitors and Googlebot. Files ('/favicon.svg') and '#'/'?' suffixes are kept.
  */
 export const withBase = (path = '/') => {
   const base = import.meta.env.BASE_URL.replace(/\/$/, ''); // '' or '/marcin-carpetcleaning'
   const p = path.startsWith('/') ? path : `/${path}`;
-  return base + p;
+  const [, pathname, suffix] = p.match(/^([^?#]*)(.*)$/)!;
+  const isPage = !pathname.endsWith('/') && !/\.[a-z0-9]+$/i.test(pathname);
+  return base + (isPage ? `${pathname}/` : pathname) + suffix;
 };
+
+// Stable JSON-LD @id for the business, so page-level schema (Service, WebSite)
+// can reference the single LocalBusiness entity that Base.astro emits sitewide.
+export const businessSchemaId = (siteUrl?: URL) => String(new URL('/#business', siteUrl));
 
 export const site = {
   businessName: 'On Target Carpet Cleaning',

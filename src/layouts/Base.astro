@@ -6,7 +6,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FloatingContact from '../components/FloatingContact.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
-import { site, links, areas, withBase } from '../config';
+import { site, links, areas, services, withBase, businessSchemaId } from '../config';
 import heroImg from '../images/hero-equipment.png';
 
 interface Props {
@@ -25,13 +25,15 @@ const pageDescription = description ?? `${site.tagline}. Serving ${site.serviceA
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const optimizedOgImage = await getImage({ src: image ?? heroImg, width: 1200, format: 'jpg' });
 const ogImage = new URL(optimizedOgImage.src, Astro.site);
+const isHome = Astro.url.pathname === withBase('/');
+const businessId = businessSchemaId(Astro.site);
 
 // ── Breadcrumb structured data ──
 // Skipped on the homepage (a single "Home" crumb isn't a meaningful trail).
 // Every other page defaults to Home > <title>; pages needing a deeper trail
 // (e.g. Home > Services > Carpet Cleaning) pass `breadcrumbs` explicitly.
 const crumbs =
-  Astro.url.pathname === withBase('/')
+  isHome
     ? null
     : (breadcrumbs ?? [{ name: 'Home', path: '/' }, { name: title ?? pageTitle, path: Astro.url.pathname }]);
 const breadcrumbList = crumbs && {
@@ -50,6 +52,7 @@ const sameAs = [links.instagram, site.googleReviewsUrl].filter((u) => u && !u.in
 const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
+  '@id': businessId,
   name: site.googleBusinessName,
   alternateName: site.businessName,
   image: String(ogImage),
@@ -63,6 +66,8 @@ const localBusiness = {
     addressRegion: 'Leicestershire',
     addressCountry: 'GB',
   },
+  // Ties this site to the Google Business Profile listing (local-pack entity).
+  hasMap: site.googleReviewsUrl,
   areaServed: areas.map((a) => ({ '@type': 'City', name: a })),
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
@@ -75,7 +80,30 @@ const localBusiness = {
     ratingValue: site.googleRating,
     reviewCount: site.googleReviewCount,
   },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Carpet & upholstery cleaning services',
+    itemListElement: services.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: s.title,
+        url: String(new URL(withBase(`/services/${s.slug}`), Astro.site)),
+      },
+    })),
+  },
   sameAs,
+};
+
+// WebSite entity (homepage only) — helps Google show the business name as the
+// site name above search results.
+const webSite = isHome && {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.googleBusinessName,
+  alternateName: site.businessName,
+  url: String(Astro.site),
+  publisher: { '@id': businessId },
 };
 ---
 <!doctype html>
@@ -94,6 +122,7 @@ const localBusiness = {
 
     <!-- Open Graph / social sharing -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content={site.businessName} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
@@ -106,6 +135,7 @@ const localBusiness = {
 
     <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
     {breadcrumbList && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbList)} />}
+    {webSite && <script type="application/ld+json" set:html={JSON.stringify(webSite)} />}
   </head>
   <body>
     <Header />

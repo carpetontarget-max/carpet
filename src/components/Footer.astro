@@ -1,5 +1,6 @@
 ---
 import { site, links, hasMessenger, withBase } from '../config';
+import { areaPages } from '../areaPages';
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 ---
@@ -21,6 +22,7 @@ import Icon from './Icon.astro';
         <a href={withBase('/residential')}>Residential</a><br />
         <a href={withBase('/commercial')}>Commercial</a><br />
         <a href={withBase('/services')}>Services</a><br />
+        <a href={withBase('/areas')}>Areas we cover</a><br />
         <a href={withBase('/about')}>About</a><br />
         <a href={withBase('/faq')}>FAQ</a>
       </p>
@@ -39,6 +41,15 @@ import Icon from './Icon.astro';
         {site.hours.map((h) => (<span>{h.day}: {h.time}<br /></span>))}
       </p>
     </div>
+  </div>
+  <!-- Sitewide links to every local area page (local SEO internal linking) -->
+  <div class="container footer-areas">
+    <h4>Carpet cleaning near you</h4>
+    <p>
+      {areaPages.map((a, i) => (
+        <>{i > 0 && <span aria-hidden="true"> · </span>}<a href={withBase(`/areas/${a.slug}`)}>{a.name}</a></>
+      ))}
+    </p>
   </div>
   <div class="container footer-bottom">
     © 2026 {site.googleBusinessName}. All rights reserved.

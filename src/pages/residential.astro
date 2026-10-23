@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { site, links, homeServices, withBase } from '../config';
 import Icon from '../components/Icon.astro';
+import imgCarpet from '../images/service-carpet.png';
 
 // Residential services, in display order, each linking to its own full page.
 const resServices = homeServices;
@@ -32,10 +34,16 @@ const reasons = [
           <a href={links.tel} class="btn btn--onDark btn--lg"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
         </div>
       </div>
-      <!-- PHOTO: replace this placeholder with a real home job photo later -->
-      <div class="ph-photo reveal reveal--right">
-        <span class="ph-cap">📷 Freshly cleaned living room — photo to follow</span>
-      </div>
+      <Image
+        src={imgCarpet}
+        alt="Hot water extraction wand lifting dirt from a bedroom carpet, leaving clean stripes behind"
+        loading="eager"
+        fetchpriority="high"
+        width={800}
+        format="webp"
+        class="reveal reveal--right"
+        style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"
+      />
     </div>
   </section>
 

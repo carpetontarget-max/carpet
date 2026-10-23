@@ -14,6 +14,6 @@ export default defineConfig({
   // Old combined slug split into separate Upholstery and Rug pages — keep the
   // old URL working for anyone who has it bookmarked or linked.
   redirects: {
-    '/services/upholstery-rug-cleaning': '/services/upholstery-cleaning',
+    '/services/upholstery-rug-cleaning': '/services/upholstery-cleaning/',
   },
 });

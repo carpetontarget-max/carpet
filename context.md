@@ -163,7 +163,28 @@ Desktop never finished onboarding in the session that added it).
   (previously all pointed at one generic service page — fixed same day).
 - Google Analytics 4 (`src/components/GoogleAnalytics.astro`) — off until
   `PUBLIC_GA_ID` is set; currently **active** in production (see Deployment above).
-- `robots.txt` + auto-generated `sitemap-index.xml` (33 pages as of 2026-09-07).
+- `robots.txt` + auto-generated `sitemap-index.xml` (33 pages as of 2026-09-07;
+  `/review` is filtered out in `astro.config.mjs`).
+- **Local SEO pass (2026-10-23):**
+  - LocalBusiness JSON-LD now has a stable `@id` (`/#business`, via
+    `businessSchemaId()` in config), `hasMap` → the Google Maps listing, and a
+    `hasOfferCatalog` of all 12 services. Homepage also emits `WebSite` schema.
+  - Every service page and every area page emits `Service` schema whose
+    `provider` points at that `@id`.
+  - Area pages: each has unique `localNotes` + `popular` (recommended services
+    with an area-specific reason) in `areaPages.ts`, a real photo hero (rotates
+    through the service photos), and keyword-first titles
+    ("Carpet Cleaning Oadby | …") with rating + price in the meta description.
+  - Area pages are linked sitewide (footer "Carpet cleaning near you" row +
+    Explore link) and from every service page ("Where we offer this" chips).
+  - `withBase()` now adds the trailing slash, so internal links no longer go
+    through GitHub Pages' `/page` → `/page/` 301.
+  - `/review` (added by the owner, `src/pages/review.astro`) — a standalone
+    noindex page that meta-refreshes to `site.googleWriteReviewUrl` (the GBP
+    `g.page/r/…/review` link). Send it to customers after every job.
+  - LocalBusiness and WebSite schema use `site.googleBusinessName` (the exact
+    GBP name, "On Target Carpet & Upholstery Cleaning") as `name`, with
+    `site.businessName` as `alternateName`; the footer copyright uses it too.
 
 ## Local SEO — Google Business Profile (off-site, do in business.google.com)
 
@@ -172,7 +193,8 @@ local map-pack rankings, and none of it can be done from this repo. Existing
 listing: Place ID `ChIJ5QDUP5yQ5gIRVld4qaAXYiU` (see `config.ts`), 5.0★ / 78 reviews.
 
 1. **NAP consistency** — Name/Address/Phone on the GBP listing must exactly match
-   the website: "On Target Carpet Cleaning", `07444 784316`. Mismatches (different
+   the website: "On Target Carpet & Upholstery Cleaning" (`site.googleBusinessName`,
+   used in structured data and the footer), `07444 784316`. Mismatches (different
    phone formatting, abbreviated name, etc.) weaken local ranking signals.
 2. **Categories** — primary: "Carpet cleaning service". Add secondary categories
    that apply: "Upholstery cleaning service", "Rug cleaner", "House cleaning service".
@@ -316,3 +338,14 @@ for the GBP work that still needs doing manually, off-site.
 The SEO/area-pages work above (about.astro, services.astro, Base.astro,
 services/[slug].astro, index.astro, src/areaPages.ts, src/pages/areas/**) is
 **uncommitted on `main`** as of this entry — commit/push from your own machine.
+
+**Local SEO pass (2026-10-23).** Owner asked to "boost" local SEO, sharing a GA4
+link that couldn't be opened (needs their Google login) — so this pass was
+driven by a site/code audit, not traffic data. Changes listed under "SEO
+features already in place". Same day, the owner worked through the off-site
+list: **Enforce HTTPS** is on (`http://www…` now 301s to https), the
+**Search Console** verification file is in `public/`, the GBP name is in
+config as `googleBusinessName`, review count updated to 86, the Facebook page
+set, and `/review` added. Remaining: submit `sitemap-index.xml` in Search
+Console (if not done), then the GBP checklist above — especially review
+velocity via `/review`.

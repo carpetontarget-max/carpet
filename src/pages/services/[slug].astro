@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
-import { site, links, services, withBase } from '../../config';
+import { site, links, services, areas, withBase, businessSchemaId } from '../../config';
 import { servicePages } from '../../servicePages';
+import { areaPages } from '../../areaPages';
 import Icon from '../../components/Icon.astro';
 
 export function getStaticPaths() {
@@ -31,6 +32,17 @@ const faqSchema = page?.faqs && {
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: h1,
+  serviceType: service.title,
+  description: page?.metaDescription ?? service.metaDescription,
+  url: String(new URL(withBase(`/services/${service.slug}`), Astro.site)),
+  provider: { '@id': businessSchemaId(Astro.site) },
+  areaServed: areas.map((a) => ({ '@type': 'City', name: a })),
+};
 ---
 <Base
   title={page ? undefined : `${service.title} in Leicester`}
@@ -42,6 +54,7 @@ const faqSchema = page?.faqs && {
     { name: service.title, path: `/services/${service.slug}/` },
   ]}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
 
   <!-- HERO -->
@@ -149,6 +162,18 @@ const faqSchema = page?.faqs && {
       </div>
     </section>
   )}
+
+  <!-- AREAS: links every service page to the local area pages -->
+  <section class="section">
+    <div class="container center">
+      <span class="eyebrow">Where we offer this</span>
+      <h2>{service.title} across Leicestershire</h2>
+      <p class="lead">Local, family-run and based in Leicester — find your area below.</p>
+      <div class="areas" style="justify-content:center;max-width:820px;margin:24px auto 0;">
+        {areaPages.map((a) => <a href={withBase(`/areas/${a.slug}`)}>{a.name}</a>)}
+      </div>
+    </div>
+  </section>
 
   <section class="section section--deep center">
     <div class="container">

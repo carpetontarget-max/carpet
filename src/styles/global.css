@@ -678,6 +678,9 @@ a.feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg)
 .site-footer .footer-grid p a { display: inline-block; padding: 2px 0; }
 @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
 @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-areas { border-top: 1px solid rgba(255,255,255,.12); margin-top: 34px; padding-top: 24px; }
+.footer-areas p { margin: 0; line-height: 1.9; font-size: .92rem; }
+.footer-areas span { color: #4f7f86; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 34px; padding-top: 20px; font-size: .85rem; color: #7fa6a4; }
 .social-row { display: flex; gap: 14px; margin-top: 14px; }
 .social-row a { font-size: 1.3rem; }
