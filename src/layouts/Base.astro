@@ -50,7 +50,8 @@ const sameAs = [links.instagram, site.googleReviewsUrl].filter((u) => u && !u.in
 const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: site.businessName,
+  name: site.googleBusinessName,
+  alternateName: site.businessName,
   image: String(ogImage),
   url: String(Astro.site),
   telephone: site.phoneIntl,
