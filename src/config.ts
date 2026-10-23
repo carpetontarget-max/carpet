@@ -379,7 +379,7 @@ export const educate = [
   {
     icon: '🔥',
     title: 'Hot water extraction, the method manufacturers recommend',
-    text: 'Most carpet makers specify hot water extraction to keep a warranty valid. It injects heated solution deep into the pile, then extracts it — lifting dirt a surface clean never reaches.',
+    text: 'Most carpet makers specify hot water extraction (often called “steam cleaning”) to keep a warranty valid. Despite the name, there’s no cloud of steam: it injects heated solution deep into the pile, then extracts it — lifting dirt a surface clean never reaches.',
   },
   {
     icon: '🧽',
@@ -468,7 +468,7 @@ export const faqCategories = [
     items: [
       {
         q: 'What cleaning method do you use?',
-        a: 'Professional hot water extraction — the method most carpet manufacturers recommend. It injects a heated eco-friendly solution deep into the pile, then extracts it along with the dirt, allergens and grime a surface clean leaves behind.',
+        a: 'Professional hot water extraction, often called “steam cleaning” — the method most carpet manufacturers recommend. Despite the name, you won’t see clouds of steam: it injects a heated eco-friendly solution deep into the pile, then extracts it along with the dirt, allergens and grime a surface clean leaves behind.',
       },
       {
         q: 'How long does a carpet take to dry?',

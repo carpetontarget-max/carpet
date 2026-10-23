@@ -19,12 +19,14 @@ export const servicePages = {
   'carpet-deep-cleaning': {
     // The homepage owns "carpet cleaning leicester" — this page targets the
     // method (hot water extraction / deep clean) so the two don't compete.
-    // Never call it "steam" cleaning: no steam is visible, and the owner
-    // doesn't want customers questioning it. See context.md.
+    // "Steam cleaning" is only ever explained as the everyday NAME for hot
+    // water extraction (good for searches) — never used as the service name in
+    // titles/headings, and always with the note that no steam is visible.
+    // See context.md.
     h1: 'Hot Water Extraction Carpet Cleaning in Leicester',
     metaTitle: 'Hot Water Extraction Carpet Cleaning | Deep Clean in Leicester',
     metaDescription:
-      'Deep carpet cleaning in Leicester by professional hot water extraction — lifts dirt, allergens and stains from deep in the pile. Dry in hours, fixed prices, free WhatsApp quotes.',
+      'Deep carpet cleaning in Leicester by hot water extraction (often called steam cleaning). Lifts dirt, allergens and stains from deep in the pile. Fixed prices, free quotes.',
     lead:
       'Looking for professional carpet cleaning in Leicester? On Target Carpet Cleaning is a local, family-run team that brings tired, dull and stained carpets back to life using powerful hot water extraction. We clean homes and businesses across Leicester and the surrounding Leicestershire towns, and every job is backed by honest, fixed pricing and a satisfaction guarantee.',
     sections: [
@@ -61,7 +63,7 @@ export const servicePages = {
       {
         h2: 'Hot water extraction: the method manufacturers recommend',
         body: [
-          'Hot water extraction is the method most carpet manufacturers specify to keep a warranty valid, and it’s the core of what we do. Heated water and cleaning solution are forced into the carpet under pressure to loosen embedded dirt, dust, allergens and bacteria, then a powerful vacuum pulls the dirty water back out.',
+          'Hot water extraction — often called “steam cleaning” — is the method most carpet manufacturers specify to keep a warranty valid, and it’s the core of what we do. Despite the name, you won’t see clouds of steam: heated water and cleaning solution are forced into the carpet under pressure to loosen embedded dirt, dust, allergens and bacteria, then a powerful vacuum pulls the dirty water straight back out.',
           'Because the dirt is physically removed rather than just moved around, the finish is deeper and longer-lasting than bonnet-mopping or a rented upright can achieve. We use eco-friendly, non-toxic solutions throughout, so the clean is safe around children and pets once dry — no harsh chemical smell left hanging in the room.',
         ],
       },
@@ -135,6 +137,10 @@ export const servicePages = {
       {
         q: 'How much does carpet cleaning cost in Leicester?',
         a: 'As a guide, a single room starts from £70 and a whole home (three rooms or more) from £120, with upholstery from £30 per seat. The exact price depends on room sizes, how soiled the carpet is, stairs and whether furniture needs moving — but we always agree a fixed price before we begin, so there are no surprises.',
+      },
+      {
+        q: 'Is hot water extraction the same as carpet steam cleaning?',
+        a: 'Yes — “steam cleaning” is simply the everyday name for hot water extraction, the same professional method. Despite the name, you won’t see clouds of steam: we inject heated water and an eco-friendly solution deep into the pile, then extract it straight back out with powerful suction, taking the dirt with it. It’s the method most carpet manufacturers recommend, and it leaves carpets far drier than a hired machine.',
       },
       {
         q: 'How long will my carpet take to dry?',

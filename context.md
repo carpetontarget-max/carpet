@@ -197,10 +197,16 @@ Desktop never finished onboarding in the session that added it).
     page links to `/` ("carpet cleaning company based in Leicester"). Don't
     give another page a "Carpet Cleaning Leicester" title. The carpet service
     page targets the method instead: "Hot Water Extraction Carpet Cleaning".
-  - **Never say "steam cleaning" anywhere on the site** (owner's decision,
-    2026-10-23): no steam is visible during a clean, so the word makes
-    customers question it. Always say "hot water extraction", even though
-    "carpet steam cleaning" is a searched term.
+  - **"Steam cleaning" wording rule** (owner's decision, 2026-10-23): the
+    service is always called **hot water extraction** — never "steam
+    cleaning" in titles or headings, and never a claim that we use steam (no
+    steam is visible, so customers would question it). It's fine, and good
+    for "carpet steam cleaning" searches, to *explain* that hot water
+    extraction is often called steam cleaning, always paired with "you won't
+    see clouds of steam". Current mentions: carpet page meta description,
+    article body + an FAQ ("Is hot water extraction the same as carpet steam
+    cleaning?"), the homepage "professional difference" band, and the /faq
+    method answer.
   - Area pages are linked sitewide (footer "Carpet cleaning near you" row +
     Explore link) and from every service page ("Where we offer this" chips).
   - `withBase()` now adds the trailing slash, so internal links no longer go
