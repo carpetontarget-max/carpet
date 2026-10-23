@@ -163,6 +163,15 @@ Desktop never finished onboarding in the session that added it).
   (previously all pointed at one generic service page — fixed same day).
 - Google Analytics 4 (`src/components/GoogleAnalytics.astro`) — off until
   `PUBLIC_GA_ID` is set; currently **active** in production (see Deployment above).
+  **Enquiry tracking** (2026-10-23): every tap on a `tel:` / `sms:` / `mailto:` /
+  WhatsApp / Messenger link sends a `generate_lead` event with `method`
+  (`call`, `text`, `email`, `whatsapp`, `messenger`) — a sitewide click listener
+  in `GoogleAnalytics.astro`. The homepage quote form opens WhatsApp from
+  script, so it sends its own `generate_lead` with `method: 'quote_form'`.
+  Gotcha: `define:vars` wraps inline scripts in a function, so `gtag` is only
+  global because the component sets `window.gtag = gtag` — keep that line.
+  In GA4: mark `generate_lead` as a key event and add an event-scoped custom
+  dimension for `method`.
 - `robots.txt` + auto-generated `sitemap-index.xml` (33 pages as of 2026-09-07;
   `/review` is filtered out in `astro.config.mjs`).
 - **Local SEO pass (2026-10-23):**
@@ -253,10 +262,13 @@ listing: Place ID `ChIJ5QDUP5yQ5gIRVld4qaAXYiU` (see `config.ts`), 5.0★ / 78 r
   To add/swap a photo: import it in `config.ts` (or the page), set `img`, and the
   templates automatically switch from the placeholder to `<Image>`.
   `service-sofa.jpg` is only 335px wide — swap in a higher-res shot when one exists.
-- **One redirect exists** in `astro.config.mjs`: the old combined
+- **Redirects** in `astro.config.mjs`: the old combined
   `/services/upholstery-rug-cleaning` → `/services/upholstery-cleaning` (the page
-  was split into separate Upholstery and Rug pages). Keep it while any old link
-  might still be live.
+  was split into separate Upholstery and Rug pages), plus 19 old **Wix URLs**
+  (`/leicester`, `/carpetcleaning`, `/service-page/…`, `/post/…`, added
+  2026-10-23) that still had Google impressions. GitHub Pages can't send real
+  301s, so these are instant meta-refresh pages, which Google treats as
+  permanent redirects. Keep them while any old link might still be live.
 - **Google reviews are fetched at build time** if `GOOGLE_PLACES_API_KEY` is set
   in a `.env` (see `.env.example`); otherwise it falls back to the reviews pasted
   into `config.ts`. The key never reaches the browser.

@@ -308,6 +308,17 @@ const homeServices = homeFeatured.map((slug) => services.find((s) => s.slug === 
         postcode ? `Postcode: ${postcode}` : '',
         message ? `Details: ${message}` : '',
       ].filter(Boolean);
+      // The form opens WhatsApp from script, not a link, so the sitewide
+      // link-tap tracking in GoogleAnalytics.astro can't see it — send the same
+      // enquiry event here (gtag only exists when Analytics is configured).
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          method: 'quote_form',
+          link_text: 'Get My Free Quote',
+          page_path: location.pathname,
+          transport_type: 'beacon',
+        });
+      }
       window.location.href = `https://wa.me/${waNumber}?text=` + encodeURIComponent(lines.join('\n'));
     });
 

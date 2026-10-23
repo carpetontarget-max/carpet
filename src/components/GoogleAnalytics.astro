@@ -27,6 +27,9 @@ const enabled = gaId.startsWith('G-') && gaId !== 'G-XXXXXXXXXX';
     <script is:inline define:vars={{ gaId }}>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
+      // define:vars wraps this script in a function, so gtag isn't global by
+      // default — expose it for page scripts (e.g. the homepage quote form).
+      window.gtag = gtag;
       gtag('js', new Date());
       gtag('config', gaId);
 
