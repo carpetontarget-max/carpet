@@ -221,12 +221,16 @@ listing: Place ID `ChIJ5QDUP5yQ5gIRVld4qaAXYiU` (see `config.ts`), 5.0★ / 78 r
   ~90%. Reference them via `import` in config/pages and the `<Image>` component,
   **not** by string path. `public/images/` only holds a few large `*-source`
   originals that nothing references (safe to delete if tidying up).
-- **Some services have no photo yet** (rug, mattress, curtain, sofa, office).
-  They carry a `tint` gradient instead of an `img` and render a colour placeholder
-  panel with a "photo to follow" caption. The commercial/residential sub-heroes do
-  the same.
-  To add a real photo: import it in `config.ts` (or the page), set `img`, and the
+- **All 12 services now have a photo** (added 2026-10-23 from the owner's
+  `website_picture/` folder, copied into `src/images/service-*.{jpg,png}`). The
+  templates still support a `tint` gradient instead of `img` — a service without
+  `img` renders a colour placeholder panel with a "photo to follow" caption. The
+  `/commercial` sub-hero and "out-of-hours" panel now use the real office job
+  photos; the `/residential` sub-hero, `/commercial` premises cards and `/areas`
+  pages still use colour placeholders.
+  To add/swap a photo: import it in `config.ts` (or the page), set `img`, and the
   templates automatically switch from the placeholder to `<Image>`.
+  `service-sofa.jpg` is only 335px wide — swap in a higher-res shot when one exists.
 - **One redirect exists** in `astro.config.mjs`: the old combined
   `/services/upholstery-rug-cleaning` → `/services/upholstery-cleaning` (the page
   was split into separate Upholstery and Rug pages). Keep it while any old link

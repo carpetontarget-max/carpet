@@ -12,8 +12,13 @@ import imgCarpet from './images/service-carpet.png';
 import imgStain from './images/service-stain.png';
 import imgPet from './images/service-pet.png';
 import imgTenancy from './images/service-tenancy.png';
-import imgCommercial from './images/service-commercial.png';
+import imgCommercial from './images/service-commercial.jpg';
+import imgOffice from './images/service-office.jpg';
 import imgUpholstery from './images/service-upholstery.jpg';
+import imgSofa from './images/service-sofa.jpg';
+import imgRug from './images/service-rug.jpg';
+import imgMattress from './images/service-mattress.png';
+import imgCurtain from './images/service-curtain.jpg';
 import imgStairsAfter from './images/stairs-after.jpg';
 
 /**
@@ -165,7 +170,7 @@ export const services = [
     group: 'home',
     desc: 'Gentle, fabric-safe deep cleaning for sofas, armchairs and dining chairs — priced per seat.',
     img: imgUpholstery,
-    alt: 'Sofa upholstery being deep cleaned with fabric-safe solution',
+    alt: 'Technician deep cleaning a cream fabric sofa seat with an upholstery extraction tool',
     metaDescription: 'Upholstery cleaning in Leicester — sofas, armchairs and dining chairs of all fabrics, priced per seat. Fabric-safe deep clean, with pet stain and odour removal available.',
     intro: "Not every fabric can be cleaned the same way — velvet, wool and delicate weaves need a different approach to a standard cotton-blend sofa, and getting it wrong can shrink, discolour or stiffen the material. We check the fabric first and treat it accordingly.\n\nPriced per seat rather than per item, so a single armchair costs less than a 3-seater sofa. Covers sofas, armchairs and dining chairs, and pairs well with our pet stain and odour removal if that's the issue you're dealing with.",
     related: ['sofa-cleaning', 'rug-cleaning', 'stain-spot-removal'],
@@ -176,8 +181,8 @@ export const services = [
     title: 'Sofa Cleaning',
     group: 'home',
     desc: 'Deep, fabric-safe cleaning that lifts dirt, body oils and odour from sofas and settees — priced per seat.',
-    tint: 'linear-gradient(135deg,#0a97ac,#0a4a63)',
-    alt: 'A fabric sofa being deep cleaned seat by seat in a Leicester living room',
+    img: imgSofa,
+    alt: 'A stained fabric seat being agitated with a rotary brush during a sofa deep clean',
     metaDescription: 'Sofa cleaning in Leicester — fabric-safe deep cleaning for settees and sofas of all fabrics, priced per seat. Lifts dirt, body oils, pet hair and odour. Free quotes.',
     intro: "Your sofa is the hardest-working seat in the house — daily use leaves body oils, food crumbs, pet hair and odour worked deep into the fabric, long before it looks visibly dirty. We deep clean it seat by seat, lifting what a vacuum can't reach and leaving it fresher, brighter and healthier to sit on.\n\nWe check the fabric first — velvet, wool, cotton blends and delicate weaves each need a different approach — then clean accordingly, priced per seat so a two-seater costs less than a corner suite. Pairs perfectly with our pet odour removal if that's the real issue.",
     related: ['upholstery-cleaning', 'pet-stain-odour-removal', 'stain-spot-removal'],
@@ -188,8 +193,8 @@ export const services = [
     title: 'Rug Cleaning',
     group: 'home',
     desc: 'Specialist cleaning for rugs of all kinds — wool, Persian, synthetic and delicate fabrics.',
-    tint: 'linear-gradient(135deg,#6fe6c2,#0a97ac)',
-    alt: 'A wool rug being gently deep cleaned in a Leicester home',
+    img: imgRug,
+    alt: 'Technician deep cleaning a patterned rug with a hot water extraction wand',
     metaDescription: 'Rug cleaning in Leicester for wool, Persian, synthetic and delicate rugs. Fibre-checked, fabric-safe cleaning that lifts trapped grit, dust and odour. Free quotes.',
     intro: "Rugs aren't all the same — a wool Persian, a synthetic shag and a delicate viscose each need a different approach, and the wrong method can shrink a rug, bleed its colours or flatten the pile for good. We check the fibre and construction first, then clean accordingly.\n\nMost rugs are cleaned in your home using controlled, fabric-safe methods that lift the trapped grit, dust and odour a vacuum leaves behind. We'll always tell you honestly what a rug will take before we start — no guesswork on something that's often irreplaceable.",
     related: ['upholstery-cleaning', 'carpet-deep-cleaning', 'stain-spot-removal'],
@@ -200,8 +205,8 @@ export const services = [
     title: 'Mattress Cleaning',
     group: 'home',
     desc: "Deep cleaning that lifts dust mites, allergens, sweat and stains for a healthier night's sleep.",
-    tint: 'linear-gradient(135deg,#0e86c4,#04263a)',
-    alt: 'A mattress being deep cleaned to remove dust mites and allergens',
+    img: imgMattress,
+    alt: 'A mattress being deep cleaned with an extraction tool, lifted dirt visible in its clear head',
     metaDescription: 'Mattress cleaning in Leicester — lifts dust mites, allergens, sweat and stains for a fresher, healthier bed. Low-moisture method, dry the same day. Free quotes.',
     intro: "A mattress quietly collects sweat, dead skin, dust mites and allergens for years — everything you'd rather not be sleeping on. Our deep clean lifts that out of the surface and the layers just beneath, leaving the mattress fresher, cleaner and far kinder for anyone with allergies or asthma.\n\nWe treat stains and odours as part of the clean and use low-moisture methods, so the mattress dries quickly and is ready to sleep on the same day. Ideal before a house move, after illness, or simply as part of a proper spring clean.",
     related: ['pet-stain-odour-removal', 'upholstery-cleaning', 'carpet-deep-cleaning'],
@@ -248,8 +253,8 @@ export const services = [
     title: 'Curtain Cleaning',
     group: 'home',
     desc: 'On-site curtain cleaning — freshened up without the hassle of taking them down.',
-    tint: 'linear-gradient(135deg,#14bcc4,#0a4a63)',
-    alt: 'Curtains being cleaned on-site while still hanging',
+    img: imgCurtain,
+    alt: 'Technician connecting the solution hose to professional cleaning equipment before an on-site curtain clean',
     metaDescription: 'On-site curtain cleaning in Leicester — freshened up while they hang, with no taking them down. Fabric-safe method that lifts dust and trapped odours. Free quotes.',
     intro: "Curtains quietly soak up dust, cooking smells and general household odour, but taking them down, cleaning them and re-hanging them is a job most people never quite get around to. We clean them on-site, while they hang — so there's no unhooking, no shrinkage risk from the wrong wash, and no wrestling them back onto the rail.\n\nWe check the fabric first and use a gentle, fabric-safe method that freshens the material and lifts trapped odour. It's a quick, low-hassle way to refresh the whole feel of a room.",
     related: ['upholstery-cleaning', 'carpet-deep-cleaning', 'rug-cleaning'],
@@ -273,7 +278,7 @@ export const services = [
     group: 'business',
     desc: 'Flexible, out-of-hours cleaning for offices, shops and business premises.',
     img: imgCommercial,
-    alt: 'Commercial office carpet being professionally cleaned outside business hours',
+    alt: 'Technician filling hot water extraction equipment before cleaning a commercial office carpet',
     metaDescription: 'Commercial carpet cleaning for offices, shops and business premises in Leicester. Flexible out-of-hours scheduling so cleaning never disrupts your working day.',
     intro: "Business carpets take a different kind of punishment — constant foot traffic, wheeled chairs, spilled coffee — and can't be closed off for a day to deal with it. We work evenings and weekends so cleaning happens around your business, not in the middle of it.\n\nWe cover offices, shops, salons, waiting rooms and other business premises, and can set up a regular schedule (monthly, quarterly) rather than a one-off if that suits your footfall better. Get in touch with your square footage and current condition for an accurate quote.",
     related: ['office-carpet-cleaning', 'carpet-deep-cleaning', 'end-of-tenancy-cleaning'],
@@ -284,8 +289,8 @@ export const services = [
     title: 'Office Carpet Cleaning',
     group: 'business',
     desc: 'Out-of-hours deep cleaning for office carpets, meeting rooms and high-traffic walkways.',
-    tint: 'linear-gradient(135deg,#0a4a63,#04263a)',
-    alt: 'An office carpet being cleaned out of hours between desks',
+    img: imgOffice,
+    alt: 'Technician cleaning office carpet between desks with a hot water extraction wand',
     metaDescription: 'Office carpet cleaning in Leicester — out-of-hours deep cleaning for offices, meeting rooms and walkways. Fast-drying and low-disruption, with free site quotes.',
     intro: "Office carpet is walked over thousands of times a day — under desks, along walkways, in and out of meeting rooms — and it greys and flattens far faster than carpet at home. A tired office floor quietly undermines the impression your workplace makes on staff and visitors alike.\n\nWe clean out of hours — evenings and weekends — so there's no disruption to your working day, and our fast-drying extraction means floors are ready well before staff arrive. Book a one-off refresh or a regular schedule to keep things consistently sharp. Send your floor area and current condition for an accurate quote.",
     related: ['commercial-carpet-cleaning', 'carpet-deep-cleaning', 'end-of-tenancy-cleaning'],

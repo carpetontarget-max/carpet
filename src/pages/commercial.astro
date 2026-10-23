@@ -1,7 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { site, links, commercialPremises, withBase } from '../config';
 import Icon from '../components/Icon.astro';
+import imgCommercial from '../images/service-commercial.jpg';
+import imgOffice from '../images/service-office.jpg';
 
 const benefits = [
   { icon: '🕒', title: 'Out-of-hours cleaning', text: 'Evening, weekend and early-morning slots so we work around your business — not through it.' },
@@ -29,10 +32,16 @@ const benefits = [
           <a href={links.tel} class="btn btn--onDark btn--lg"><Icon name="phone" size={16} /> {site.phoneDisplay}</a>
         </div>
       </div>
-      <!-- PHOTO: replace this placeholder with a real commercial job photo later -->
-      <div class="ph-photo reveal reveal--right">
-        <span class="ph-cap">📷 Commercial clean — photo to follow</span>
-      </div>
+      <Image
+        src={imgCommercial}
+        alt="Technician preparing hot water extraction equipment inside a client's office"
+        loading="eager"
+        fetchpriority="high"
+        width={800}
+        format="webp"
+        class="reveal reveal--right"
+        style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"
+      />
     </div>
   </section>
 
@@ -98,10 +107,15 @@ const benefits = [
             <a href={withBase('/contact')} class="btn btn--ghost">Contact us</a>
           </div>
         </div>
-        <!-- PHOTO: replace with a real out-of-hours / office photo later -->
-        <div class="ph-photo reveal reveal--right" style="min-height:300px;background:linear-gradient(135deg,#0a4a63,#04263a);">
-          <span class="ph-cap">📷 Out-of-hours clean — photo to follow</span>
-        </div>
+        <Image
+          src={imgOffice}
+          alt="Office carpet being deep cleaned between empty desks, with no staff disrupted"
+          loading="lazy"
+          width={800}
+          format="webp"
+          class="reveal reveal--right"
+          style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"
+        />
       </div>
     </div>
   </section>
