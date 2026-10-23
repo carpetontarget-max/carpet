@@ -40,8 +40,8 @@ const areaSchema = {
 };
 ---
 <Base
-  titleFull={`Carpet Cleaning ${area.name} | Sofa & Upholstery Cleaning | On Target`}
-  description={`Carpet, sofa and upholstery cleaning in ${area.name} (${area.postcode}). Rated ${site.googleRating.toFixed(1)}★ from ${site.googleReviewCount} Google reviews, from £${fromPrice} a room, dry in 4–6 hours. Free quotes.`}
+  titleFull={area.metaTitle ?? `Carpet Cleaning ${area.name} | Sofa & Upholstery Cleaning | On Target`}
+  description={area.metaDescription ?? `Carpet, sofa and upholstery cleaning in ${area.name} (${area.postcode}). Rated ${site.googleRating.toFixed(1)}★ from ${site.googleReviewCount} Google reviews, from £${fromPrice} a room, dry in 4–6 hours. Free quotes.`}
   breadcrumbs={[
     { name: 'Home', path: '/' },
     { name: 'Areas We Cover', path: '/areas/' },
@@ -55,7 +55,7 @@ const areaSchema = {
     <div class="container subhero-grid">
       <div class="reveal reveal--left">
         <span class="eyebrow">Serving {area.name}</span>
-        <h1>Carpet &amp; upholstery cleaning in {area.name}</h1>
+        <h1>{area.h1 ?? `Carpet & upholstery cleaning in ${area.name}`}</h1>
         <p class="lead" style="margin-left:0;">{area.blurb}</p>
         <div class="btn-row">
           <a href={links.whatsapp} class="btn btn--wa btn--lg"><Icon name="whatsapp" size={18} /> WhatsApp a quote</a>
@@ -82,6 +82,12 @@ const areaSchema = {
         <span class="eyebrow">Local know-how</span>
         <h2>Carpet cleaning in {area.name}: what to know</h2>
         {area.localNotes.map((p) => <p>{p}</p>)}
+        {/* Supporting link: the homepage is the page we want ranking for
+            "carpet cleaning leicester", so every town page points at it. */}
+        <p>
+          We're a family-run <a href={withBase('/')}>carpet cleaning company based in Leicester</a> —
+          see how it works, our prices and what customers say.
+        </p>
       </div>
     </div>
   </section>

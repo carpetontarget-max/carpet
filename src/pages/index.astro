@@ -18,10 +18,16 @@ const whatsappPhotos = `https://wa.me/${site.whatsappNumber}?text=${photoMessage
 // The full range (including rug, mattress and curtain) lives on /services.
 const homeFeatured = ['carpet-deep-cleaning', 'stain-spot-removal', 'pet-stain-odour-removal', 'upholstery-cleaning', 'stairs-landing-cleaning', 'end-of-tenancy-cleaning'];
 const homeServices = homeFeatured.map((slug) => services.find((s) => s.slug === slug)).filter(Boolean);
+
+// The homepage is THE page for "carpet cleaning leicester" (Google already
+// picks it ~95% of the time). Other Leicester pages support it rather than
+// compete — see the Leicester entry in areaPages.ts.
+const roomFrom = pricing.find((p) => p.name === 'Single Room')?.price;
+const seatFrom = pricing.find((p) => p.name === 'Upholstery')?.price;
 ---
 <Base
-  title="Carpet & Upholstery Cleaning in Leicester"
-  description="Professional carpet, upholstery and rug cleaning across Leicester and Leicestershire. Eco-friendly hot water extraction, free quotes, satisfaction guaranteed."
+  titleFull="Carpet Cleaning Leicester | Carpet & Upholstery Cleaners | On Target"
+  description={`Carpet cleaning in Leicester rated ${site.googleRating.toFixed(1)}★ by ${site.googleReviewCount} Google reviewers. Rooms from £${roomFrom}, sofas from £${seatFrom} a seat, dry in 4–6 hours. Family-run, free quotes.`}
 >
   <!-- HERO -->
   <section class="hero">
@@ -34,7 +40,7 @@ const homeServices = homeFeatured.map((slug) => services.find((s) => s.slug === 
     <div class="container hero-grid">
       <div class="reveal reveal--left">
         <span class="pill"><span class="stars">★★★★★</span> Rated 5.0 by {site.googleReviewCount} local customers</span>
-        <h1>The <span style="color:var(--brand-light)">healthier, deeper</span> carpet &amp; upholstery clean in Leicester</h1>
+        <h1><span style="color:var(--brand-light)">Healthier, deeper</span> carpet cleaning in Leicester</h1>
         <p class="lead" style="margin-left:0;">
           Bringing carpets, rugs and upholstery back to life with professional hot water extraction —
           outstanding results across {site.serviceArea}.

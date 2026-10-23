@@ -17,10 +17,12 @@
  */
 export const servicePages = {
   'carpet-deep-cleaning': {
-    h1: 'Carpet Cleaning in Leicester',
-    metaTitle: 'Carpet Cleaning Leicester | Professional Deep Carpet Cleaners',
+    // The homepage owns "carpet cleaning leicester" — this page targets the
+    // method (deep / steam cleaning) so the two don't compete. See context.md.
+    h1: 'Deep Carpet & Steam Cleaning in Leicester',
+    metaTitle: 'Carpet Steam Cleaning Leicester | Deep Hot Water Extraction',
     metaDescription:
-      'Professional carpet cleaning in Leicester. Hot water extraction that lifts dirt, allergens and stains from deep in the pile. Dry in hours, fixed prices, satisfaction guaranteed. Free quote on WhatsApp.',
+      'Deep carpet steam cleaning in Leicester using professional hot water extraction — lifts dirt, allergens and stains from deep in the pile. Dry in hours, fixed prices, free WhatsApp quotes.',
     lead:
       'Looking for professional carpet cleaning in Leicester? On Target Carpet Cleaning is a local, family-run team that brings tired, dull and stained carpets back to life using powerful hot water extraction. We clean homes and businesses across Leicester and the surrounding Leicestershire towns, and every job is backed by honest, fixed pricing and a satisfaction guarantee.',
     sections: [

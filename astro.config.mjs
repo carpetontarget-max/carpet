@@ -16,7 +16,9 @@ export default defineConfig({
   redirects: {
     '/services/upholstery-rug-cleaning': '/services/upholstery-cleaning/',
     // Old Wix URLs that still get Google impressions or visits.
-    '/leicester': '/areas/leicester/',
+    // Leicester-wide pages forward to the homepage: it's the page we want
+    // ranking for "carpet cleaning leicester", so it should inherit their pull.
+    '/leicester': '/',
     '/carpetcleaning': '/services/carpet-deep-cleaning/',
     '/blog': '/faq/',
     '/service-page/one-bedroom': '/services/carpet-deep-cleaning/',
@@ -29,8 +31,8 @@ export default defineConfig({
     '/service-page/corner-sofa': '/services/sofa-cleaning/',
     '/service-page/pet-stain-removal': '/services/pet-stain-odour-removal/',
     '/service-page/stairs-hall-landing': '/services/stairs-landing-cleaning/',
-    '/post/affordable-leicester-carpet-cleaners-keeping-your-carpets-spotless-without-breaking-the-bank': '/areas/leicester/',
-    '/post/professional-carpet-cleaning-services-in-leicester-keeping-your-floors-spotless-and-fresh': '/areas/leicester/',
+    '/post/affordable-leicester-carpet-cleaners-keeping-your-carpets-spotless-without-breaking-the-bank': '/',
+    '/post/professional-carpet-cleaning-services-in-leicester-keeping-your-floors-spotless-and-fresh': '/',
     '/post/benefits-of-professional-carpet-cleaning': '/services/carpet-deep-cleaning/',
     '/post/top-tips-for-removing-stubborn-carpet-stains-efficiently': '/services/stain-spot-removal/',
     '/post/expert-carpet-cleaning-advice-tips-to-keep-your-carpets-spotless': '/faq/',

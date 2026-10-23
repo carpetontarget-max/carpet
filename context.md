@@ -187,6 +187,15 @@ Desktop never finished onboarding in the session that added it).
     with an area-specific reason) in `areaPages.ts`, a real photo hero (rotates
     through the service photos), and keyword-first titles
     ("Carpet Cleaning Oadby | …") with rating + price in the meta description.
+  - **One page per search — "carpet cleaning leicester" belongs to the
+    homepage** (decided 2026-10-23 from Search Console: the homepage had 1,056
+    of ~1,100 appearances at position 9.4; the old Wix `/leicester` had 49 at
+    7.3). The homepage title/H1/meta lead with it. `/areas/leicester/`
+    overrides the town pattern (`metaTitle` / `h1` / `metaDescription` in
+    `areaPages.ts`) to target Leicester's neighbourhoods instead. `/leicester`
+    and the two Leicester-themed Wix posts redirect to `/`, and every town
+    page links to `/` ("carpet cleaning company based in Leicester"). Don't
+    give another page a "Carpet Cleaning Leicester" title.
   - Area pages are linked sitewide (footer "Carpet cleaning near you" row +
     Explore link) and from every service page ("Where we offer this" chips).
   - `withBase()` now adds the trailing slash, so internal links no longer go

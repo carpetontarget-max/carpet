@@ -13,6 +13,8 @@
  * them specific to the place, and only state things that are true. Real
  * local job photos and reviews mentioning the town are the best additions.
  * `popular[].slug` must be a service slug from `config.ts`.
+ * `metaTitle` / `metaDescription` / `h1` optionally override the template's
+ * "Carpet Cleaning <Town>" pattern — used where another page owns that search.
  * ────────────────────────────────────────────────────────────────────────
  */
 
@@ -24,6 +26,9 @@ export type AreaPage = {
   localNotes: string[];
   popular: { slug: string; why: string }[];
   nearby: string[];
+  metaTitle?: string;
+  metaDescription?: string;
+  h1?: string;
 };
 
 export const areaPages: AreaPage[] = [
@@ -31,6 +36,12 @@ export const areaPages: AreaPage[] = [
     slug: 'leicester',
     name: 'Leicester',
     postcode: 'LE1–LE5',
+    // The HOMEPAGE owns "carpet cleaning leicester". This page targets the
+    // neighbourhoods instead, so the two support rather than compete.
+    metaTitle: "Carpet & Sofa Cleaning Across Leicester's Neighbourhoods | On Target",
+    metaDescription:
+      'From Clarendon Park, Westcotes and Highfields to Evington and Knighton — carpet, sofa and upholstery cleaning in every Leicester postcode from LE1 to LE5. Fixed prices, free quotes.',
+    h1: "Carpet & upholstery cleaning across Leicester's neighbourhoods",
     blurb:
       "As a Leicester-based team, the city itself is where we do the bulk of our work — from Victorian terraces to modern new-builds, across every postcode from LE1 to LE5. Being local means we're rarely more than a few minutes from your door, so response times are fast and there's never a travel surcharge tacked onto your quote.",
     localNotes: [
