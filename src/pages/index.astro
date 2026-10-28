@@ -27,20 +27,23 @@ const seatFrom = pricing.find((p) => p.name === 'Upholstery')?.price;
 
 // Mobile LCP element is this hero background photo — shown at only 12%
 // opacity under the dark overlay, so it can be small and heavily compressed.
-// One getImage() call feeds both the <img> and the preload, so the URLs match.
+// `sizes` deliberately asks for ~270px on phones (→ the 9.5 KB 480w file even
+// at 2x): a faint texture doesn't need full resolution. One getImage() call
+// feeds both the <img> and the preload, so the URLs match.
+const heroBgSizes = '(max-width: 940px) 270px, 100vw';
 const heroBg = await getImage({
-  src: heroImg, width: 1200, widths: [480, 800, 1200], sizes: '100vw', format: 'webp', quality: 40,
+  src: heroImg, width: 1200, widths: [480, 1200], sizes: heroBgSizes, format: 'webp', quality: 40,
 });
 ---
 <Base
   titleFull="Carpet Cleaning Leicester | Carpet & Upholstery Cleaners | On Target"
   description={`Carpet cleaning in Leicester rated ${site.googleRating.toFixed(1)}★ by ${site.googleReviewCount} Google reviewers. Rooms from £${roomFrom}, sofas from £${seatFrom} a seat, dry in 4–6 hours. Family-run, free quotes.`}
 >
-  <link slot="head" rel="preload" as="image" imagesrcset={heroBg.srcSet.attribute} imagesizes="100vw" fetchpriority="high" />
+  <link slot="head" rel="preload" as="image" imagesrcset={heroBg.srcSet.attribute} imagesizes={heroBgSizes} fetchpriority="high" />
 
   <!-- HERO -->
   <section class="hero">
-    <img src={heroBg.src} srcset={heroBg.srcSet.attribute} sizes="100vw" alt="" aria-hidden="true" class="hero-bg"
+    <img src={heroBg.src} srcset={heroBg.srcSet.attribute} sizes={heroBgSizes} alt="" aria-hidden="true" class="hero-bg"
       width={heroBg.attributes.width} height={heroBg.attributes.height} fetchpriority="high" />
     <div class="hero-blobs" id="heroBlobs">
       <span class="hero-blob hero-blob--1"></span>

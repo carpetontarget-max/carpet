@@ -23,7 +23,6 @@ const enabled = gaId.startsWith('G-') && gaId !== 'G-XXXXXXXXXX';
 ---
 {enabled && (
   <>
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
     <script is:inline define:vars={{ gaId }}>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
@@ -32,6 +31,16 @@ const enabled = gaId.startsWith('G-') && gaId !== 'G-XXXXXXXXXX';
       window.gtag = gtag;
       gtag('js', new Date());
       gtag('config', gaId);
+
+      // Speed: fetch gtag.js (~176 KB) only once the page has loaded, so it
+      // doesn't compete with the hero image and font on slow mobile data.
+      // Calls made before then wait in dataLayer and are sent when it arrives.
+      window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+        document.head.appendChild(s);
+      });
 
       // Enquiry tracking: every tap on WhatsApp, Messenger, call, text or email
       // is sent to Analytics as a 'generate_lead' event with the method used and
