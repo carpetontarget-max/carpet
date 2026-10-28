@@ -330,12 +330,14 @@ const heroBg = await getImage({
       ].filter(Boolean);
       // The form opens WhatsApp from script, not a link, so the sitewide
       // link-tap tracking in GoogleAnalytics.astro can't see it — send the same
-      // enquiry event here (gtag only exists when Analytics is configured).
+      // enquiry event here. This runs only after the browser's required-field
+      // check has passed (an invalid form never fires 'submit'). Only the
+      // method and the button's own text are sent — never the form contents.
       if (typeof gtag === 'function') {
+        const btn = e.submitter || quoteForm.querySelector('[type="submit"]');
         gtag('event', 'generate_lead', {
-          method: 'quote_form',
-          link_text: 'Get My Free Quote',
-          page_path: location.pathname,
+          method: 'form',
+          link_text: (btn?.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100),
           transport_type: 'beacon',
         });
       }

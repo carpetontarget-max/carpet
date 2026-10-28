@@ -21,8 +21,11 @@ interface Props {
   // intermediate "Services" step on /services/<slug> pages). Each `path` is
   // site-root-relative ('/services/foo'), resolved to an absolute URL below.
   breadcrumbs?: { name: string; path: string }[];
+  // Utility pages (the 404): "noindex" and no canonical — every real page gets
+  // a self-referencing, query-free canonical (so ?utm_ visits aren't duplicates).
+  noindex?: boolean;
 }
-const { title, titleFull, description, image, breadcrumbs } = Astro.props as Props;
+const { title, titleFull, description, image, breadcrumbs, noindex } = Astro.props as Props;
 const pageTitle = titleFull ?? (title ? `${title} | ${site.businessName}` : `${site.businessName} | ${site.tagline}`);
 const pageDescription = description ?? `${site.tagline}. Serving ${site.serviceArea} with eco-friendly hot water extraction and a satisfaction guarantee.`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -140,7 +143,7 @@ const webSite = isHome && {
 
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
-    <link rel="canonical" href={canonicalURL} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonicalURL} />}
     <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
 
     <!-- Open Graph / social sharing -->

@@ -19,3 +19,11 @@ logs/
 
 # unrelated file that landed in this folder before the repo was cloned
 github-mcp-server-main.zip
+
+# SEO data loop (tools/seo-data): analytics data and Google service-account
+# keys must never be committed — the repo is public. Keys live in
+# ~/.config/ontarget/, data in ~/ontarget-seo-data/ (both outside the repo).
+ontarget-seo-data-*.json
+ontarget-seo-data/
+*service-account*.json
+seo-reader*.json
