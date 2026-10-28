@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { links, services, withBase } from '../config';
+import { links, services, withBase, responsive } from '../config';
 import Icon from '../components/Icon.astro';
 ---
 <Base title="Carpet & Upholstery Cleaning Services" description="All our cleaning services in Leicester: carpet, upholstery, sofa, rug, mattress, curtain, pet stain and stain removal, plus commercial and end of tenancy cleans.">
@@ -16,7 +16,7 @@ import Icon from '../components/Icon.astro';
       <div class="grid grid--3">
         {services.map((s) => (
           <a href={withBase(`/services/${s.slug}`)} class="svc-card" style={s.img ? undefined : `background:${s.tint};`}>
-            {s.img && <Image src={s.img} alt={s.alt} loading="lazy" width={700} format="webp" />}
+            {s.img && <Image src={s.img} alt={s.alt} loading="lazy" width={700} {...responsive.card} format="webp" />}
             <div class="overlay"></div>
             <div class="body">
               <span class="chip">{s.icon} Service</span>

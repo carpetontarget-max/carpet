@@ -15,6 +15,10 @@
  * `popular[].slug` must be a service slug from `config.ts`.
  * `metaTitle` / `metaDescription` / `h1` optionally override the template's
  * "Carpet Cleaning <Town>" pattern — used where another page owns that search.
+ * `neighbourhoods` lists parts of the town we cover (only ones we're sure of).
+ * `localJob` / `customerQuote` must come from the OWNER — a real job and a
+ * real customer's words from that town. Never invent them; the page simply
+ * hides these blocks until they're filled in.
  * ────────────────────────────────────────────────────────────────────────
  */
 
@@ -29,6 +33,9 @@ export type AreaPage = {
   metaTitle?: string;
   metaDescription?: string;
   h1?: string;
+  neighbourhoods?: string[];
+  localJob?: { title: string; text: string };
+  customerQuote?: { text: string; name: string };
 };
 
 export const areaPages: AreaPage[] = [
@@ -36,6 +43,7 @@ export const areaPages: AreaPage[] = [
     slug: 'leicester',
     name: 'Leicester',
     postcode: 'LE1–LE5',
+    neighbourhoods: ['City Centre', 'Clarendon Park', 'Stoneygate', 'Knighton', 'Evington', 'Highfields', 'Westcotes', 'Aylestone', 'Belgrave', 'Humberstone', 'Hamilton', 'Beaumont Leys', 'New Parks', 'Rushey Mead'],
     // The HOMEPAGE owns "carpet cleaning leicester". This page targets the
     // neighbourhoods instead, so the two support rather than compete.
     metaTitle: "Carpet & Sofa Cleaning Across Leicester's Neighbourhoods | On Target",
@@ -76,6 +84,7 @@ export const areaPages: AreaPage[] = [
     slug: 'wigston',
     name: 'Wigston',
     postcode: 'LE18',
+    neighbourhoods: ['Wigston Magna', 'South Wigston', 'Wigston Fields'],
     blurb:
       "Wigston, bordering Oadby to the south, grew up as a hosiery and framework-knitting town and still has that close-knit community feel today. We clean everything from period terraces to newer estates on the edge of town, covering both Wigston and South Wigston on flexible evening and weekend slots.",
     localNotes: [
@@ -110,6 +119,7 @@ export const areaPages: AreaPage[] = [
     slug: 'braunstone',
     name: 'Braunstone',
     postcode: 'LE3',
+    neighbourhoods: ['Braunstone Town', 'Braunstone Park', 'Thorpe Astley', 'Braunstone Frith'],
     blurb:
       "Braunstone, one of Leicester's larger residential areas west of the centre, keeps us busy with everything from single-room refreshes to full end-of-tenancy cleans. We cover both Braunstone Town and the wider Braunstone Frith area along the Hinckley Road corridor.",
     localNotes: [
@@ -229,6 +239,7 @@ export const areaPages: AreaPage[] = [
     slug: 'loughborough',
     name: 'Loughborough',
     postcode: 'LE11 / LE12',
+    neighbourhoods: ['Town centre', 'Shelthorpe', 'Thorpe Acre', 'Nanpantan', 'The Golden Triangle'],
     blurb:
       "Loughborough, the largest town north of Leicester and home to Loughborough University, is a little further out but firmly within our coverage — from student lets needing an end-of-tenancy clean to family homes across the town.",
     localNotes: [
@@ -246,6 +257,7 @@ export const areaPages: AreaPage[] = [
     slug: 'coalville',
     name: 'Coalville',
     postcode: 'LE67',
+    neighbourhoods: ['Coalville town centre', 'Whitwick', 'Thringstone', 'Hugglescote', 'Greenhill', 'Bardon'],
     blurb:
       "Coalville, the former mining town about twelve miles north-west of Leicester on the edge of Charnwood Forest, is well within our coverage — from the older streets of Whitwick and Thringstone to the new estates around Hugglescote and Bardon, on evening and weekend slots that suit you.",
     localNotes: [

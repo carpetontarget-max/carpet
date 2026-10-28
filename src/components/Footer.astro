@@ -17,7 +17,7 @@ import Icon from './Icon.astro';
       </div>
     </div>
     <div>
-      <h4>Explore</h4>
+      <h2 class="footer-h">Explore</h2>
       <p>
         <a href={withBase('/residential')}>Residential</a><br />
         <a href={withBase('/commercial')}>Commercial</a><br />
@@ -28,7 +28,7 @@ import Icon from './Icon.astro';
       </p>
     </div>
     <div>
-      <h4>Contact</h4>
+      <h2 class="footer-h">Contact</h2>
       <p>
         <a href={links.tel}>{site.phoneDisplay}</a><br />
         <a href={links.sms}>Text us</a><br />
@@ -36,7 +36,7 @@ import Icon from './Icon.astro';
       </p>
     </div>
     <div>
-      <h4>Opening Hours</h4>
+      <h2 class="footer-h">Opening Hours</h2>
       <p>
         {site.hours.map((h) => (<span>{h.day}: {h.time}<br /></span>))}
       </p>
@@ -44,7 +44,7 @@ import Icon from './Icon.astro';
   </div>
   <!-- Sitewide links to every local area page (local SEO internal linking) -->
   <div class="container footer-areas">
-    <h4>Carpet cleaning near you</h4>
+    <h2 class="footer-h">Carpet cleaning near you</h2>
     <p>
       {areaPages.map((a, i) => (
         <>{i > 0 && <span aria-hidden="true"> · </span>}<a href={withBase(`/areas/${a.slug}`)}>{a.name}</a></>

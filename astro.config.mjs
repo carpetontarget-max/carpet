@@ -9,6 +9,9 @@ export default defineConfig({
   // Served at the root of the custom domain (public/CNAME + GitHub Pages
   // "Custom domain" setting point carpetontarget-max.github.io at this).
   site: 'https://www.ontargetcarpetcleaning.co.uk',
+  // Inline the (small) stylesheet into every page: removes the one
+  // render-blocking request, which mattered for mobile LCP.
+  build: { inlineStylesheets: 'always' },
   // /review is just a redirect to the Google review form, so keep it out of the sitemap.
   integrations: [sitemap({ filter: (page) => !page.includes('/review') })],
   // Old combined slug split into separate Upholstery and Rug pages — keep the

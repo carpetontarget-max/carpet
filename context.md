@@ -271,6 +271,20 @@ listing: Place ID `ChIJ5QDUP5yQ5gIRVld4qaAXYiU` (see `config.ts`), 5.0★ / 78 r
 - **Don't `npm update` `@astrojs/sitemap`.** It's pinned to `3.2.1` on purpose;
   3.4+ needs an Astro-5 integration hook and crashes the Astro-4 build. See the
   comment in `astro.config.mjs`. (Upgrade Astro to 5 first if you ever bump it.)
+- **Speed rules (mobile LCP was 4.3s, 2026-10-28):** spread
+  `{...responsive.hero}` / `{...responsive.card}` (config.ts) into every
+  `<Image>` so phones get phone-sized files; the homepage hero background is
+  built with `getImage()` (quality 40 — it's shown at 12% opacity) and
+  preloaded via Base's `<slot name="head">`; CSS is inlined
+  (`build.inlineStylesheets: 'always'`); the latin font file is preloaded in
+  Base. Each page's **first section never uses the `.reveal` fade** (CSS rule
+  `main > section:first-of-type .reveal`) — hidden-until-JS hero text delays LCP.
+- **Accessibility rules:** text in brand teal uses `--brand-text` (#077788,
+  passes AA on white and mist) — `--brand-2` is for backgrounds/gradients only.
+  Links inside `main p` are underlined. Footer headings are `h2.footer-h`
+  (not h4) so heading order stays valid. White text on WhatsApp green fails
+  contrast — use navy (`--deep`) text on it. Lighthouse 13.5.0 is the version
+  that works with current Chrome (12.x errors on LCP diagnostics).
 - **Images live in `src/images/`, not `public/images/`.** Astro's build pipeline
   optimises anything under `src/` (WebP, resized) — this cut total image weight
   ~90%. Reference them via `import` in config/pages and the `<Image>` component,
@@ -385,3 +399,23 @@ config as `googleBusinessName`, review count updated to 86, the Facebook page
 set, and `/review` added. Remaining: submit `sitemap-index.xml` in Search
 Console (if not done), then the GBP checklist above — especially review
 velocity via `/review`.
+
+**PageSpeed / indexing pass (2026-10-28).** From the owner's Chrome-Claude
+PageSpeed + Search Console review:
+- Mobile speed: see "Speed rules" in Gotchas. Before (live, Lighthouse mobile):
+  homepage perf 81, LCP 4.3s (LCP element = 140 KB hero background); now phones
+  get a ~27 KB version.
+- Accessibility: contrast, heading order and logo-label fixes (see Gotchas);
+  every audited page scores 100 locally.
+- Carpet page was "Discovered – currently not indexed": the homepage opening
+  text now links "carpet cleaning" to it, and its lead + section order lead
+  with method, prices and drying time instead of repeating the homepage.
+- Town pages were ~72% identical text: the 10 service cards, 6 why-us cards
+  and full reviews block were replaced by compact link chips, a one-line trust
+  strip and a rating line → ~40% shared. Added `neighbourhoods` for Leicester,
+  Wigston, Braunstone, Coalville and Loughborough. **Still waiting on the
+  owner** for one real recent job + one real customer quote per town
+  (`localJob` / `customerQuote` in areaPages.ts — hidden until filled; never
+  invent them) and neighbourhood lists for the other nine towns.
+- Not done (optional, owner's call): Cloudflare in front of GitHub Pages for
+  longer browser caching (Pages caches only 10 minutes).

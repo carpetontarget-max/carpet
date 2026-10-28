@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
-import { site, links, services, areas, withBase, businessSchemaId } from '../../config';
+import { site, links, services, areas, withBase, businessSchemaId, responsive } from '../../config';
 import { servicePages } from '../../servicePages';
 import { areaPages } from '../../areaPages';
 import Icon from '../../components/Icon.astro';
@@ -78,6 +78,7 @@ const serviceSchema = {
             loading="eager"
             fetchpriority="high"
             width={800}
+            {...responsive.hero}
             format="webp"
             style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"
           />

@@ -19,6 +19,8 @@ import Icon from '../../components/Icon.astro';
       <p class="lead">Proudly serving {site.serviceArea}. Pick your area below for local details, or just get in touch — we very likely cover you.</p>
     </div>
     <div class="container">
+      <!-- Keeps heading order valid (h1 → h2 → card h3s) without changing the design. -->
+      <h2 class="sr-only">Towns and areas we cover</h2>
       <div class="grid grid--3" style="margin-top:40px;">
         {areaPages.map((a) => (
           <a href={withBase(`/areas/${a.slug}`)} class="card reveal" style="display:block;">

@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { site, links, services, steps, stats, trustBadges, educate, whyChooseUs, pricing, areas, withBase } from '../config';
+import { site, links, services, steps, stats, trustBadges, educate, whyChooseUs, pricing, areas, withBase, responsive } from '../config';
 import { areaPages } from '../areaPages';
 import GoogleReviews from '../components/GoogleReviews.astro';
 import Icon from '../components/Icon.astro';
@@ -24,14 +24,24 @@ const homeServices = homeFeatured.map((slug) => services.find((s) => s.slug === 
 // compete — see the Leicester entry in areaPages.ts.
 const roomFrom = pricing.find((p) => p.name === 'Single Room')?.price;
 const seatFrom = pricing.find((p) => p.name === 'Upholstery')?.price;
+
+// Mobile LCP element is this hero background photo — shown at only 12%
+// opacity under the dark overlay, so it can be small and heavily compressed.
+// One getImage() call feeds both the <img> and the preload, so the URLs match.
+const heroBg = await getImage({
+  src: heroImg, width: 1200, widths: [480, 800, 1200], sizes: '100vw', format: 'webp', quality: 40,
+});
 ---
 <Base
   titleFull="Carpet Cleaning Leicester | Carpet & Upholstery Cleaners | On Target"
   description={`Carpet cleaning in Leicester rated ${site.googleRating.toFixed(1)}★ by ${site.googleReviewCount} Google reviewers. Rooms from £${roomFrom}, sofas from £${seatFrom} a seat, dry in 4–6 hours. Family-run, free quotes.`}
 >
+  <link slot="head" rel="preload" as="image" imagesrcset={heroBg.srcSet.attribute} imagesizes="100vw" fetchpriority="high" />
+
   <!-- HERO -->
   <section class="hero">
-    <Image src={heroImg} alt="" aria-hidden="true" class="hero-bg" width={1400} format="webp" loading="eager" />
+    <img src={heroBg.src} srcset={heroBg.srcSet.attribute} sizes="100vw" alt="" aria-hidden="true" class="hero-bg"
+      width={heroBg.attributes.width} height={heroBg.attributes.height} fetchpriority="high" />
     <div class="hero-blobs" id="heroBlobs">
       <span class="hero-blob hero-blob--1"></span>
       <span class="hero-blob hero-blob--2"></span>
@@ -42,7 +52,8 @@ const seatFrom = pricing.find((p) => p.name === 'Upholstery')?.price;
         <span class="pill"><span class="stars">★★★★★</span> Rated 5.0 by {site.googleReviewCount} local customers</span>
         <h1><span style="color:var(--brand-light)">Healthier, deeper</span> carpet cleaning in Leicester</h1>
         <p class="lead" style="margin-left:0;">
-          Bringing carpets, rugs and upholstery back to life with professional hot water extraction —
+          Bringing carpets, rugs and upholstery back to life with professional
+          <a href={withBase('/services/carpet-deep-cleaning')}>carpet cleaning</a> by hot water extraction —
           outstanding results across {site.serviceArea}.
         </p>
         <div class="btn-row">
@@ -117,7 +128,7 @@ const seatFrom = pricing.find((p) => p.name === 'Upholstery')?.price;
       <div class="grid grid--3">
         {homeServices.map((s) => (
           <a href={withBase(`/services/${s.slug}`)} class="svc-card reveal" style={s.img ? undefined : `background:${s.tint};`}>
-            {s.img && <Image src={s.img} alt={s.alt} loading="lazy" width={700} format="webp" />}
+            {s.img && <Image src={s.img} alt={s.alt} loading="lazy" width={700} {...responsive.card} format="webp" />}
             <div class="overlay"></div>
             <div class="body">
               <span class="chip">{s.icon} Service</span>

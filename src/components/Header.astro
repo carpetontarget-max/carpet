@@ -21,7 +21,8 @@ const navAfter = [
 
 <header class="site-header" id="siteHeader">
   <div class="container nav">
-    <a href={withBase('/')} aria-label="On Target Carpet Cleaning home"><Logo /></a>
+    <!-- Accessible name must contain the visible logo text (WCAG 2.5.3). -->
+    <a href={withBase('/')} aria-label="ontarget Carpet & Upholstery Cleaning — home"><Logo /></a>
     <nav class="nav-links" id="navLinks">
       {navBefore.map((n) => <a class="navlink" href={withBase(n.href)}>{n.label}</a>)}
 

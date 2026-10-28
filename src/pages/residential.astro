@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { site, links, homeServices, withBase } from '../config';
+import { site, links, homeServices, withBase, responsive } from '../config';
 import Icon from '../components/Icon.astro';
 import imgCarpet from '../images/service-carpet.png';
 
@@ -40,6 +40,7 @@ const reasons = [
         loading="eager"
         fetchpriority="high"
         width={800}
+        {...responsive.hero}
         format="webp"
         class="reveal reveal--right"
         style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"

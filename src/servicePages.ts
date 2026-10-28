@@ -28,21 +28,13 @@ export const servicePages = {
     metaDescription:
       'Deep carpet cleaning in Leicester by hot water extraction (often called steam cleaning). Lifts dirt, allergens and stains from deep in the pile. Fixed prices, free quotes.',
     lead:
-      'Looking for professional carpet cleaning in Leicester? On Target Carpet Cleaning is a local, family-run team that brings tired, dull and stained carpets back to life using powerful hot water extraction. We clean homes and businesses across Leicester and the surrounding Leicestershire towns, and every job is backed by honest, fixed pricing and a satisfaction guarantee.',
+      'Hot water extraction is the deep-clean method most carpet manufacturers recommend: heated water and an eco-friendly solution are injected deep into the pile, then pulled straight back out with the dirt, allergens and grime. A single room starts from £70 and a whole home (three rooms or more) from £120, at a fixed price agreed before we begin — and most carpets are touch-dry in 4–6 hours.',
     sections: [
       {
-        h2: 'Trusted local carpet cleaners in Leicester & Leicestershire',
+        h2: 'Hot water extraction: the method manufacturers recommend',
         body: [
-          'We’re a Leicester-based carpet cleaning business built on doing the job properly and treating people’s homes with respect. Over hundreds of cleans we’ve earned a 5.0-star rating from local customers — because we turn up when we say we will, explain exactly what we’re doing, and leave carpets genuinely cleaner rather than just wet.',
-          'Whether it’s a single lounge that’s seen better days, a whole house before guests arrive, or a rental property that needs to pass a check-out inspection, the process and the standard are the same. We work with homeowners, tenants, landlords and businesses right across the city and county, and we’re happy to advise honestly on what a clean will and won’t achieve before you commit to anything.',
-        ],
-      },
-      {
-        h2: 'Why professional carpet cleaning beats a hired machine',
-        body: [
-          'Supermarket hire machines and DIY sprays feel like a bargain, but they rarely get carpets properly clean — and they can create problems of their own. They lack the heat, the water pressure and, most importantly, the vacuum recovery power to pull dirty water back out of the pile. The result is grime left sitting in the base of the fibres and a carpet that stays damp for days.',
-          'That leftover moisture is exactly what causes the two classic DIY complaints: carpets that go crispy and stiff, and stains that “reappear” a week later as soapy residue and deep soiling wick back up to the surface. Over-wetting can also loosen the backing and leave a musty smell lingering in the room.',
-          'Our professional equipment injects heated cleaning solution deep into the carpet and then extracts the vast majority of it straight back out in the same pass — lifting the dirt with it. You get a deeper clean, no sticky residue, and a carpet that’s dry in hours rather than days.',
+          'Hot water extraction — often called “steam cleaning” — is the method most carpet manufacturers specify to keep a warranty valid, and it’s the core of what we do. Despite the name, you won’t see clouds of steam: heated water and cleaning solution are forced into the carpet under pressure to loosen embedded dirt, dust, allergens and bacteria, then a powerful vacuum pulls the dirty water straight back out.',
+          'Because the dirt is physically removed rather than just moved around, the finish is deeper and longer-lasting than bonnet-mopping or a rented upright can achieve. We use eco-friendly, non-toxic solutions throughout, so the clean is safe around children and pets once dry — no harsh chemical smell left hanging in the room.',
         ],
       },
       {
@@ -61,10 +53,36 @@ export const servicePages = {
         ],
       },
       {
-        h2: 'Hot water extraction: the method manufacturers recommend',
+        h2: 'How long does carpet take to dry?',
         body: [
-          'Hot water extraction — often called “steam cleaning” — is the method most carpet manufacturers specify to keep a warranty valid, and it’s the core of what we do. Despite the name, you won’t see clouds of steam: heated water and cleaning solution are forced into the carpet under pressure to loosen embedded dirt, dust, allergens and bacteria, then a powerful vacuum pulls the dirty water straight back out.',
-          'Because the dirt is physically removed rather than just moved around, the finish is deeper and longer-lasting than bonnet-mopping or a rented upright can achieve. We use eco-friendly, non-toxic solutions throughout, so the clean is safe around children and pets once dry — no harsh chemical smell left hanging in the room.',
+          'Most carpets are touch-dry within 4–6 hours of a professional clean, and fully dry within about 24 hours. Because our extraction removes most of the moisture on the spot, you avoid the soggy, days-long dry that a hire machine leaves behind. A few things affect how quickly your carpet dries:',
+        ],
+        list: [
+          'Airflow — opening windows or running fans makes a big difference.',
+          'Room temperature — a warm room dries faster than a cold one.',
+          'Carpet type & thickness — deep wool piles hold more moisture than low-pile synthetics.',
+          'How soiled it was — heavily soiled carpets need more solution and a little longer.',
+        ],
+      },
+      {
+        h2: 'How much does carpet cleaning cost in Leicester?',
+        body: [
+          'We believe in honest, upfront pricing — not a low number to get us on the phone followed by surprises on the day. As a guide, a single room typically starts from £70, and a whole home (three rooms or more) from £120, with hallway and stairs able to be added in. Upholstery is priced separately, from £30 per seat.',
+          'The final figure depends on a few sensible factors, and we’ll always confirm a fixed price before any work begins:',
+        ],
+        list: [
+          'The number and size of rooms being cleaned.',
+          'How heavily soiled the carpet is, and whether there are stains needing extra treatment.',
+          'Stairs, which are more labour-intensive per square metre than a flat room.',
+          'Whether furniture needs moving as part of the job.',
+        ],
+      },
+      {
+        h2: 'Why professional carpet cleaning beats a hired machine',
+        body: [
+          'Supermarket hire machines and DIY sprays feel like a bargain, but they rarely get carpets properly clean — and they can create problems of their own. They lack the heat, the water pressure and, most importantly, the vacuum recovery power to pull dirty water back out of the pile. The result is grime left sitting in the base of the fibres and a carpet that stays damp for days.',
+          'That leftover moisture is exactly what causes the two classic DIY complaints: carpets that go crispy and stiff, and stains that “reappear” a week later as soapy residue and deep soiling wick back up to the surface. Over-wetting can also loosen the backing and leave a musty smell lingering in the room.',
+          'Our professional equipment injects heated cleaning solution deep into the carpet and then extracts the vast majority of it straight back out in the same pass — lifting the dirt with it. You get a deeper clean, no sticky residue, and a carpet that’s dry in hours rather than days.',
         ],
       },
       {
@@ -81,18 +99,6 @@ export const servicePages = {
         ],
       },
       {
-        h2: 'How long does carpet take to dry?',
-        body: [
-          'Most carpets are touch-dry within 4–6 hours of a professional clean, and fully dry within about 24 hours. Because our extraction removes most of the moisture on the spot, you avoid the soggy, days-long dry that a hire machine leaves behind. A few things affect how quickly your carpet dries:',
-        ],
-        list: [
-          'Airflow — opening windows or running fans makes a big difference.',
-          'Room temperature — a warm room dries faster than a cold one.',
-          'Carpet type & thickness — deep wool piles hold more moisture than low-pile synthetics.',
-          'How soiled it was — heavily soiled carpets need more solution and a little longer.',
-        ],
-      },
-      {
         h2: 'The health benefits of a professionally cleaned carpet',
         body: [
           'Carpet acts a bit like a giant filter, trapping dust, pollen, pet dander and other allergens that would otherwise float around your home. That’s helpful — until the carpet becomes saturated and starts releasing those particles back into the air every time someone walks across it.',
@@ -100,16 +106,10 @@ export const servicePages = {
         ],
       },
       {
-        h2: 'How much does carpet cleaning cost in Leicester?',
+        h2: 'A local, family-run team you can trust',
         body: [
-          'We believe in honest, upfront pricing — not a low number to get us on the phone followed by surprises on the day. As a guide, a single room typically starts from £70, and a whole home (three rooms or more) from £120, with hallway and stairs able to be added in. Upholstery is priced separately, from £30 per seat.',
-          'The final figure depends on a few sensible factors, and we’ll always confirm a fixed price before any work begins:',
-        ],
-        list: [
-          'The number and size of rooms being cleaned.',
-          'How heavily soiled the carpet is, and whether there are stains needing extra treatment.',
-          'Stairs, which are more labour-intensive per square metre than a flat room.',
-          'Whether furniture needs moving as part of the job.',
+          'We’re a Leicester-based carpet cleaning business built on doing the job properly and treating people’s homes with respect. Over hundreds of cleans we’ve earned a 5.0-star rating from local customers — because we turn up when we say we will, explain exactly what we’re doing, and leave carpets genuinely cleaner rather than just wet.',
+          'Whether it’s a single lounge that’s seen better days, a whole house before guests arrive, or a rental property that needs to pass a check-out inspection, the process and the standard are the same. We work with homeowners, tenants, landlords and businesses right across the city and county, and we’re happy to advise honestly on what a clean will and won’t achieve before you commit to anything.',
         ],
       },
       {

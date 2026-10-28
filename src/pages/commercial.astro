@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { site, links, commercialPremises, withBase } from '../config';
+import { site, links, commercialPremises, withBase, responsive } from '../config';
 import Icon from '../components/Icon.astro';
 import imgCommercial from '../images/service-commercial.jpg';
 import imgOffice from '../images/service-office.jpg';
@@ -38,6 +38,7 @@ const benefits = [
         loading="eager"
         fetchpriority="high"
         width={800}
+        {...responsive.hero}
         format="webp"
         class="reveal reveal--right"
         style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"
@@ -112,6 +113,7 @@ const benefits = [
           alt="Office carpet being deep cleaned between empty desks, with no staff disrupted"
           loading="lazy"
           width={800}
+          {...responsive.hero}
           format="webp"
           class="reveal reveal--right"
           style="width:100%;height:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;"

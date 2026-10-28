@@ -40,6 +40,15 @@ export const withBase = (path = '/') => {
   return base + (isPage ? `${pathname}/` : pathname) + suffix;
 };
 
+// Responsive presets for <Image> — spread them in ({...responsive.hero}) so
+// phones download a phone-sized file instead of the desktop one.
+// `sizes` mirrors the CSS: heroes go single-column ≤940px, card grids ≤860px
+// (container padding is 24px each side, hence calc(100vw - 48px)).
+export const responsive = {
+  hero: { widths: [480, 640, 800], sizes: '(max-width: 940px) calc(100vw - 48px), 540px', quality: 70 },
+  card: { widths: [400, 640, 700], sizes: '(max-width: 860px) calc(100vw - 48px), 380px', quality: 65 },
+};
+
 // Stable JSON-LD @id for the business, so page-level schema (Service, WebSite)
 // can reference the single LocalBusiness entity that Base.astro emits sitewide.
 export const businessSchemaId = (siteUrl?: URL) => String(new URL('/#business', siteUrl));
