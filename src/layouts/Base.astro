@@ -51,10 +51,16 @@ const breadcrumbList = crumbs && {
 };
 
 // ── LocalBusiness structured data (JSON-LD) ──
-const sameAs = [links.instagram, site.googleReviewsUrl].filter((u) => u && !u.includes('YOUR_'));
+// Real profiles only: an unset handle falls back to the bare platform homepage
+// (see `link()` in config.ts), which must not be claimed as our profile.
+const sameAs = [links.instagram, links.facebook, site.googleReviewsUrl]
+  .filter((u) => u && !/^https:\/\/(instagram|facebook)\.com\/?$/.test(u));
 const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
+  // schema.org has no carpet-cleaning subtype, so name the category for
+  // machines (search engines, AI assistants) via a well-known entity URL.
+  additionalType: 'https://en.wikipedia.org/wiki/Carpet_cleaning',
   '@id': businessId,
   name: site.googleBusinessName,
   alternateName: site.businessName,
@@ -63,6 +69,15 @@ const localBusiness = {
   telephone: site.phoneIntl,
   email: site.email,
   priceRange: '££',
+  knowsAbout: ['Carpet cleaning', 'Hot water extraction', 'Upholstery cleaning', 'Rug cleaning', 'Stain removal', 'Pet odour removal'],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: site.phoneIntl,
+    email: site.email,
+    contactType: 'customer service',
+    areaServed: 'GB',
+    availableLanguage: 'English',
+  },
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Leicester',

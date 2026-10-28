@@ -429,3 +429,24 @@ PageSpeed + Search Console review:
   confirm with pagespeed.web.dev (the keyless PSI API hit its daily quota).
   If PSI still shows ~4s, the next lever is removing the faint 12%-opacity
   hero background photo (a design call for the owner).
+
+**claude-seo plugin pass (2026-10-28).** Owner supplied `claude-seo-main.zip`
+(open-source "Claude SEO" plugin, MIT). It was NOT installed (its installer
+adds skills/hooks to ~/.claude); its local, schema, technical, GEO and content
+checklists were read and applied by hand. Already passing: service pages, town
+pages, internal links, review link without gating, NAP + hours visible,
+static HTML (AI crawlers see everything), AI search bots allowed by robots.txt,
+HTTPS, single-hop redirects. Added:
+- LocalBusiness schema: `additionalType` (Wikipedia "Carpet_cleaning" — no
+  schema.org subtype fits), `knowsAbout`, `contactPoint`, Facebook in `sameAs`
+  (sameAs now skips bare platform-homepage fallbacks for unset handles).
+- `/llms.txt` (src/pages/llms.txt.ts), generated from config.ts and
+  areaPages.ts. Google ignores llms.txt; other assistants may read it.
+Gaps that need the owner (plugin rates these highly): a named person on
+/about (experience, training/certifications, insurer, real photo); real local
+jobs + customer quotes per town (town pages are ~350–440 words of main text vs
+the plugin's 500–600 guide); Bing Places + Bing Webmaster Tools (feed
+ChatGPT/Copilot), Apple Business Connect, Yelp/Checkatrade/Yell/Bark listings;
+security headers would need Cloudflare (GitHub Pages can't set them). FAQPage
+rich results were retired for all sites in May 2026 — the FAQ schema stays
+(harmless, helps machines parse Q&A) but won't produce stars/dropdowns.
