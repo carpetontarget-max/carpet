@@ -277,7 +277,9 @@ listing: Place ID `ChIJ5QDUP5yQ5gIRVld4qaAXYiU` (see `config.ts`), 5.0★ / 78 r
   built with `getImage()` (quality 40 — it's shown at 12% opacity) and
   preloaded via Base's `<slot name="head">`; CSS is inlined
   (`build.inlineStylesheets: 'always'`); the latin font file is preloaded in
-  Base. Each page's **first section never uses the `.reveal` fade** (CSS rule
+  Base; **gtag.js is fetched on `window.load`** (GoogleAnalytics.astro —
+  `gtag()`/dataLayer are defined up front, so events queue until it arrives).
+  Each page's **first section never uses the `.reveal` fade** (CSS rule
   `main > section:first-of-type .reveal`) — hidden-until-JS hero text delays LCP.
 - **Accessibility rules:** text in brand teal uses `--brand-text` (#077788,
   passes AA on white and mist) — `--brand-2` is for backgrounds/gradients only.
@@ -419,3 +421,11 @@ PageSpeed + Search Console review:
   invent them) and neighbourhood lists for the other nine towns.
 - Not done (optional, owner's call): Cloudflare in front of GitHub Pages for
   longer browser caching (Pages caches only 10 minutes).
+- Results (live, Lighthouse 13.5 mobile, run on the owner's Mac): homepage
+  perf 81 → 86, a11y 94 → 100, LCP 4.3s → 3.9s (LCP element is now the hero
+  text, not the photo); Oadby perf 86 → 90, LCP 4.1s → 3.6s; carpet page a11y
+  89 → 100. Caveat: headless Chrome on that Mac shows black filmstrip frames
+  and a ~2s paint stall after everything has loaded, which inflates LCP —
+  confirm with pagespeed.web.dev (the keyless PSI API hit its daily quota).
+  If PSI still shows ~4s, the next lever is removing the faint 12%-opacity
+  hero background photo (a design call for the owner).
