@@ -1,0 +1,13 @@
+{
+  "ga4PropertyId": "483918321",
+  "searchConsoleSite": "https://www.ontargetcarpetcleaning.co.uk/",
+  "siteUrl": "https://www.ontargetcarpetcleaning.co.uk/",
+  "serviceAccountKeyFile": "~/.config/ontarget/seo-reader.json",
+  "outputDir": "~/ontarget-seo-data",
+  "thresholds": {
+    "strikingDistanceMinImpressions": 20,
+    "lowCtrMinImpressions": 50,
+    "cannibalisationMinImpressions": 30,
+    "landingPageMinSessions": 10
+  }
+}

@@ -166,15 +166,30 @@ Desktop never finished onboarding in the session that added it).
   (previously all pointed at one generic service page — fixed same day).
 - Google Analytics 4 (`src/components/GoogleAnalytics.astro`) — off until
   `PUBLIC_GA_ID` is set; currently **active** in production (see Deployment above).
-  **Enquiry tracking** (2026-10-23): every tap on a `tel:` / `sms:` / `mailto:` /
-  WhatsApp / Messenger link sends a `generate_lead` event with `method`
-  (`call`, `text`, `email`, `whatsapp`, `messenger`) — a sitewide click listener
-  in `GoogleAnalytics.astro`. The homepage quote form opens WhatsApp from
-  script, so it sends its own `generate_lead` with `method: 'quote_form'`.
+  **Enquiry tracking** (2026-10-23, names fixed to the owner's spec
+  2026-10-28): every tap on a `tel:` / `sms:` / `mailto:` / WhatsApp /
+  Messenger link sends GA4 event `generate_lead` with exactly two parameters,
+  `method` (`phone`, `text`, `email`, `whatsapp`, `messenger`) and
+  `link_text` (the link's visible text; icon-only buttons fall back to their
+  aria-label) — a sitewide click listener in `GoogleAnalytics.astro`. The
+  homepage quote form opens WhatsApp from script, so it sends its own
+  `generate_lead` with `method: 'form'` and the submit button's text, only
+  after the browser's required-field check passes. **Never send form
+  contents** (name, phone, postcode, message) to GA. Events before 28 Oct used
+  `call` / `quote_form` and included a `page_path` parameter.
   Gotcha: `define:vars` wraps inline scripts in a function, so `gtag` is only
   global because the component sets `window.gtag = gtag` — keep that line.
-  In GA4: mark `generate_lead` as a key event and add an event-scoped custom
-  dimension for `method`.
+  In GA4: mark `generate_lead` as a key event and add event-scoped custom
+  dimensions for `method` and `link_text`.
+  **Tag + canonical + UTM rules (checked 2026-10-28):** the G-CBJMMXPV2S tag
+  is rendered once, from Base's head, on every real page (`/review` and the
+  redirect pages have none). Every real page has a self-referencing,
+  query-free canonical (homepage: `https://www.ontargetcarpetcleaning.co.uk/`),
+  so the Business Profile's `?utm_` link isn't a duplicate. The 404 page is
+  `noindex` with no canonical (Base `noindex` prop). GitHub Pages' http→https,
+  apex→www and trailing-slash 301s all keep the query string (verified live).
+  Our own meta-refresh redirects (old Wix URLs, `/review`) don't carry query
+  strings — fine, since nothing tagged points at them.
 - `robots.txt` + auto-generated `sitemap-index.xml` (34 URLs as of 2026-10-23;
   `/review` and the old-URL redirects are left out).
 - **Local SEO pass (2026-10-23):**
@@ -321,6 +336,96 @@ listing: Place ID `ChIJ5QDUP5yQ5gIRVld4qaAXYiU` (see `config.ts`), 5.0★ / 78 r
   Push from your own machine (VS Code Source Control button, or `git push` in
   Terminal) — never paste a personal access token into a chat/prompt; it gets
   exposed and must then be revoked.
+
+## Session summary — 23–28 Oct 2026 (current status & next steps)
+
+A long working session that took the site from "live" to "locally optimised and
+measured". Details for each step are in the dated History entries below and in
+"SEO features already in place" / "Gotchas"; this is the overview.
+
+**What shipped (all committed, pushed and live):**
+- Real photos for all 12 services + the commercial/residential heroes.
+- 14 town pages (Coalville and Ashby-de-la-Zouch added after Search Console
+  showed ~1,400 impressions there with no page), rewritten to be ~40% shared
+  text instead of ~72%, with neighbourhood lists for 5 towns.
+- Local SEO: business/Service/WebSite schema, sitewide links to town pages,
+  trailing-slash links, the homepage made the single owner of "carpet
+  cleaning leicester" (other pages refocused to support it).
+- 19 old Wix URLs redirected; enquiry tracking (`generate_lead`, incl. the
+  homepage quote form); Google Analytics loads after the page.
+- Speed + accessibility pass (accessibility 100 on all audited pages); the
+  carpet service page refocused on method/prices/drying time to get indexed.
+- "Steam cleaning" wording rule; claude-seo plugin checklists applied
+  (richer schema, `/llms.txt`).
+
+**How the owner works (important for anyone editing):** two Claudes. *Claude
+in VS Code* edits the code; *Claude in Chrome* works in the owner's Google
+accounts (Analytics, Search Console, Business Profile) and **also commits to
+GitHub directly** (it added `/review`, the GBP name, the Wix redirects and the
+enquiry tracking). So always `git fetch` before pushing; if behind, rebase and
+keep the owner's version where both did the same thing. Reports from Chrome
+Claude are pasted into VS Code as instructions/data.
+
+**Baseline to measure against (23 Oct 2026):** Search Console 3 months — 61
+clicks / 11,300 impressions, avg position 22; "carpet cleaning leicester" —
+homepage position 9.4, 5 clicks, 1,056 impressions. Business Profile May–Oct
+— 2,197 views, 20 calls, 10 chats, 84 website clicks; 5.0★ / 86 reviews.
+Analytics 90 days — 404 visits (182 organic), 0 tracked enquiries (tracking
+started 23 Oct). PageSpeed mobile homepage — perf 81, LCP 4.3s.
+
+**Off-site status:** HTTPS enforced; Search Console verified, sitemap
+submitted (read OK); indexing requested for the homepage, /areas/leicester/,
+/areas/coalville/, /areas/ashby-de-la-zouch/ and the carpet page (which was
+"Discovered – currently not indexed"); Business Profile uses all 20 service-
+area slots (Ashby, Oadby, Syston, Birstall added 23 Oct). Pending since 24 Oct
+(confirm): mark `generate_lead` as a key event + "Enquiry method" custom
+dimension in GA4.
+
+**Waiting on the owner:**
+1. One real recent job + one real customer quote per town (`localJob` /
+   `customerQuote` in areaPages.ts — never invent them).
+2. Neighbourhood lists for Oadby, Glenfield, Syston, Birstall, Thurmaston,
+   Enderby, Blaby, Leicester Forest East and Ashby.
+3. A named person on /about: name, experience, training/certifications,
+   insurer, a real photo.
+4. Bing Places + Bing Webmaster Tools, Apple Business Connect, and checking
+   Yelp/Checkatrade/Yell/Bark listings (a paste-ready block for Chrome Claude
+   was given on 28 Oct).
+5. A pagespeed.web.dev re-check of the homepage and a town page. If the
+   homepage still shows ~4s LCP, removing the faint hero background photo is
+   the next lever (a design call).
+6. Optional: Cloudflare in front of GitHub Pages (caching + security headers).
+
+**Check-in dates:** Fri 30 Oct (quick: carpet page indexed? enquiries
+recording?), Fri 6 Nov (only if pages still not indexed), **Fri 20 Nov first
+full review**, then the third Friday monthly (18 Dec, 15 Jan 2027, 19 Feb
+2027 + spring prep, 19 Mar 2027 …). At each review the owner pastes a Chrome
+Claude report (Search Console queries/pages, Analytics enquiries by
+page/method/source, Business Profile performance); compare with the baseline
+above before changing anything.
+
+**Tools and housekeeping:**
+- **SEO data loop** (`tools/seo-data/`, added 28 Oct; see its README):
+  `collect.mjs` pulls GA4 (property `483918321`) + Search Console daily with a
+  read-only service account → `~/ontarget-seo-data/` (outside the public repo);
+  `digest.mjs` writes `latest-digest.md` — ranked actions (near-wins, weak
+  listings, competing pages, towns without a page, unindexed pages, visits
+  without enquiries). launchd plist runs both at 07:15. **Not active until
+  the owner creates the service account + key** (setup steps in the README).
+  Rule: data daily, changes weekly at most (1–2 at a time, logged here).
+- Reusable playbook skill: `~/Desktop/website skill/website-creation/`
+  (SKILL.md + references + scripts: `check-dist.mjs`, `live-check.sh`,
+  `screenshot.sh`, `town-overlap.mjs`). Lighthouse **13.5.0** works with the
+  current Chrome.
+- Namecheap is the registrar/DNS only: apex A records → GitHub Pages IPs
+  (185.199.108–111.153), `www` CNAME → `carpetontarget-max.github.io`. Every
+  push to `main` goes live via GitHub Actions; never switch on Namecheap
+  hosting or change those records.
+- Left untracked on purpose: `claude-seo-main.zip` (third-party plugin
+  download) and `website_picture/` (originals already copied to
+  `src/images/`).
+- The older History entries marked "not yet committed" (July 2026) were all
+  committed long ago.
 
 ## History
 

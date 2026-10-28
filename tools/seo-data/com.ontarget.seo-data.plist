@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Daily SEO data run (macOS launchd). Collects GA4 + Search Console data at
+  07:15 and writes the digest. Install/uninstall: see README.md → "Daily schedule".
+  If the Mac is asleep at 07:15, launchd runs it when the Mac next wakes.
+  Paths use $HOME (expanded by zsh) so no username is baked into this file.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ontarget.seo-data</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>-c</string>
+    <string>N="$HOME/.nvm/versions/node/v24.18.0/bin/node"; mkdir -p "$HOME/ontarget-seo-data"; cd "$HOME/Desktop/ontarget website" &amp;&amp; { "$N" tools/seo-data/collect.mjs &amp;&amp; "$N" tools/seo-data/digest.mjs &gt; /dev/null; } &gt;&gt; "$HOME/ontarget-seo-data/run.log" 2&gt;&amp;1</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>7</integer>
+    <key>Minute</key>
+    <integer>15</integer>
+  </dict>
+</dict>
+</plist>
